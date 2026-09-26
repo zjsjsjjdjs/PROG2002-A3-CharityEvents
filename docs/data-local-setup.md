@@ -1,6 +1,6 @@
 # Data and Local Runtime
 
-This commit contains the MySQL schema, sample data, Node dependencies, database connection and Express health endpoint. The completed browsing features will be committed as separate modules.
+This guide covers the MySQL schema, sample data, Node dependencies, database connection and Express health endpoint. For the public homepage, also see homepage-browsing.md.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ In another terminal:
 Invoke-RestMethod 'http://localhost:3000/api/health'
 ```
 
-Expected: status=ok and database=connected. Database unavailability returns HTTP 500 with a generic message; unknown routes return HTTP 404. This module does not yet expose browsing or search endpoints.
+Expected: status=ok and database=connected. Database unavailability returns HTTP 500 with a generic message; unknown routes return HTTP 404. Open the public homepage at http://localhost:3000/ after the health check succeeds. The homepage list is available at /api/events/upcoming; search is a later module.
 
 ## Identity
 

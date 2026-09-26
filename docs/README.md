@@ -1,3 +1,4 @@
 # Documentation
 
-See [data and local runtime setup](data-local-setup.md).
+- [Data and local runtime setup](data-local-setup.md).
+- [Homepage browsing and verification](homepage-browsing.md).

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harbour Hope Charity | Events</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Harbour Hope Charity home">
+        <span class="brand-mark" aria-hidden="true">HH</span>
+        <span>
+          <span class="brand-name">Harbour Hope</span>
+          <span class="brand-subtitle">Charity events</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        Menu
+      </button>
+      <div class="nav-links" id="primary-navigation">
+        <a href="index.html">Home</a>
+        <a href="#events">Events</a><a href="#charity-contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-copy">
+        <p class="eyebrow">Community fundraising in Brisbane</p>
+        <h1>Local events that turn ticket sales into practical help.</h1>
+        <p class="hero-text">
+          Harbour Hope Charity supports families through emergency relief, youth programs, and community care. Browse upcoming events and choose where your attendance can make a difference.
+        </p>
+      </div>
+      <div class="hero-panel" id="charity-contact" aria-label="Harbour Hope contact details">
+        <p class="panel-label">Contact</p>
+        <p>contact@harbourhope.org</p>
+        <p>02 5550 1200</p>
+      </div>
+    </section>
+
+    <section class="content-section" id="events">
+      <div class="section-heading">
+        <p class="eyebrow">Upcoming events</p>
+        <h2>Events open for registration</h2>
+      </div>
+      <div class="status-message" id="events-status" role="status" aria-live="polite">
+        Loading upcoming events...
+      </div>
+      <div class="event-grid" id="event-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Harbour Hope Charity. Built for PROG2002 coursework.</p>
+  </footer>
+</body>
+</html>
