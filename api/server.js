@@ -11,6 +11,14 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+function isValidDate(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value));
+}
+
+function isPositiveInteger(value) {
+  return /^\d+$/.test(value) && Number(value) > 0;
+}
+
 app.get('/api/health', async (req, res) => {
   try {
     await testConnection();
@@ -50,6 +58,84 @@ app.get('/api/events/upcoming', async (req, res, next) => {
         AND e.event_datetime >= DATE(UTC_TIMESTAMP() + INTERVAL 10 HOUR)
       ORDER BY e.event_datetime ASC, e.event_id ASC
     `);
+    res.json(events);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get('/api/categories', async (req, res, next) => {
+  try {
+    const [categories] = await pool.query(`
+      SELECT
+        category_id,
+        name,
+        description
+      FROM categories
+      ORDER BY name
+    `);
+
+    res.json(categories);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get('/api/events/search', async (req, res, next) => {
+  const { date, location, categoryId } = req.query;
+
+  if (date && !isValidDate(date)) {
+    return res.status(400).json({
+      message: 'Date must use YYYY-MM-DD format.'
+    });
+  }
+
+  if (categoryId && !isPositiveInteger(categoryId)) {
+    return res.status(400).json({
+      message: 'Category ID must be a positive number.'
+    });
+  }
+
+  const conditions = ["e.status = 'active'"];
+  const values = [];
+
+  if (date) {
+    conditions.push('DATE(e.event_datetime) = ?');
+    values.push(date);
+  }
+
+  if (location && location.trim()) {
+    conditions.push('e.location LIKE ?');
+    values.push(`%${location.trim()}%`);
+  }
+
+  if (categoryId) {
+    conditions.push('e.category_id = ?');
+    values.push(Number(categoryId));
+  }
+
+  try {
+    const [events] = await pool.query(`
+      SELECT
+        e.event_id,
+        e.name,
+        e.event_datetime,
+        e.location,
+        e.purpose,
+        e.short_description,
+        e.ticket_price,
+        e.fundraising_goal,
+        e.current_progress,
+        e.status,
+        c.category_id,
+        c.name AS category_name
+      FROM events e
+      INNER JOIN categories c
+        ON e.category_id = c.category_id
+      WHERE ${conditions.join(' AND ')}
+      ORDER BY e.event_datetime ASC
+    `, values);
+
     res.json(events);
   } catch (error) {
     next(error);

@@ -139,3 +139,114 @@ async function loadHomepageEvents() {
 }
 
 loadHomepageEvents();
+
+async function loadSearchCategories() {
+  const categorySelect = document.querySelector('#event-category');
+
+  if (!categorySelect) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/categories`);
+
+    if (!response.ok) {
+      throw new Error('Unable to load categories.');
+    }
+
+    const categories = await response.json();
+
+    categories.forEach((category) => {
+      const option = document.createElement('option');
+      option.value = category.category_id;
+      option.textContent = category.name;
+      categorySelect.append(option);
+    });
+  } catch (error) {
+    const statusMessage = document.querySelector('#search-status');
+
+    if (statusMessage) {
+      statusMessage.hidden = false;
+      statusMessage.textContent = 'Categories could not be loaded. Check that the API server is running.';
+    }
+  }
+}
+
+function buildSearchParams(formData) {
+  const params = new URLSearchParams();
+
+  ['date', 'location', 'categoryId'].forEach((field) => {
+    const value = formData.get(field);
+
+    if (value && value.trim()) {
+      params.append(field, value.trim());
+    }
+  });
+
+  return params;
+}
+
+async function runEventSearch(params) {
+  const resultsContainer = document.querySelector('#search-results');
+  const statusMessage = document.querySelector('#search-status');
+
+  if (!resultsContainer || !statusMessage) {
+    return;
+  }
+
+  resultsContainer.textContent = '';
+  statusMessage.hidden = false;
+  statusMessage.textContent = 'Searching events...';
+
+  try {
+    const queryString = params.toString();
+    const url = queryString ? `${API_BASE_URL}/events/search?${queryString}` : `${API_BASE_URL}/events/search`;
+    const response = await fetch(url);
+    const responseBody = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseBody.message || 'Search could not be completed.');
+    }
+
+    if (responseBody.length === 0) {
+      statusMessage.textContent = 'No events matched those filters. Try a different date, location, or category.';
+      return;
+    }
+
+    statusMessage.hidden = true;
+    responseBody.forEach((event) => {
+      resultsContainer.append(createEventCard(event));
+    });
+  } catch (error) {
+    statusMessage.hidden = false;
+    statusMessage.textContent = error.message || 'Search could not be completed. Check that the API server and MySQL are running.';
+  }
+}
+
+function setupSearchPage() {
+  const searchForm = document.querySelector('#search-form');
+  const clearButton = document.querySelector('#clear-filters');
+  const resultsContainer = document.querySelector('#search-results');
+  const statusMessage = document.querySelector('#search-status');
+
+  if (!searchForm || !clearButton || !resultsContainer || !statusMessage) {
+    return;
+  }
+
+  loadSearchCategories();
+
+  searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(searchForm);
+    runEventSearch(buildSearchParams(formData));
+  });
+
+  clearButton.addEventListener('click', () => {
+    searchForm.reset();
+    resultsContainer.textContent = '';
+    statusMessage.hidden = false;
+    statusMessage.textContent = 'Filters cleared. Enter one or more filters, then search again.';
+  });
+}
+
+setupSearchPage();
