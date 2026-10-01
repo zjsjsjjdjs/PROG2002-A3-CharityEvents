@@ -96,7 +96,12 @@ function createEventCard(event) {
   progressTrack.append(progressFill);
   progressBlock.append(progressLabel, progressTrack);
 
-  card.append(tagRow, title, date, location, purpose, ticket, progressBlock);
+  const detailsLink = document.createElement('a');
+  detailsLink.className = 'button secondary-button card-link';
+  detailsLink.href = `detail.html?id=${event.event_id}`;
+  detailsLink.textContent = 'View details';
+
+  card.append(tagRow, title, date, location, purpose, ticket, progressBlock, detailsLink);
 
   return card;
 }
@@ -250,3 +255,154 @@ function setupSearchPage() {
 }
 
 setupSearchPage();
+
+function createProgressBlock(event) {
+  const goal = Number(event.fundraising_goal);
+  const progress = Number(event.current_progress);
+  const progressPercent = goal > 0 ? Math.min(Math.round((progress / goal) * 100), 100) : 0;
+
+  const progressBlock = document.createElement('div');
+  progressBlock.className = 'progress-block';
+
+  const progressLabel = createTextElement(
+    'p',
+    'progress-label',
+    `${formatCurrency(progress)} raised of ${formatCurrency(goal)} goal`
+  );
+
+  const progressTrack = document.createElement('div');
+  progressTrack.className = 'progress-track';
+  progressTrack.setAttribute('aria-label', `${progressPercent}% of fundraising goal reached`);
+
+  const progressFill = document.createElement('span');
+  progressFill.className = 'progress-fill';
+  progressFill.style.width = `${progressPercent}%`;
+  progressTrack.append(progressFill);
+  progressBlock.append(progressLabel, progressTrack);
+
+  return progressBlock;
+}
+
+function createDetailRow(label, value) {
+  const row = document.createDocumentFragment();
+  row.append(
+    createTextElement('dt', 'detail-label', label),
+    createTextElement('dd', 'detail-value', value)
+  );
+  return row;
+}
+
+function renderEventDetail(event) {
+  const title = document.querySelector('#event-title');
+  const detailContainer = document.querySelector('#event-detail');
+  const registerPanel = document.querySelector('#registration-summary');
+
+  if (!title || !detailContainer || !registerPanel) {
+    return;
+  }
+
+  title.textContent = event.name;
+  detailContainer.textContent = '';
+  registerPanel.textContent = '';
+
+  const tags = document.createElement('div');
+  tags.className = 'tag-row detail-tags';
+  tags.append(
+    createTextElement('span', 'tag', event.category_name),
+    createTextElement('span', `tag timing-tag ${getTimingLabel(event.event_datetime)}`, getTimingLabel(event.event_datetime))
+  );
+
+  const summary = document.createElement('dl');
+  summary.className = 'detail-summary';
+  summary.append(
+    createDetailRow('Date and time', formatDateTime(event.event_datetime)),
+    createDetailRow('Location', event.location),
+    createDetailRow('Purpose', event.purpose),
+    createDetailRow('Ticket price', Number(event.ticket_price) === 0 ? 'Free entry' : formatCurrency(event.ticket_price))
+  );
+
+  const descriptionHeading = createTextElement('h2', 'detail-heading', 'About this event');
+  const description = createTextElement('p', 'detail-description', event.full_description);
+
+  const progressHeading = createTextElement('h2', 'detail-heading', 'Goal vs progress');
+  const progressBlock = createProgressBlock(event);
+
+  const organisationHeading = createTextElement('h2', 'detail-heading', 'Charity contact');
+  const organisation = document.createElement('dl');
+  organisation.className = 'detail-summary';
+  organisation.append(
+    createDetailRow('Organisation', event.organisation_name),
+    createDetailRow('Mission', event.organisation_mission),
+    createDetailRow('Email', event.contact_email),
+    createDetailRow('Phone', event.contact_phone)
+  );
+
+  detailContainer.append(
+    tags,
+    summary,
+    descriptionHeading,
+    description,
+    progressHeading,
+    progressBlock,
+    organisationHeading,
+    organisation
+  );
+
+  const ticketText = Number(event.ticket_price) === 0 ? 'Free entry' : `${formatCurrency(event.ticket_price)} per ticket`;
+  registerPanel.append(
+    createTextElement('p', 'register-event-name', event.name),
+    createTextElement('p', 'register-ticket', ticketText),
+    createTextElement('p', 'register-date', formatDateTime(event.event_datetime))
+  );
+}
+
+async function loadEventDetail(eventId) {
+  const detailContainer = document.querySelector('#event-detail');
+
+  if (!detailContainer) {
+    return;
+  }
+
+  detailContainer.textContent = '';
+  detailContainer.append(createTextElement('div', 'status-message', 'Loading event details...'));
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/events/${eventId}`);
+    const responseBody = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseBody.message || 'Event details could not be loaded.');
+    }
+
+    renderEventDetail(responseBody);
+  } catch (error) {
+    detailContainer.textContent = '';
+    detailContainer.append(createTextElement('div', 'status-message error-message', error.message || 'Event details could not be loaded.'));
+  }
+}
+
+function setupDetailPage() {
+  const detailContainer = document.querySelector('#event-detail');
+  const registerButton = document.querySelector('#register-button');
+
+  if (!detailContainer || !registerButton) {
+    return;
+  }
+
+  registerButton.addEventListener('click', () => {
+    alert('This feature is currently under construction.');
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const eventId = params.get('id');
+
+  if (!eventId || !/^\d+$/.test(eventId)) {
+    detailContainer.textContent = '';
+    detailContainer.append(createTextElement('div', 'status-message error-message', 'No valid event was selected. Return to the home page or search page and choose an event.'));
+    return;
+  }
+
+  loadEventDetail(eventId);
+}
+
+setupDetailPage();

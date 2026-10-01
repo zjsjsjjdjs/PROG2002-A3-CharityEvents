@@ -464,3 +464,74 @@ select {
   margin-top: 4px;
   text-decoration: none;
 }
+
+.error-message {
+  border-left-color: var(--rose);
+  background: #fbeaea;
+  color: #803030;
+}
+
+.detail-tags {
+  margin-bottom: 20px;
+}
+
+.detail-summary {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+  gap: 10px 18px;
+  margin: 0 0 26px;
+}
+
+
+.detail-label {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.detail-value {
+  margin: 0;
+}
+
+.detail-heading {
+  margin: 30px 0 12px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.detail-description {
+  max-width: 760px;
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.04rem;
+}
+
+.register-event-name,
+.register-ticket,
+.register-date {
+  margin: 0 0 10px;
+}
+
+.register-event-name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.register-ticket {
+  color: var(--leaf);
+  font-weight: 800;
+}
+
+.register-date {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .detail-summary {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

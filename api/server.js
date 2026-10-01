@@ -142,6 +142,61 @@ app.get('/api/events/search', async (req, res, next) => {
   }
 });
 
+app.get('/api/events/:id', async (req, res, next) => {
+  const { id } = req.params;
+
+  if (!isPositiveInteger(id)) {
+    return res.status(400).json({
+      message: 'Event ID must be a positive number.'
+    });
+  }
+
+  try {
+    const [events] = await pool.query(`
+      SELECT
+        e.event_id,
+        e.name,
+        e.event_datetime,
+        e.location,
+        e.purpose,
+        e.short_description,
+        e.full_description,
+        e.ticket_price,
+        e.fundraising_goal,
+        e.current_progress,
+        e.status,
+        e.latitude,
+        e.longitude,
+        c.category_id,
+        c.name AS category_name,
+        o.organisation_id,
+        o.name AS organisation_name,
+        o.mission AS organisation_mission,
+        o.contact_email,
+        o.contact_phone,
+        o.website_url
+      FROM events e
+      INNER JOIN categories c
+        ON e.category_id = c.category_id
+      INNER JOIN organisations o
+        ON e.organisation_id = o.organisation_id
+      WHERE e.event_id = ?
+        AND e.status = 'active'
+      LIMIT 1
+    `, [Number(id)]);
+
+    if (events.length === 0) {
+      return res.status(404).json({
+        message: 'Event not found.'
+      });
+    }
+
+    res.json(events[0]);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Serve only public client files, keeping API credentials outside the web root.
 app.use(express.static(path.join(__dirname, '..', 'clientside')));
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details | Harbour Hope Charity</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Harbour Hope Charity home">
+        <span class="brand-mark" aria-hidden="true">HH</span>
+        <span>
+          <span class="brand-name">Harbour Hope</span>
+          <span class="brand-subtitle">Charity events</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        Menu
+      </button>
+      <div class="nav-links" id="primary-navigation">
+        <a href="index.html">Home</a>
+        <a href="search.html">Search events</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-title">
+      <p class="eyebrow">Event details</p>
+      <h1 id="event-title">Selected charity event</h1>
+    </section>
+
+    <section class="content-section detail-layout">
+      <article class="detail-content" id="event-detail">
+        <div class="status-message">
+          Loading event details...
+        </div>
+      </article>
+
+      <aside class="register-panel" aria-label="Registration area">
+        <p class="panel-label">Registration</p>
+        <div id="registration-summary"><p>Loading ticket information...</p></div>
+        <button class="button primary-button" id="register-button" type="button">
+          Register
+        </button>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Harbour Hope Charity. Built for PROG2002 coursework.</p>
+  </footer>
+</body>
+</html>
