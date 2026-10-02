@@ -465,6 +465,10 @@ select {
   text-decoration: none;
 }
 
+.results-panel .event-grid {
+  margin-top: 18px;
+}
+
 .error-message {
   border-left-color: var(--rose);
   background: #fbeaea;
