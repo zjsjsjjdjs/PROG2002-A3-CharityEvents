@@ -142,7 +142,7 @@ GET http://localhost:3000/api/events/search?date=bad-date
 Expected result:
 
 ```json
-{"message":"Date must use YYYY-MM-DD format."}
+{"message":"Date must be a valid calendar date in YYYY-MM-DD format (years 1000-9999)."}
 ```
 
 What to explain:
@@ -205,4 +205,4 @@ What to explain:
 
 ## Regression status
 
-See [the dated regression results](a2-final-test-checklist.md#regression-results--2026-10-03) for observed HTTP status codes, database failures and known gaps. These demonstration examples do not imply that all validation boundaries pass.
+See [the dated regression results](a2-final-test-checklist.md#regression-results--2026-10-03) for observed HTTP status codes, database failures and known gaps. The previously recorded date, non-string filter and detail-sidebar failures were fixed and retested; see the follow-up verification section in that checklist.

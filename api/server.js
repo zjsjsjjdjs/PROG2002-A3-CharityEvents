@@ -12,11 +12,21 @@ app.use(cors());
 app.use(express.json());
 
 function isValidDate(value) {
-  return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value));
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return false;
+  }
+
+  const [year, month, day] = value.split('-').map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return year >= 1000 && year <= 9999
+    && date.getUTCFullYear() === year
+    && date.getUTCMonth() === month - 1
+    && date.getUTCDate() === day;
 }
 
 function isPositiveInteger(value) {
-  return /^\d+$/.test(value) && Number(value) > 0;
+  return typeof value === 'string' && /^\d+$/.test(value)
+    && Number.isSafeInteger(Number(value)) && Number(value) > 0;
 }
 
 app.get('/api/health', async (req, res) => {
@@ -82,39 +92,49 @@ app.get('/api/categories', async (req, res, next) => {
 });
 
 app.get('/api/events/search', async (req, res, next) => {
-  const { date, location, categoryId } = req.query;
-
-  if (date && !isValidDate(date)) {
-    return res.status(400).json({
-      message: 'Date must use YYYY-MM-DD format.'
-    });
-  }
-
-  if (categoryId && !isPositiveInteger(categoryId)) {
-    return res.status(400).json({
-      message: 'Category ID must be a positive number.'
-    });
-  }
-
-  const conditions = ["e.status = 'active'"];
-  const values = [];
-
-  if (date) {
-    conditions.push('DATE(e.event_datetime) = ?');
-    values.push(date);
-  }
-
-  if (location && location.trim()) {
-    conditions.push('e.location LIKE ?');
-    values.push(`%${location.trim()}%`);
-  }
-
-  if (categoryId) {
-    conditions.push('e.category_id = ?');
-    values.push(Number(categoryId));
-  }
-
   try {
+    const filters = {};
+    for (const field of ['date', 'location', 'categoryId']) {
+      const value = req.query[field];
+      if (value !== undefined && typeof value !== 'string') {
+        return res.status(400).json({
+          message: `${field} must be a single text value.`
+        });
+      }
+      filters[field] = (value || '').trim();
+    }
+    const { date, location, categoryId } = filters;
+
+    if (date && !isValidDate(date)) {
+      return res.status(400).json({
+        message: 'Date must be a valid calendar date in YYYY-MM-DD format (years 1000-9999).'
+      });
+    }
+
+    if (categoryId && !isPositiveInteger(categoryId)) {
+      return res.status(400).json({
+        message: 'Category ID must be a positive safe integer.'
+      });
+    }
+
+    const conditions = ["e.status = 'active'"];
+    const values = [];
+
+    if (date) {
+      conditions.push('DATE(e.event_datetime) = ?');
+      values.push(date);
+    }
+
+    if (location) {
+      conditions.push('e.location LIKE ?');
+      values.push(`%${location}%`);
+    }
+
+    if (categoryId) {
+      conditions.push('e.category_id = ?');
+      values.push(Number(categoryId));
+    }
+
     const [events] = await pool.query(`
       SELECT
         e.event_id,

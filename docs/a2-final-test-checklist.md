@@ -117,7 +117,7 @@ Current sample observations: 5 categories, 7 active search results and 4 upcomin
 
 Status checks: malformed date text, invalid category and invalid event ID returned 400; missing/suspended events and unknown API routes returned 404. Refused database connections returned 500 with a generic JSON message. The browser displayed the API/database/network failures rather than silently rendering an empty result.
 
-### Known gaps — not passed and not fixed
+### Historical gaps — before the follow-up fix
 
 | Case | Expected | Observed |
 | --- | --- | --- |
@@ -128,7 +128,7 @@ Status checks: malformed date text, invalid category and invalid event ID return
 
 The non-string location cases call `location.trim()` before the route's try/catch. In the tested Node/Express setup, the unhandled async rejection terminates the process. Each of those two cases was tested in an isolated process. Do not run these cases against a shared API that must remain available.
 
-These are existing source behaviors, recorded rather than silently repaired under the copy-only scope. The module does not represent an all-pass final acceptance. Fixes require a separate change before claiming full boundary coverage.
+These were the observed behaviors at baseline 1096b44, preserved as historical evidence. They were subsequently fixed after source-project testing and user acceptance; see the follow-up verification below. This checklist does not establish complete final assessment acceptance.
 
 ### Test isolation and limits
 
@@ -137,3 +137,16 @@ These are existing source behaviors, recorded rather than silently repaired unde
 - Browser network failures used aborted browser requests. Free entry, zero goal and progress exceeding the goal used browser response fixtures; they do not prove those scenarios exist in the stored sample data.
 - The normal API and browser checks read existing data; no SQL import, insert, update or deletion was performed. Existing API services were not restarted.
 - Temporary launchers, fixtures and test output remain outside the repository. Project defaults remain port 3000. No JavaScript page errors were observed in the completed browser checks.
+
+## Follow-up fix verification — 2026-10-03
+
+The user accepted the fixes in the complete A2 project before synchronization. The date/integer helpers, search input validation and detail loading/error states were copied into user2. Port 3000, same-origin API requests, existing homepage date rules and other module behavior were preserved.
+
+- Impossible dates, including 2026-02-30, 2026-02-29, 1900-02-29 and 2026-04-31, return 400. Valid leap dates 2000-02-29 and 2028-02-29 are accepted. Supported year boundaries 1000 and 9999 were checked.
+- Repeated, array and object values for search filters return 400. Non-positive or unsafe integer categories/IDs are rejected. Health and a normal combined search succeeded immediately after every malformed-parameter request.
+- The entire search handler now catches unexpected exceptions. An isolated API with a refused database connection still returned generic 500 responses for health, search and detail requests.
+- Detail loading disables Register and marks both content areas busy. Missing, invalid, suspended and absent IDs show resolved error text in both areas, without an indefinite ticket-loading message.
+- Database and network failure checks kept Register disabled. A successful retry cleared errors, rendered ticket information and re-enabled Register. Its original A2 placeholder alert remains unchanged.
+- Existing homepage, category loading, search and detail routes passed regression checks. No browser JavaScript errors were observed.
+
+These automated checks ran against user2 using temporary API ports 3096/3097 and the existing database. Browser requests from the target files were directed to those temporary servers during testing; stored application settings stayed on port 3000. Database contents were not changed. The earlier four failing cases across three categories now pass their targeted checks.

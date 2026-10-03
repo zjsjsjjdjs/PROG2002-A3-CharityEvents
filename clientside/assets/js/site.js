@@ -356,6 +356,39 @@ function renderEventDetail(event) {
   );
 }
 
+function setDetailState(state, message) {
+  const detailContainer = document.querySelector('#event-detail');
+  const registerPanel = document.querySelector('#registration-summary');
+  const registerButton = document.querySelector('#register-button');
+
+  if (!detailContainer || !registerPanel || !registerButton) {
+    return;
+  }
+
+  const loading = state === 'loading';
+  detailContainer.setAttribute('aria-busy', String(loading));
+  registerPanel.setAttribute('aria-busy', String(loading));
+  registerButton.disabled = state !== 'success';
+
+  if (state === 'success') {
+    return;
+  }
+
+  const title = document.querySelector('#event-title');
+  if (title) title.textContent = 'Selected charity event';
+  detailContainer.textContent = '';
+  registerPanel.textContent = '';
+
+  if (loading) {
+    detailContainer.append(createTextElement('div', 'status-message', 'Loading event details...'));
+    registerPanel.append(createTextElement('p', 'register-status', 'Loading ticket information...'));
+  } else {
+    const errorMessage = message || 'Event details could not be loaded. Please try again.';
+    detailContainer.append(createTextElement('div', 'status-message error-message', errorMessage));
+    registerPanel.append(createTextElement('p', 'register-status error-message', errorMessage));
+  }
+}
+
 async function loadEventDetail(eventId) {
   const detailContainer = document.querySelector('#event-detail');
 
@@ -363,8 +396,7 @@ async function loadEventDetail(eventId) {
     return;
   }
 
-  detailContainer.textContent = '';
-  detailContainer.append(createTextElement('div', 'status-message', 'Loading event details...'));
+  setDetailState('loading');
 
   try {
     const response = await fetch(`${API_BASE_URL}/events/${eventId}`);
@@ -375,9 +407,9 @@ async function loadEventDetail(eventId) {
     }
 
     renderEventDetail(responseBody);
+    setDetailState('success');
   } catch (error) {
-    detailContainer.textContent = '';
-    detailContainer.append(createTextElement('div', 'status-message error-message', error.message || 'Event details could not be loaded.'));
+    setDetailState('error', error.message);
   }
 }
 
@@ -396,9 +428,8 @@ function setupDetailPage() {
   const params = new URLSearchParams(window.location.search);
   const eventId = params.get('id');
 
-  if (!eventId || !/^\d+$/.test(eventId)) {
-    detailContainer.textContent = '';
-    detailContainer.append(createTextElement('div', 'status-message error-message', 'No valid event was selected. Return to the home page or search page and choose an event.'));
+  if (!eventId || !/^\d+$/.test(eventId) || !Number.isSafeInteger(Number(eventId)) || Number(eventId) <= 0) {
+    setDetailState('error', 'No valid event was selected. Return to the home page or search page and choose an event.');
     return;
   }
 
