@@ -1,21 +1,167 @@
-# PROG2002 Charity Events Website
+# PROG2002 A2 Charity Events Website
 
-Author: Tianyi Li <id_09188388@foxmail.com>.
-Repository: https://github.com/zjsjsjjdjs/prog2002-charity-events
+A public charity events website for **Harbour Hope Charity**, developed for PROG2002 Assessment 2. Visitors can browse upcoming events, search by date, location or category, and view event details, ticket prices, fundraising progress and charity contact information.
 
-A2 public website for Harbour Hope Charity: homepage, event search, event details, a read-only Express API and MySQL sample data. Register displays the required construction notice; A2 does not process registrations.
+**Author:** Tianyi Li
+
+**Repository:** [prog2002-charity-events](https://github.com/zjsjsjjdjs/prog2002-charity-events)
+
+## Implemented features
+
+- **Homepage:** lists active events dated today or later using the Brisbane calendar date, ordered by event date and time.
+- **Event search:** supports date, partial location and category filters, individually or together. Combined filters must all match. Search can also return past active events.
+- **Clear filters:** resets the search form and clears the displayed results.
+- **Event details:** displays the description, date and time, location, ticket price, fundraising goal and progress, and charity contact details.
+- **Loading and error states:** provides feedback for loading, no matching events, invalid or missing event IDs, and API or network failures.
+- **Responsive layout:** adapts navigation, event cards and page layouts to smaller screens.
+
+## Technology stack
+
+- **Frontend:** HTML, CSS, vanilla JavaScript, DOM manipulation and the Fetch API.
+- **Backend:** Node.js and Express, with `mysql2`, `dotenv` and `cors`.
+- **Database:** MySQL, with schema and sample data provided in SQL.
+
+Express serves the frontend and the read-only API from the same local server. No frontend build step is required.
+
+## Project structure
+
+```text
+project/
+├── api/                    # Express API, database connection and environment template
+├── clientside/             # index.html, search.html, detail.html and shared assets
+├── database/               # Database schema and sample data
+├── docs/                   # Setup, API checks, regression results and delivery guides
+├── scripts/                # PowerShell packaging script
+├── submission/             # Generated local delivery files; ignored by Git
+└── README.md
+```
+
+Keep `api/` and `clientside/` as sibling directories: the API serves the frontend from `../clientside`.
 
 ## Run locally
 
-Follow [local setup](docs/a2-local-setup.md). Keep `api/` and `clientside/` as sibling directories. Start MySQL, import the SQL only into an empty/disposable database environment, run `npm ci` and `npm start` in `api/`, then open http://localhost:3000/.
+### 1. Prepare the environment
 
-The SQL starts with DROP DATABASE. Do not import over existing data you need to keep. Required database: `charityevents_db`; connection file: `api/event_db.js`.
+Install Node.js with npm and MySQL, then clone or download this repository. Start MySQL on **port 3306**. If using XAMPP, start its MySQL service from the control panel.
 
-## Delivery and verification
+The commands below start from the project root. They assume the `mysql` command is available on your PATH; otherwise, use the full path to your MySQL executable. See the [local setup guide](docs/a2-local-setup.md) for a Windows/XAMPP example.
 
+### 2. Import the database
+
+> **Warning:** `database/charityevents_db.sql` drops and recreates `charityevents_db`. Import it only into a fresh or disposable environment, or back up existing data before choosing to replace it. Skip this step if the correct database is already installed.
+
+Connect to MySQL from the project root, replacing `root` if you use another local database account:
+
+```sh
+mysql --host=localhost --port=3306 --protocol=tcp --user=root --password
+```
+
+Enter your database password when prompted. At the MySQL prompt, run:
+
+```sql
+SOURCE database/charityevents_db.sql;
+SHOW TABLES FROM charityevents_db;
+EXIT;
+```
+
+The import creates `organisations`, `categories` and `events`, with 1 organisation, 5 categories and 8 sample events. The sample events include past and suspended events for filtering checks.
+
+### 3. Configure the API
+
+In `api/`, copy `.env.example` to `.env` if you do not already have a local configuration. For example, in PowerShell:
+
+```powershell
+cd api
+if (-not (Test-Path -LiteralPath '.env')) {
+    Copy-Item -LiteralPath '.env.example' -Destination '.env'
+}
+```
+
+Edit `api/.env` with your local database credentials:
+
+```dotenv
+PORT=3000
+DB_HOST=localhost
+DB_USER=your_mysql_username
+DB_PASSWORD=your_mysql_password
+DB_NAME=charityevents_db
+```
+
+Replace the username and password placeholders with your own values. Keep `.env` private; it is excluded from Git and delivery archives. The database connection currently uses MySQL's default **port 3306**; there is no `DB_PORT` setting in the current implementation.
+
+### 4. Install dependencies and start the API
+
+Run these commands inside `api/`:
+
+```sh
+npm ci
+npm start
+```
+
+`npm ci` installs the versions recorded in `package-lock.json` and requires internet access or a suitable npm cache. If PowerShell blocks `npm.ps1`, use `npm.cmd ci` and `npm.cmd start` instead.
+
+Keep the terminal open while using the website. The API and frontend run on **port 3000**.
+
+### 5. Open the website and check the connection
+
+- Website: [http://localhost:3000/](http://localhost:3000/)
+- Database health check: [http://localhost:3000/api/health](http://localhost:3000/api/health)
+
+A successful health check returns:
+
+```json
+{"status":"ok","database":"connected"}
+```
+
+If events do not load, check that MySQL is running, `charityevents_db` exists, the credentials in `api/.env` are correct, and the API terminal is still running. Restart the API after changing `.env`. An empty upcoming-events list can also be valid when all sample event dates have passed.
+
+For archive extraction instructions and more setup details, see the [local setup guide](docs/a2-local-setup.md).
+
+## API endpoints
+
+Base URL: `http://localhost:3000`
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| GET | `/api/health` | Check database connectivity. |
+| GET | `/api/categories` | Retrieve categories for the search dropdown. |
+| GET | `/api/events/upcoming` | Retrieve active events dated today or later in Brisbane. |
+| GET | `/api/events/search` | Search active events using optional `date`, `location` and `categoryId` filters. |
+| GET | `/api/events/:id` | Retrieve an active event and its charity contact details. |
+
+Example search: [events in Brisbane](http://localhost:3000/api/events/search?location=Brisbane). Dates use `YYYY-MM-DD`; category and event IDs must be positive safe integers. Invalid filter values or IDs return `400`, missing or suspended events return `404`, and database failures return `500` with a generic error response.
+
+See the [API guide](api/README.md) and [API demonstration checklist](docs/a2-api-demo-checklist.md) for further details.
+
+## Verification
+
+After starting the application:
+
+1. Check that `/api/health` returns `status: ok` and `database: connected`.
+2. Open the homepage and follow an event's **View details** link. If there are no upcoming events, use the search page to find an active sample event.
+3. Search by date, location and category, try combined filters and a search with no matches, then confirm **Clear filters** resets both the form and results.
+4. Confirm the detail page displays ticket information, fundraising progress and charity contacts. Click **Register** to check the construction notice.
+5. Open `/detail.html?id=abc` to check the invalid-ID message and `/api/events/search?date=2026-02-30` to check an HTTP `400` response.
+
+The [regression checklist](docs/a2-final-test-checklist.md) records checks performed on **2026-10-03**, including search combinations, invalid dates and parameters, missing or suspended events, database and network failures, and detail-page loading and error states. Its follow-up verification records fixes for the earlier failures. These are documented prior results, not a claim that every possible scenario has been tested. Upcoming-event counts change with the current date.
+
+There is no `npm test` script in the current API package. Use the linked checklists for verification steps, recorded results and test limitations.
+
+## A2 scope
+
+The **Register** button displays:
+
+> This feature is currently under construction.
+
+It is disabled while event details are loading or after an error. This A2 version does not process registrations or payments; the API provides read-only event information.
+
+## Documentation and delivery
+
+- [Local setup and archive extraction](docs/a2-local-setup.md)
+- [API demonstration and error checks](docs/a2-api-demo-checklist.md)
+- [Regression results and test limitations](docs/a2-final-test-checklist.md)
 - [Packaging instructions](docs/a2-packaging-checklist.md)
-- [Reproducibility checks and personal handoff](docs/a2-delivery-checklist.md)
-- [API checks](docs/a2-api-demo-checklist.md)
-- [Regression results](docs/a2-final-test-checklist.md)
+- [Reproducibility and delivery checklist](docs/a2-delivery-checklist.md)
+- [Full documentation index](docs/README.md)
 
-Generated archives, SQL copy and SHA-256 manifest are written to ignored `submission/`. They are local delivery artifacts, not automatically submitted to the school. Reports, video and account-access tasks remain the author's responsibility.
+The packaging script writes the client/API archives, SQL copy and verification manifests to the ignored `submission/` directory. Packaging does not submit files to the school; the report, demonstration video, repository access and final upload remain separate delivery tasks.
