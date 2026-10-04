@@ -1,15 +1,21 @@
 # PROG2002 Charity Events Website
 
 Author: Tianyi Li <id_09188388@foxmail.com>.
+Repository: https://github.com/zjsjsjjdjs/prog2002-charity-events
 
-This project currently includes the MySQL database, Node.js runtime and public event browsing homepage.
+A2 public website for Harbour Hope Charity: homepage, event search, event details, a read-only Express API and MySQL sample data. Register displays the required construction notice; A2 does not process registrations.
 
 ## Run locally
 
-Follow [database and local setup](docs/data-local-setup.md), then run npm start from api/ and open http://localhost:3000/ in a browser. If PORT changes, use that port for both the homepage and API; the homepage uses a relative API URL.
+Follow [local setup](docs/a2-local-setup.md). Keep `api/` and `clientside/` as sibling directories. Start MySQL, import the SQL only into an empty/disposable database environment, run `npm ci` and `npm start` in `api/`, then open http://localhost:3000/.
 
-The homepage loads active events dated today or later in Brisbane, shows event categories, ticket prices and fundraising progress, and handles empty results and service failures.
+The SQL starts with DROP DATABASE. Do not import over existing data you need to keep. Required database: `charityevents_db`; connection file: `api/event_db.js`.
 
-See [homepage checks](docs/homepage-browsing.md). Search and event detail pages will be added in separate module commits.
+## Delivery and verification
 
-Required database: charityevents_db. Required connection file: api/event_db.js.
+- [Packaging instructions](docs/a2-packaging-checklist.md)
+- [Reproducibility checks and personal handoff](docs/a2-delivery-checklist.md)
+- [API checks](docs/a2-api-demo-checklist.md)
+- [Regression results](docs/a2-final-test-checklist.md)
+
+Generated archives, SQL copy and SHA-256 manifest are written to ignored `submission/`. They are local delivery artifacts, not automatically submitted to the school. Reports, video and account-access tasks remain the author's responsibility.

@@ -31,7 +31,7 @@ npm.cmd ci
 npm.cmd start
 ```
 
-Save the local database settings before starting the server. If port 3000 is in use, set PORT=3001 in .env and use that port in the health URL. Keep .env and node_modules out of Git.
+Save the local database settings before starting the server. Keep PORT=3000 for this delivery. If it is occupied by an older instance of this project, stop that known instance before starting another. Keep .env and node_modules out of Git.
 
 In another terminal:
 
@@ -39,7 +39,7 @@ In another terminal:
 Invoke-RestMethod 'http://localhost:3000/api/health'
 ```
 
-Expected: status=ok and database=connected. Database unavailability returns HTTP 500 with a generic message; unknown routes return HTTP 404. Open the public homepage at http://localhost:3000/ after the health check succeeds. The homepage list is available at /api/events/upcoming; search is a later module.
+Expected: status=ok and database=connected. Database unavailability returns HTTP 500 with a generic message; unknown routes return HTTP 404. Open the public homepage at http://localhost:3000/ after the health check succeeds. The homepage list is available at /api/events/upcoming; search and detail pages are also included. For delivery from the two archives, follow [the complete setup guide](a2-local-setup.md).
 
 ## Identity
 

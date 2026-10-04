@@ -1,9 +1,13 @@
-# Public Homepage
+# Public A2 Website
 
-Open http://localhost:3000/ after starting the API. The Express server hosts only this clientside directory, and the page calls /api/events/upcoming on the same origin.
+Author: Tianyi Li <id_09188388@foxmail.com>.
 
-The homepage uses HTML, CSS and native JavaScript DOM operations. It includes charity information, contact details, responsive navigation, event cards, loading/empty/error messages, ticket prices and fundraising progress.
+Pages: `index.html`, `search.html`, `detail.html`. Shared CSS and JavaScript are under `assets/`. The site uses native HTML, CSS, JavaScript, DOM manipulation and fetch.
 
-All displayed event dates and date-based past/upcoming labels use Australia/Brisbane. The Home, Events and Contact navigation links work within this module. Search navigation and links to the full event detail page will be added with those later modules.
+Extract this zip into `A2/clientside/`, with the API zip extracted into the sibling `A2/api/`. Start the API from `api/` after installing its dependencies and setting up MySQL, then open http://localhost:3000/.
 
-Directly opening index.html is also supported with the API on localhost:3000. Prefer the HTTP URL when using a custom port.
+- Home lists upcoming active events and links to details.
+- Search supports date, partial location and category filters and Clear filters.
+- Details show event information, tickets, fundraising and charity contacts. Register remains disabled while loading or after an error; on success it shows the A2 construction notice.
+
+Directly opening `index.html` also works while the API is running at localhost:3000. Prefer the HTTP URL above. Opening these files alone does not start the API or MySQL. The API serves only this directory, not backend credentials.
