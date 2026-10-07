@@ -42,3 +42,15 @@ Verified: node --require dotenv/config --test test/m07-create.test.js (from api)
 Result: 3 acceptance cases plus parent passed, 0 failed, using real MariaDB and Chrome.
 Covers persistence and refresh, malformed input, calendar/decimal/coordinate bounds,
 foreign keys, media type, browser validation, escaped text and 390px layout.
+
+## M08 edit events and view registrations
+Implemented GET and PUT /api/admin/events/:id. The admin detail endpoint includes
+all editable fields and reuses getEventRegistrations; unlike the public detail
+endpoint it also returns suspended events. Update locks the event in a transaction
+and changes only event fields, leaving all registration IDs and records intact.
+The browser prefills Brisbane local time and displays the existing attendee list.
+
+Verified: node --require dotenv/config --test test/m08-update.test.js (from api).
+Result: 5 acceptance cases plus parent passed, 0 failed. Covers public data updates,
+unchanged saves, suspended-event editing, invalid IDs and foreign keys, browser
+prefill/save, and preservation of a registration created through the public API.
