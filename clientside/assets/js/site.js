@@ -348,6 +348,28 @@ function renderEventDetail(event) {
     organisation
   );
 
+  const registrationHeading = createTextElement('h2', 'detail-heading', 'Registered attendees');
+  const attendees = document.createElement('ol');
+  attendees.id = 'attendee-list';
+  attendees.setAttribute('aria-label', 'Registered attendees, newest first');
+  const registrations = event.registrations || [];
+  if (registrations.length === 0) {
+    detailContainer.append(registrationHeading,
+      createTextElement('p', 'status-message', 'No registrations yet. Be the first to register.'));
+  } else {
+    registrations.forEach((registration) => {
+      const item = document.createElement('li');
+      item.append(
+        createTextElement('strong', '', registration.name),
+        createTextElement('p', 'event-meta',
+          formatDateTime(registration.registered_at) + ' · ' + registration.tickets +
+          (registration.tickets === 1 ? ' ticket' : ' tickets'))
+      );
+      attendees.append(item);
+    });
+    detailContainer.append(registrationHeading, attendees);
+  }
+
   const ticketText = Number(event.ticket_price) === 0 ? 'Free entry' : `${formatCurrency(event.ticket_price)} per ticket`;
   registerPanel.append(
     createTextElement('p', 'register-event-name', event.name),
@@ -407,6 +429,7 @@ async function loadEventDetail(eventId) {
     }
 
     renderEventDetail(responseBody);
+    document.querySelector('#register-button').dataset.eventId = String(responseBody.event_id);
     setDetailState('success');
   } catch (error) {
     setDetailState('error', error.message);
@@ -422,7 +445,8 @@ function setupDetailPage() {
   }
 
   registerButton.addEventListener('click', () => {
-    alert('This feature is currently under construction.');
+    const eventId = registerButton.dataset.eventId;
+    if (eventId) window.location.href = `register.html?id=${eventId}`;
   });
 
   const params = new URLSearchParams(window.location.search);
