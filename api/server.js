@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const { pool, testConnection, getEventRegistrations } = require('./event_db');
 
+const registrationRouter = require('./registration');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -220,6 +222,8 @@ app.get('/api/events/:id', async (req, res, next) => {
   }
 });
 
+app.use('/api/events/:id/registrations', registrationRouter);
+
 // Serve only public client files, keeping API credentials outside the web root.
 app.use(express.static(path.join(__dirname, '..', 'clientside')));
 
@@ -230,10 +234,14 @@ app.use((req, res) => {
 });
 
 app.use((error, req, res, next) => {
+  if (error.type === 'entity.parse.failed') {
+    return res.status(400).json({ code: 'INVALID_JSON', message: 'Request body must be valid JSON.' });
+  }
+  if (error.type === 'entity.too.large') {
+    return res.status(413).json({ code: 'PAYLOAD_TOO_LARGE', message: 'Request body is too large.' });
+  }
   console.error(error);
-  res.status(500).json({
-    message: 'Internal server error.'
-  });
+  res.status(500).json({ code: 'INTERNAL_ERROR', message: 'Internal server error.' });
 });
 
 if (require.main === module) {
