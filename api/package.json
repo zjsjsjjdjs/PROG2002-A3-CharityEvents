@@ -4,7 +4,7 @@
   "description": "Express REST API for the PROG2002 charity events website.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "dev": "node --watch server.js",
     "test": "node --require dotenv/config --test --test-concurrency=1"
   },

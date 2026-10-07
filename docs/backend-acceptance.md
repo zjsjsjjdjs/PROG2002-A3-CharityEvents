@@ -68,3 +68,35 @@ and five registration/delete races with no successful registration lost or orpha
 This completes the backend portion of the M11 cross-module registration/delete check;
 the teammate's uncommitted public timestamp regression and final joint M11 record
 still require integration.
+
+## M10 deployment and final local checks
+Implemented anchored api/.env loading, configurable database host/port/pool limits,
+Passenger app.js startup, explicit CORS allowlists, and production administrator
+HTTP Basic authentication. Production requires an HTTPS origin and explicit admin
+credentials; development without credentials is limited to loopback access.
+The fresh-install SQL uses the operator-selected empty database and preserves
+schema/sample attribution. Backend API/operation and cPanel guides are included.
+No cPanel account or remote repository was accessed.
+
+Verified: node --require dotenv/config --test test/m10-deployment.test.js (from api).
+Four acceptance cases plus parent passed. Includes configuration validation,
+authenticated/unauthenticated requests, cross-site write rejection, actual fresh SQL
+import (four tables, eight events, twelve registrations), startup from the project
+root, anchored environment lookup, allowed/disallowed CORS origins, database health
+and private file paths returning 404.
+
+Final full regression: npm test --prefix api, 61 passed and 0 failed (51 acceptance
+cases and 10 parent tests), on 2026-10-07. This covers committed M02–M05 plus M06–M10;
+it does not include Hongke's uncommitted M11 public timestamp regression test.
+Desktop and mobile directory/edit screenshots were inspected. A hidden retry button
+was incorrectly displayed because of the button display style; the hidden rule was
+fixed and browser assertions now cover it. Screenshots are local ignored artifacts
+in submission/admin-desktop.png, admin-mobile.png, edit-desktop.png and edit-mobile.png.
+
+## Remaining integration boundary
+M01 remains deferred. M06–M10 are local module commits on codex/tianyi-admin.
+The teammate's uncommitted M11 server.js date serialization fixes remain untouched.
+Ask the registration contributor to finish and commit that work with their own Git
+identity, then combine it with the backend branch and run the joint regression
+before final main-branch integration. M12 final assembly, actual cPanel deployment,
+video and peer-assessment submission remain separate work.

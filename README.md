@@ -1,4 +1,24 @@
-# PROG2002 A2 Charity Events Website
+# PROG2002 A3 Charity Events
+
+A3 retains the A2 history and adds public event registration plus an activity
+management backend. A2 author and current backend contributor:
+**Tianyi Li <id_09188388@foxmail.com>**. Registration contributor:
+**Hongke Ouyang <2838356314@qq.com>**. Original source:
+[prog2002-charity-events](https://github.com/zjsjsjjdjs/prog2002-charity-events),
+A2 commit 5c800ac884e4dc4c50e2ca01b87347416c116f0d.
+
+- [Backend operations, fields and API contract](docs/backend-guide.md)
+- [Current local startup and cPanel deployment](docs/cpanel-deployment.md)
+- [Executed backend acceptance and contribution](docs/backend-acceptance.md)
+- Public site: /index.html. Administration: /admin.html.
+- Start: npm start --prefix api. Tests: npm test --prefix api against an isolated database.
+
+M01 remote setup is deferred. Local modules retain individual commits; remote
+publication, cPanel deployment and final M11/M12 integration are still separate steps.
+The A2 documentation below records the inherited version; use the A3 guides above
+for current startup, registrations, administration and deployment.
+
+## A2 baseline documentation
 
 A public charity events website for **Harbour Hope Charity**, developed for PROG2002 Assessment 2. Visitors can browse upcoming events, search by date, location or category, and view event details, ticket prices, fundraising progress and charity contact information.
 

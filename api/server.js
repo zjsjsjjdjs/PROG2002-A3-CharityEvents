@@ -1,16 +1,17 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-require('dotenv').config();
+const { config } = require('./config');
+const { adminAccess } = require('./admin-access');
 
 const { pool, testConnection, getEventRegistrations } = require('./event_db');
 
 const registrationRouter = require('./registration');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const protectAdmin = adminAccess(config);
 
-app.use(cors());
+app.use(cors({ origin: (origin, callback) => callback(null, Boolean(origin && config.allowedOrigins.includes(origin))) }));
 app.use(express.json());
 
 function isValidDate(value) {
@@ -225,7 +226,8 @@ app.get('/api/events/:id', async (req, res, next) => {
 app.use('/api/events/:id/registrations', registrationRouter);
 
 // Backend routes keep public filtering unchanged.
-app.use('/api/admin', require('./admin'));
+app.use('/api/admin', protectAdmin, require('./admin'));
+app.get(['/admin.html', '/admin-event.html'], protectAdmin);
 
 // Serve only public client files, keeping API credentials outside the web root.
 app.use(express.static(path.join(__dirname, '..', 'clientside')));
@@ -243,14 +245,10 @@ app.use((error, req, res, next) => {
   if (error.type === 'entity.too.large') {
     return res.status(413).json({ code: 'PAYLOAD_TOO_LARGE', message: 'Request body is too large.' });
   }
-  console.error(error);
+  console.error('Request failed:', error.code || error.name);
   res.status(500).json({ code: 'INTERNAL_ERROR', message: 'Internal server error.' });
 });
 
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Charity events API is running on port ${port}`);
-  });
-}
+if (require.main === module) require('./start')(app);
 
 module.exports = app;
