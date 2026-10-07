@@ -17,7 +17,7 @@ router.get('/events', async (req, res, next) => {
     res.json(events);
   } catch (error) { next(error); }
 });
-const { createEvent, getEvent, updateEvent } = require('./admin_db');
+const { createEvent, getEvent, updateEvent, deleteEvent } = require('./admin_db');
 const { validate } = require('../clientside/assets/js/admin-validation');
 function validatedBody(req, res) {
   if (!req.is('application/json')) { res.status(415).json({code:'UNSUPPORTED_MEDIA_TYPE',message:'Use application/json.'}); return null; }
@@ -56,7 +56,15 @@ router.put('/events/:id', async (req,res,next) => {
   } catch(error) { next(error); }
 });
 
+router.delete('/events/:id', async (req,res,next) => {
+  try {
+    if (!await deleteEvent(Number(req.params.id))) return res.status(404).json({code:'EVENT_NOT_FOUND',message:'Event not found.'});
+    res.json({message:'Event deleted.',event_id:Number(req.params.id)});
+  } catch(error) { next(error); }
+});
+
 router.use((error,req,res,next) => {
+  if (['EVENT_HAS_REGISTRATIONS','ER_ROW_IS_REFERENCED_2'].includes(error.code)) return res.status(409).json({code:'EVENT_HAS_REGISTRATIONS',message:'This event has registrations and cannot be deleted. Suspend it instead.'});
   if (error.code === 'ER_NO_REFERENCED_ROW_2') return res.status(400).json({code:'INVALID_REFERENCE',message:'Choose an existing category and organisation.'});
   next(error);
 });

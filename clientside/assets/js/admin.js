@@ -18,7 +18,7 @@ function renderEvents() {
     const status = document.createElement('td'); status.append(text('span', event.display_status, 'status-pill ' + event.display_status.toLowerCase()));
     const actions = document.createElement('td'); const group = document.createElement('div'); group.className = 'actions';
     const edit = text('a', 'Edit'); edit.href = link.href; edit.setAttribute('aria-label', 'Edit ' + event.name);
-    const remove = text('button', 'Delete', 'admin-button danger'); remove.type = 'button'; remove.disabled = true; remove.title = 'Deletion is added in module M09.';
+    const remove = text('button', 'Delete', 'admin-button danger'); remove.type = 'button'; remove.addEventListener('click', () => removeEvent(event, remove));
     group.append(edit, remove); actions.append(group);
     row.append(title, text('td', formatEventTime(event.event_datetime)), status, text('td', String(event.registration_count)), actions);
     tbody.append(row);
@@ -44,3 +44,18 @@ document.getElementById('refresh-events').addEventListener('click', loadEvents);
 loadEvents();
 
 if (/^\d+$/.test(new URLSearchParams(location.search).get('saved') || '')) document.getElementById('save-notice').hidden = false;
+
+async function removeEvent(event, button) {
+  if (!window.confirm('Delete "' + event.name + '"? This cannot be undone. Events with registrations cannot be deleted.')) return;
+  button.disabled = true;
+  try {
+    const response = await fetch(adminApi + '/events/' + event.event_id, {method:'DELETE'});
+    const body = await response.json();
+    if (!response.ok) throw new Error(body.message || 'Unable to delete this event.');
+    const notice = document.getElementById('save-notice'); notice.textContent = 'Event deleted: ' + event.name; notice.hidden = false;
+    await loadEvents();
+  } catch(error) {
+    statusMessage.dataset.error = 'true';
+    statusMessage.textContent = error.message + ' If the connection was interrupted, refresh to check the latest event status.';
+  } finally { button.disabled = false; }
+}

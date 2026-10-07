@@ -54,3 +54,17 @@ Verified: node --require dotenv/config --test test/m08-update.test.js (from api)
 Result: 5 acceptance cases plus parent passed, 0 failed. Covers public data updates,
 unchanged saves, suspended-event editing, invalid IDs and foreign keys, browser
 prefill/save, and preservation of a registration created through the public API.
+
+## M09 delete events and protect registrations
+Implemented DELETE /api/admin/events/:id with browser confirmation. The API locks
+the parent event before checking registrations, matching createRegistration's
+lock order. Existing registrations produce 409 EVENT_HAS_REGISTRATIONS and are
+never cascaded. Missing events return 404; invalid IDs return 400.
+
+Verified: node --require dotenv/config --test test/m09-delete.test.js (from api).
+Result: 4 acceptance cases plus parent passed, 0 failed. Includes browser cancel,
+confirmed deletion, rejection feedback, public registration appearing in admin,
+and five registration/delete races with no successful registration lost or orphaned.
+This completes the backend portion of the M11 cross-module registration/delete check;
+the teammate's uncommitted public timestamp regression and final joint M11 record
+still require integration.
