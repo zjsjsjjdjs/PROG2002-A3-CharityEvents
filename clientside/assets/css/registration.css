@@ -1,0 +1,79 @@
+.registration-intro {
+  max-width: 680px;
+  color: var(--muted);
+}
+
+.registration-form {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.registration-form fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.registration-form legend {
+  padding: 0;
+  margin-bottom: 20px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.45rem;
+  font-weight: bold;
+}
+
+.registration-form label {
+  display: block;
+  margin: 18px 0 6px;
+  font-weight: bold;
+}
+
+.registration-form input {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.registration-form input:focus-visible {
+  outline: 3px solid rgba(15, 76, 92, 0.2);
+  outline-offset: 2px;
+  border-color: var(--harbour);
+}
+
+.registration-form .form-note {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.registration-form button:disabled,
+.registration-form fieldset:disabled input {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.registration-status {
+  margin-bottom: 20px;
+}
+
+.registration-form .form-actions a {
+  text-align: center;
+  text-decoration: none;
+}
+
+#selected-event {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .registration-layout .register-panel {
+    order: -1;
+  }
+}
+
