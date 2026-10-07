@@ -224,6 +224,9 @@ app.get('/api/events/:id', async (req, res, next) => {
 
 app.use('/api/events/:id/registrations', registrationRouter);
 
+// Backend routes keep public filtering unchanged.
+app.use('/api/admin', require('./admin'));
+
 // Serve only public client files, keeping API credentials outside the web root.
 app.use(express.static(path.join(__dirname, '..', 'clientside')));
 
