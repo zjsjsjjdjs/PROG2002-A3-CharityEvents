@@ -42,3 +42,5 @@ document.getElementById('event-query').addEventListener('input', renderEvents);
 document.getElementById('event-filter').addEventListener('change', renderEvents);
 document.getElementById('refresh-events').addEventListener('click', loadEvents);
 loadEvents();
+
+if (/^\d+$/.test(new URLSearchParams(location.search).get('saved') || '')) document.getElementById('save-notice').hidden = false;
