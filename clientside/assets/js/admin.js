@@ -3,9 +3,11 @@ const adminApi = '/api/admin';
 const tbody = document.getElementById('admin-events');
 const statusMessage = document.getElementById('admin-status');
 let events = [];
+let eventsReady = false;
 const text = (tag, value, className) => { const node = document.createElement(tag); node.textContent = value; if (className) node.className = className; return node; };
 const formatEventTime = (value) => new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Brisbane', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value));
 function renderEvents() {
+  if (!eventsReady) { tbody.replaceChildren(); return; }
   const query = document.getElementById('event-query').value.trim().toLowerCase();
   const filter = document.getElementById('event-filter').value;
   const shown = events.filter((event) => (!filter || event.display_status === filter) && (event.name + ' ' + event.location).toLowerCase().includes(query));
@@ -28,11 +30,13 @@ function renderEvents() {
 }
 async function loadEvents() {
   const refresh = document.getElementById('refresh-events'); refresh.disabled = true;
+  eventsReady = false; events = []; tbody.replaceChildren();
+  statusMessage.dataset.error = 'false';
   statusMessage.textContent = 'Loading events…';
   try {
     const response = await fetch(adminApi + '/events'); const body = await response.json();
     if (!response.ok) throw new Error(body.message || 'Unable to load events.');
-    events = body; renderEvents();
+    events = body; eventsReady = true; renderEvents();
   } catch (error) {
     tbody.replaceChildren(); statusMessage.dataset.error = 'true';
     statusMessage.textContent = error.message + ' Check your connection and select Refresh.';
