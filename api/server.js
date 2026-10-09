@@ -3,7 +3,7 @@ const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
-const { pool, testConnection } = require('./event_db');
+const { pool, testConnection, getEventRegistrations } = require('./event_db');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -167,6 +167,7 @@ app.get('/api/events/:id', async (req, res, next) => {
 
   if (!isPositiveInteger(id)) {
     return res.status(400).json({
+      code: 'INVALID_EVENT_ID',
       message: 'Event ID must be a positive number.'
     });
   }
@@ -207,11 +208,13 @@ app.get('/api/events/:id', async (req, res, next) => {
 
     if (events.length === 0) {
       return res.status(404).json({
+        code: 'EVENT_NOT_FOUND',
         message: 'Event not found.'
       });
     }
 
-    res.json(events[0]);
+    const registrations = await getEventRegistrations(Number(id));
+    res.json({ ...events[0], registrations });
   } catch (error) {
     next(error);
   }
@@ -233,6 +236,10 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Charity events API is running on port ${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Charity events API is running on port ${port}`);
+  });
+}
+
+module.exports = app;
