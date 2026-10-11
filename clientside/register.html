@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Harbour Hope Charity</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/registration.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/registration.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Harbour Hope Charity home">
+        <span class="brand-mark" aria-hidden="true">HH</span>
+        <span>
+          <span class="brand-name">Harbour Hope</span>
+          <span class="brand-subtitle">Charity events</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        Menu
+      </button>
+      <div class="nav-links" id="primary-navigation">
+        <a href="index.html">Home</a>
+        <a href="search.html">Search events</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-title">
+      <p class="eyebrow">Join your community</p>
+      <h1>Register for an event</h1>
+      <p class="registration-intro">Choose your ticket quantity and add your contact details. All fields are required.</p>
+    </section>
+
+    <section class="content-section detail-layout registration-layout">
+      <div>
+        <div class="registration-status">
+          <p id="registration-status" class="status-message" role="status" aria-live="polite">Loading your selected event...</p>
+        </div>
+        <form id="registration-form" class="registration-form" novalidate>
+          <fieldset id="registration-fields" disabled>
+            <legend>Your registration</legend>
+            <label for="attendee-name">Full name</label>
+            <input id="attendee-name" name="name" autocomplete="name" maxlength="120" required>
+
+            <label for="attendee-email">Email address</label>
+            <input id="attendee-email" name="email" type="email" autocomplete="email" maxlength="254" aria-describedby="email-note" required>
+            <p id="email-note" class="form-note">Use the same email for your registrations. Each email can register once per event.</p>
+
+            <label for="attendee-tickets">Number of tickets</label>
+            <input id="attendee-tickets" name="tickets" type="number" inputmode="numeric" min="1" max="2147483647" step="1" value="1" required>
+            <p class="form-note">Your name, ticket quantity and registration time will appear on the event page. Your email will not appear in the public list.</p>
+
+            <div class="form-actions">
+              <button id="submit-registration" class="button primary-button" type="submit">Submit registration</button>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <a id="back-to-event" class="button secondary-button" hidden>Back to event details</a>
+            <a href="search.html">Find another event</a>
+          </div>
+        </form>
+      </div>
+      <aside class="register-panel" aria-label="Selected event">
+        <p class="panel-label">Your selected event</p>
+        <div id="selected-event" aria-live="polite">Loading event information...</div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Harbour Hope Charity. Built for PROG2002 coursework.</p>
+  </footer>
+</body>
+</html>
