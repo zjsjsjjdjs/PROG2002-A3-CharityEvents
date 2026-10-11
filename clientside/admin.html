@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage events | Harbour Hope</title>
+<link rel="stylesheet" href="assets/css/styles.css"><link rel="stylesheet" href="assets/css/admin.css">
+<script src="assets/js/admin.js" defer></script></head><body>
+<header class="admin-header"><a class="brand" href="admin.html"><span class="brand-mark" aria-hidden="true">HH</span><span><span class="brand-name">Harbour Hope</span><span class="brand-subtitle">Event management</span></span></a>
+<nav aria-label="Administration"><a href="admin.html" aria-current="page">All events</a><a href="admin-event.html">New event</a><a href="index.html">Public website ↗</a></nav></header>
+<main class="admin-main">
+<div class="admin-heading"><div><p class="eyebrow">Harbour Hope / Administration</p><h1>Manage events</h1><p class="admin-muted">Keep your community informed, from the first invitation to the final fundraiser.</p></div><a class="admin-button" href="admin-event.html">+ New event</a></div>
+<section class="admin-workspace" aria-label="Event directory">
+<div class="admin-toolbar"><label>Find an event<input id="event-query" type="search" placeholder="Search name or location"></label><label>Status<select id="event-filter" aria-label="Status"><option value="">All statuses</option><option>Active</option><option>Past</option><option>Suspended</option></select></label><button id="refresh-events" class="admin-button secondary" type="button">Refresh</button></div>
+<p id="admin-status" role="status" aria-live="polite">Loading events…</p>
+<div class="admin-table-wrap"><table class="admin-table"><caption class="sr-only">All charity events and management actions</caption><thead><tr><th scope="col">Event</th><th scope="col">Date · Brisbane</th><th scope="col">Status</th><th scope="col">Registrations</th><th scope="col">Actions</th></tr></thead><tbody id="admin-events"></tbody></table></div>
+</section><p class="admin-footnote">Past is based on the Brisbane calendar date. Suspended events stay hidden from the public website.</p>
+</main><footer class="admin-footer">Harbour Hope Charity · Community events, carefully managed.</footer></body></html>
