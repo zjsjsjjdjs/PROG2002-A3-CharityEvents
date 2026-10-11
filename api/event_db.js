@@ -36,4 +36,39 @@ async function getEventRegistrations(eventId) {
   }));
 }
 
-module.exports = { pool, testConnection, getEventRegistrations };
+// Lock the event so registration cannot race an admin delete or suspension.
+async function createRegistration(eventId, { name, email, tickets }) {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    const [events] = await connection.execute(
+      "SELECT event_id FROM events WHERE event_id = ? AND status = 'active' FOR UPDATE",
+      [eventId]
+    );
+    if (events.length === 0) {
+      const error = new Error('Event not found.');
+      error.code = 'EVENT_NOT_FOUND';
+      throw error;
+    }
+    const [result] = await connection.execute(
+      'INSERT INTO registrations (event_id, name, email, tickets) VALUES (?, ?, ?, ?)',
+      [eventId, name, email, tickets]
+    );
+    const [[row]] = await connection.execute(
+      'SELECT UNIX_TIMESTAMP(registered_at) * 1000 AS time_ms FROM registrations WHERE registration_id = ?',
+      [result.insertId]
+    );
+    await connection.commit();
+    return {
+      registration_id: result.insertId, event_id: eventId, name, email, tickets,
+      registered_at: new Date(Number(row.time_ms)).toISOString()
+    };
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    connection.release();
+  }
+}
+
+module.exports = { pool, testConnection, getEventRegistrations, createRegistration };
