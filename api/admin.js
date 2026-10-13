@@ -1,5 +1,5 @@
 const express = require('express');
-const { pool } = require('./event_db');
+const { pool, getEventRegistrations } = require('./event_db');
 const router = express.Router();
 router.get('/events', async (req, res, next) => {
   try {
@@ -17,7 +17,7 @@ router.get('/events', async (req, res, next) => {
     res.json(events);
   } catch (error) { next(error); }
 });
-const { createEvent } = require('./admin_db');
+const { createEvent, getEvent, updateEvent } = require('./admin_db');
 const { validate } = require('../clientside/assets/js/admin-validation');
 function validatedBody(req, res) {
   if (!req.is('application/json')) { res.status(415).json({code:'UNSUPPORTED_MEDIA_TYPE',message:'Use application/json.'}); return null; }
@@ -34,6 +34,28 @@ router.post('/events', async (req,res,next) => {
   try { const eventId = await createEvent(event); res.status(201).json({message:'Event created.',event_id:eventId}); }
   catch(error) { next(error); }
 });
+router.param('id', (req,res,next,id) => {
+  if (!/^\d+$/.test(id) || !Number.isSafeInteger(Number(id)) || Number(id) < 1 || Number(id) > 2147483647)
+    return res.status(400).json({code:'INVALID_EVENT_ID',message:'Invalid event ID.'});
+  next();
+});
+router.get('/events/:id', async (req,res,next) => {
+  try {
+    const event = await getEvent(Number(req.params.id));
+    if (!event) return res.status(404).json({code:'EVENT_NOT_FOUND',message:'Event not found.'});
+    const registrations = await getEventRegistrations(event.event_id);
+    res.json({...event, registrations});
+  } catch(error) { next(error); }
+});
+router.put('/events/:id', async (req,res,next) => {
+  const event = validatedBody(req,res); if (!event) return;
+  try {
+    const found = await updateEvent(Number(req.params.id), event);
+    if (!found) return res.status(404).json({code:'EVENT_NOT_FOUND',message:'Event not found.'});
+    res.json({message:'Event updated.',event_id:Number(req.params.id)});
+  } catch(error) { next(error); }
+});
+
 router.use((error,req,res,next) => {
   if (error.code === 'ER_NO_REFERENCED_ROW_2') return res.status(400).json({code:'INVALID_REFERENCE',message:'Choose an existing category and organisation.'});
   next(error);
