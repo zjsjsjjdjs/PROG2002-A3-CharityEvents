@@ -26,4 +26,21 @@ async function updateEvent(id, event) {
   } catch (error) { await connection.rollback(); throw error; }
   finally { connection.release(); }
 }
-module.exports = { createEvent, getEvent, updateEvent };
+async function deleteEvent(id) {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    // Same parent-first lock order as createRegistration, preventing a check/delete race.
+    const [events] = await connection.execute('SELECT event_id FROM events WHERE event_id = ? FOR UPDATE', [id]);
+    if (!events.length) { await connection.rollback(); return false; }
+    const [registrations] = await connection.execute('SELECT registration_id FROM registrations WHERE event_id = ? LIMIT 1 FOR UPDATE', [id]);
+    if (registrations.length) {
+      const error = new Error('This event has registrations and cannot be deleted. Suspend it instead.');
+      error.code = 'EVENT_HAS_REGISTRATIONS'; throw error;
+    }
+    await connection.execute('DELETE FROM events WHERE event_id = ?', [id]);
+    await connection.commit(); return true;
+  } catch(error) { await connection.rollback(); throw error; }
+  finally { connection.release(); }
+}
+module.exports = { createEvent, getEvent, updateEvent, deleteEvent };
