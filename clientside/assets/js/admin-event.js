@@ -4,7 +4,8 @@ const message = document.getElementById('form-status');
 const fieldset = document.getElementById('event-fields');
 const save = document.getElementById('save-event');
 const retry = document.getElementById('retry-form');
-const id = new URLSearchParams(location.search).get('id');
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
 const apiBase = '/api';
 async function request(url, options) {
   const response = await fetch(url, options);
@@ -23,7 +24,10 @@ async function loadForm() {
   retry.hidden = true; fieldset.disabled = true; save.disabled = true;
   message.textContent = 'Loading categories and organisations…'; message.dataset.error = 'false';
   try {
-    if (id !== null && !/^\d+$/.test(id)) throw new Error('Invalid event ID. Return to All events.');
+    if (params.getAll('id').length > 1 || (id !== null &&
+        (!/^\d+$/.test(id) || !Number.isSafeInteger(Number(id)) || Number(id) < 1 || Number(id) > 2147483647))) {
+      throw new Error('Invalid event ID. Return to All events.');
+    }
     const [categories, organisations] = await Promise.all([request(apiBase + '/categories'), request(apiBase + '/admin/organisations')]);
     for (const [key, rows, idKey] of [['category_id',categories,'category_id'],['organisation_id',organisations,'organisation_id']]) {
       const select = form.elements.namedItem(key); while (select.options.length > 1) select.remove(1);
