@@ -89,7 +89,7 @@ Both registration and deletion lock the parent event first. Deletion also checks
 registrations inside its transaction; the restrictive foreign key remains the
 last line of protection. No route cascades registration deletion.
 
-## Shared file handoff
+## Historical M06-M10 file handoff
 
 - api/server.js: admin router and page protection, configurable CORS, startup hook,
   and generic error logging. Public route logic is unchanged.
@@ -98,9 +98,8 @@ last line of protection. No route cascades registration deletion.
 - api/package.json: start entry point and test command.
 - New admin routes, data operations, shared validation, UI and tests are separate files.
 - Public HTML, site.js and registration.js are unchanged.
-- Hongke's uncommitted M11 date-format fixes in the other workspace still need to be
-  incorporated at final integration. Do not replace server.js wholesale; preserve
-  both the two DATE_FORMAT edits and the admin/deployment hooks.
+- M11 time serialization is integrated in commit 3972153. The admin/deployment hooks and original contributors remain intact.
+- Follow-up fixes in 26cb134 preserve list error/loading states, reject ambiguous editor IDs and preflight test setup before database access.
 
 ## Personal contribution and delivery
 
@@ -108,7 +107,4 @@ Tianyi's module commits cover directory/navigation, create, edit, delete and
 deployment configuration. M09 tests exercise public registration followed by admin
 visibility and restricted deletion. See backend-acceptance.md for executed checks.
 
-M01 is deferred. The user will create the private team repository and invite the
-teammate. Actual pushes, teammate review, final M11/M12 integration, each person's
-cPanel deployment, personal video of at most 15 minutes, and peer-assessment
-submission must be recorded when performed; these are not completed by local tests.
+The [A3 team repository](https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents) contains the merged modules through M11 and follow-up fixes (PR #12). The recorded full regression on 2026-10-07 passed 80 tests. M12 assembles the delivery documentation in a separate PR. Each participant records their own manual acceptance, cPanel deployment, video of at most 15 minutes and peer-assessment submission; these tasks are not certified by local tests. See [contributions](a3-delivery.md) and the [delivery checklist](m12-delivery-checklist.md).

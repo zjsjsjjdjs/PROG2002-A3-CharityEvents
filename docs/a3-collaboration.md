@@ -1,28 +1,26 @@
-# A3 source and collaboration agreement
+# A3 source and collaboration
 
-A3 starts from the A2 repository at `E:\workplace\aaaa\user2`, main commit
-`5c800ac884e4dc4c50e2ca01b87347416c116f0d`.
-Upstream: https://github.com/zjsjsjjdjs/prog2002-charity-events.git.
-A2 author: **Tianyi Li <id_09188388@foxmail.com>**. Its nine mainline commits
-and original authorship are retained unchanged.
+A2 baseline: 5c800ac884e4dc4c50e2ca01b87347416c116f0d.
+Original source: https://github.com/zjsjsjjdjs/prog2002-charity-events.
+Original author: Tianyi Li <id_09188388@foxmail.com>.
 
-A3 user1: **Hongke Ouyang <2838356314@qq.com>**, branch
-`codex/user1-registration`. Each completed module has one separate commit,
-in order M02, M03, M04, M05, M11, M12. Work stays local until the user supplies
-the new shared remote. No push or teammate review is claimed before it happens.
+user1 is Hongke Ouyang <2838356314@qq.com>, responsible for M02-M05,
+M11 integration, final follow-up fixes and M12 delivery assembly.
+user2 is Tianyi Li <id_09188388@foxmail.com>, responsible for M06-M10,
+team repository work and deployment configuration. These labels supersede any
+inconsistent labels in earlier conversation exports. Commit authors are unchanged.
 
-The user relayed user2's agreement on 2026-10-07:
+The private A3 repository is [PROG2002-A3-CharityEvents](https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents).
+user1 uploads as Sakitam630; user2 owns the repository as zjsjsjjdjs.
+M02-M11 and follow-up fix 26cb134 are merged through PR #12. Original authorship is preserved.
 
-- user2 owns M01, the admin event list/create/update/delete modules, their APIs,
-  and shared deployment configuration.
-- user1 owns registration SQL, database helpers in `api/event_db.js`, public
-  event detail/registration routes in `api/server.js`, the detail and registration
-  pages, integration acceptance and delivery documentation.
-- user2 should keep admin routes in a separate module and coordinate the router
-  mount in `api/server.js`. Coordinate any further shared-file edits before merging.
-- Both branches start from the same A2 baseline; M01 delivery remains user2's work.
+The combined candidate is E:/workplace/user1-A3 on codex/user1-registration.
+It includes user2's original module commits through 06c0b0a, M11 3972153 and
+follow-up fixes 26cb134. E:/workplace/user2-A3 remains the unmodified source copy.
+M12 documentation is prepared on user1-m12-delivery from main f0b51ec. It is submitted for teammate review without an automatic merge. The original local working branch remains available.
 
 ## Shared contract
+
 
 - Fields: `registration_id`, `event_id`, `name`, `email`, `registered_at`,
   `tickets`. Email is the contact method and attendee identity.
@@ -43,12 +41,10 @@ The user relayed user2's agreement on 2026-10-07:
   Suspended events remain unavailable publicly. No payment/capacity restriction
   is part of the agreed scope.
 
-## Handoff and remaining personal work
 
-Review each module with user2 when the new shared remote or local patch exchange
-is available. Obtain user2's actual branch and deployment instructions before
-backend integration, final acceptance and main-branch merge.
-Do not invent teammate work or test results.
+## Delivery
 
-The user must deploy the complete integrated project to their own cPanel, record
-their own A3 demonstration (maximum 15 minutes), and submit their own peer review.
+Both participants retain responsibility for their own actual cPanel deployment,
+video of at most 15 minutes and individual peer assessment. Local test passes do
+not claim these personal tasks are complete. Contributions and module commits
+are listed in [the delivery guide](a3-delivery.md). The [M12 checklist](m12-delivery-checklist.md) separates the source archive from outstanding personal evidence.

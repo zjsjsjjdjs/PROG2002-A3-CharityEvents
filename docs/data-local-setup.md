@@ -1,3 +1,5 @@
+> Historical A2 module record. For current A3 setup and behavior, use the [project README](../README.md) and [delivery guide](a3-delivery.md).
+
 # Data and Local Runtime
 
 This guide covers the MySQL schema, sample data, Node dependencies, database connection and Express health endpoint. For the public homepage, also see homepage-browsing.md.
