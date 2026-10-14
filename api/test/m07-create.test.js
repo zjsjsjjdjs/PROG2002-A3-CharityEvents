@@ -31,7 +31,7 @@ test('M07 create and validate events', async (t) => {
   await t.test('browser validates, creates, refreshes and keeps safe text content',async()=>{
    browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'chrome',headless:true});
    const page=await browser.newPage(); await page.goto(base+'/admin-event.html');
-   await expect(page.locator('#save-event')).toBeEnabled();
+   await expect(page.locator('#save-event')).toBeEnabled();await expect(page.locator('#retry-form')).toBeHidden();await expect(page.locator('#registrations')).toBeHidden();
    await page.locator('#save-event').click(); await expect(page.locator('#form-status')).toContainText('name is required');
    for(const key of ['name','event_datetime','location','purpose','short_description','full_description','ticket_price','fundraising_goal','current_progress']){
     await page.locator('#'+key).fill(key==='name'?prefix+' <img src=x onerror=alert(1)>':String(valid[key]));
@@ -41,7 +41,7 @@ test('M07 create and validate events', async (t) => {
    await expect(page.locator('#admin-events')).toContainText(prefix+' <img');
    assert.equal(await page.locator('#admin-events img').count(),0);
    await page.reload(); await expect(page.locator('#admin-events')).toContainText(prefix+' <img');
-   await page.goto(base+'/admin-event.html'); await expect(page.locator('#save-event')).toBeEnabled();
+   await page.goto(base+'/admin-event.html'); await expect(page.locator('#save-event')).toBeEnabled();await expect(page.locator('#retry-form')).toBeHidden();await expect(page.locator('#registrations')).toBeHidden();
    await page.setViewportSize({width:390,height:844}); assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   });
  }finally{if(browser)await browser.close();await pool.execute('DELETE FROM events WHERE name LIKE ?',[prefix+'%']);await new Promise(r=>server.close(r));await pool.end();}

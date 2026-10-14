@@ -35,7 +35,7 @@ test('M08 editing and registration preservation',async(t)=>{
   });
   await t.test('browser prefills Brisbane time, shows attendees and saves changes',async()=>{
    browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'chrome',headless:true});const page=await browser.newPage();
-   await page.goto(base+'/admin-event.html?id='+id);await expect(page.locator('#save-event')).toBeEnabled();
+   await page.goto(base+'/admin-event.html?id='+id);await expect(page.locator('#save-event')).toBeEnabled();await expect(page.locator('#retry-form')).toBeHidden();
    await expect(page.locator('#event_datetime')).toHaveValue('2031-05-15T14:30');await expect(page.locator('#status')).toHaveValue('suspended');
    await expect(page.locator('#registration-list')).toContainText('M08 Attendee');await expect(page.locator('#registration-list')).toContainText('2 tickets');
    await page.locator('#name').fill(data.name+' browser');await page.locator('#status').selectOption('active');await page.locator('#save-event').click();
