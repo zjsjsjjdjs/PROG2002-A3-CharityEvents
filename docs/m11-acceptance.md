@@ -1,3 +1,14 @@
+# Current integration status
+
+User1 is Hongke Ouyang; user2 is Tianyi Li. The candidate contains both contributors' modules, M11 time fixes and the three final follow-up fixes. Recorded full regression on 2026-10-07:
+80 passed, 0 failed. See final-technical-checks.md and a3-delivery.md.
+M02-M11 and follow-up fixes are merged in the [A3 repository](https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents) through PR #12. M12 assembles the final documentation; individual manual/deployment evidence remains unreported. See [current delivery status](m12-delivery-checklist.md).
+
+## Historical acceptance record
+
+The dated record below describes its original commit boundary. Pending items and
+61/76-test counts below are historical; the current status above supersedes them.
+
 # M11 joint integration acceptance — complete locally
 
 Owner: Hongke Ouyang <2838356314@qq.com> (user1, registration and integration).

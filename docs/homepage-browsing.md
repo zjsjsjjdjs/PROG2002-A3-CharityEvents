@@ -1,3 +1,5 @@
+> Historical A2 module record. For current A3 setup and behavior, use the [project README](../README.md) and [delivery guide](a3-delivery.md).
+
 # Homepage Browsing Module
 
 Author: Tianyi Li <id_09188388@foxmail.com>.

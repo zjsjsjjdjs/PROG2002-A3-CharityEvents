@@ -1,13 +1,16 @@
-# Public A2 Website
+# A3 public website and administration
 
-Author: Tianyi Li <id_09188388@foxmail.com>.
+Original A2 and admin M06-M10: Tianyi Li (user2). Registration M03-M05, M11 integration and follow-up fixes: Hongke Ouyang (user1). Original commit authorship is preserved.
 
-Pages: `index.html`, `search.html`, `detail.html`. Shared CSS and JavaScript are under `assets/`. The site uses native HTML, CSS, JavaScript, DOM manipulation and fetch.
+Keep clientside beside api. Start the Express application with npm start --prefix api from the project root and open its HTTP URL (default http://localhost:3000/). The supplied pages use same-origin /api requests; open them through the server.
 
-Extract this zip into `A2/clientside/`, with the API zip extracted into the sibling `A2/api/`. Start the API from `api/` after installing its dependencies and setting up MySQL, then open http://localhost:3000/.
+- index.html lists upcoming active events.
+- search.html combines date, location and category filters and supports clearing filters.
+- detail.html displays event information and the public attendee list, and links to registration.
+- register.html validates name, email and ticket quantity, submits the registration and returns to the event detail.
+- admin.html lists, searches and filters events, with create/edit/delete controls.
+- admin-event.html creates or edits an event and displays its registrations.
 
-- Home lists upcoming active events and links to details.
-- Search supports date, partial location and category filters and Clear filters.
-- Details show event information, tickets, fundraising and charity contacts. Register remains disabled while loading or after an error; on success it shows the A2 construction notice.
+Public lists omit attendee email. Suspended events are unavailable publicly. Existing registrations survive updates and suspension and prevent event deletion. Production admin access requires the configured credentials.
 
-Directly opening `index.html` also works while the API is running at localhost:3000. Prefer the HTTP URL above. Opening these files alone does not start the API or MySQL. The API serves only this directory, not backend credentials.
+See [startup and delivery](../README.md), [backend operations](../docs/backend-guide.md) and [deployment](../docs/cpanel-deployment.md).

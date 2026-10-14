@@ -1,187 +1,43 @@
 # PROG2002 A3 Charity Events
 
-A3 retains the A2 history and adds public event registration plus an activity
-management backend. A2 author and current backend contributor:
-**Tianyi Li <id_09188388@foxmail.com>**. Registration contributor:
-**Hongke Ouyang <2838356314@qq.com>**. Original source:
-[prog2002-charity-events](https://github.com/zjsjsjjdjs/prog2002-charity-events),
-A2 commit 5c800ac884e4dc4c50e2ca01b87347416c116f0d.
+Harbour Hope combines the original A2 event browsing and search with public
+registration and an activity management backend. Registered events cannot be
+deleted; updates and suspension preserve their registration records.
 
-- [Backend operations, fields and API contract](docs/backend-guide.md)
-- [Current local startup and cPanel deployment](docs/cpanel-deployment.md)
-- [Executed backend acceptance and contribution](docs/backend-acceptance.md)
-- Public site: /index.html. Administration: /admin.html.
-- Start: npm start --prefix api. Tests: npm test --prefix api against an isolated database.
+- user1: Hongke Ouyang <2838356314@qq.com> — registration, integration and delivery assembly.
+- user2: Tianyi Li <id_09188388@foxmail.com> — original A2 author, administration and deployment configuration.
+- A2 source: https://github.com/zjsjsjjdjs/prog2002-charity-events
+- A2 baseline: 5c800ac884e4dc4c50e2ca01b87347416c116f0d. Original commits and authors are retained.
+- A3 team repository: [PROG2002-A3-CharityEvents](https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents) (private).
+- GitHub accounts: user1 Sakitam630; user2/repository owner zjsjsjjdjs.
+- M02-M11 and follow-up fix 26cb134 are merged into main through PR #12. M12 is delivered as a separate documentation PR.
 
-M01 remote setup is deferred. Local modules retain individual commits; remote
-publication, cPanel deployment and final M11/M12 integration are still separate steps.
-The A2 documentation below records the inherited version; use the A3 guides above
-for current startup, registrations, administration and deployment.
+## Start locally
 
-## A2 baseline documentation
+1. Create an empty MySQL/MariaDB database and import database/a3-fresh-install.sql into it.
+2. Install locked dependencies: npm ci --prefix api.
+3. Copy api/.env.example to api/.env only if absent. Configure DB_HOST, DB_PORT,
+   DB_USER, DB_PASSWORD and DB_NAME for that database.
+4. Run npm start --prefix api, then open http://localhost:3000/ and /admin.html.
+   Use the configured PORT if different. /api/health should report a connected database.
 
-A public charity events website for **Harbour Hope Charity**, developed for PROG2002 Assessment 2. Visitors can browse upcoming events, search by date, location or category, and view event details, ticket prices, fundraising progress and charity contact information.
+Keep api and clientside as siblings. The entry point is api/app.js. No frontend
+build is required. Development administration without credentials is restricted
+to loopback access. Production requires HTTPS and explicit admin credentials.
 
-**Author:** Tianyi Li
+## Verification and delivery
 
-**Repository:** [prog2002-charity-events](https://github.com/zjsjsjjdjs/prog2002-charity-events)
+Code 26cb134 passed 80 tests on 2026-10-07 using Node 24.10.0, MariaDB 10.4.32 and Chrome. This is the recorded full regression result; the M12 documentation upload does not claim a new application test run.
+Run node scripts/test-joint-acceptance.cjs using a local test connection with
+permission to create disposable databases. It keeps api/.env unchanged.
 
-## Implemented features
+- [Full delivery guide and contributions](docs/a3-delivery.md)
+- [Backend operation and API](docs/backend-guide.md)
+- [cPanel deployment](docs/cpanel-deployment.md)
+- [Final technical checks](docs/final-technical-checks.md)
+- [Manual acceptance checklist](docs/final-manual-checklist.md)
+- [Collaboration and source](docs/a3-collaboration.md)
+- [Documentation index](docs/README.md)
+- [Historical A2 README](docs/a2-readme-history.md)
 
-- **Homepage:** lists active events dated today or later using the Brisbane calendar date, ordered by event date and time.
-- **Event search:** supports date, partial location and category filters, individually or together. Combined filters must all match. Search can also return past active events.
-- **Clear filters:** resets the search form and clears the displayed results.
-- **Event details:** displays the description, date and time, location, ticket price, fundraising goal and progress, and charity contact details.
-- **Loading and error states:** provides feedback for loading, no matching events, invalid or missing event IDs, and API or network failures.
-- **Responsive layout:** adapts navigation, event cards and page layouts to smaller screens.
-
-## Technology stack
-
-- **Frontend:** HTML, CSS, vanilla JavaScript, DOM manipulation and the Fetch API.
-- **Backend:** Node.js and Express, with `mysql2`, `dotenv` and `cors`.
-- **Database:** MySQL, with schema and sample data provided in SQL.
-
-Express serves the frontend and the read-only API from the same local server. No frontend build step is required.
-
-## Project structure
-
-```text
-project/
-├── api/                    # Express API, database connection and environment template
-├── clientside/             # index.html, search.html, detail.html and shared assets
-├── database/               # Database schema and sample data
-├── docs/                   # Setup, API checks, regression results and delivery guides
-├── scripts/                # PowerShell packaging script
-├── submission/             # Generated local delivery files; ignored by Git
-└── README.md
-```
-
-Keep `api/` and `clientside/` as sibling directories: the API serves the frontend from `../clientside`.
-
-## Run locally
-
-### 1. Prepare the environment
-
-Install Node.js with npm and MySQL, then clone or download this repository. Start MySQL on **port 3306**. If using XAMPP, start its MySQL service from the control panel.
-
-The commands below start from the project root. They assume the `mysql` command is available on your PATH; otherwise, use the full path to your MySQL executable. See the [local setup guide](docs/a2-local-setup.md) for a Windows/XAMPP example.
-
-### 2. Import the database
-
-> **Warning:** `database/charityevents_db.sql` drops and recreates `charityevents_db`. Import it only into a fresh or disposable environment, or back up existing data before choosing to replace it. Skip this step if the correct database is already installed.
-
-Connect to MySQL from the project root, replacing `root` if you use another local database account:
-
-```sh
-mysql --host=localhost --port=3306 --protocol=tcp --user=root --password
-```
-
-Enter your database password when prompted. At the MySQL prompt, run:
-
-```sql
-SOURCE database/charityevents_db.sql;
-SHOW TABLES FROM charityevents_db;
-EXIT;
-```
-
-The import creates `organisations`, `categories` and `events`, with 1 organisation, 5 categories and 8 sample events. The sample events include past and suspended events for filtering checks.
-
-### 3. Configure the API
-
-In `api/`, copy `.env.example` to `.env` if you do not already have a local configuration. For example, in PowerShell:
-
-```powershell
-cd api
-if (-not (Test-Path -LiteralPath '.env')) {
-    Copy-Item -LiteralPath '.env.example' -Destination '.env'
-}
-```
-
-Edit `api/.env` with your local database credentials:
-
-```dotenv
-PORT=3000
-DB_HOST=localhost
-DB_USER=your_mysql_username
-DB_PASSWORD=your_mysql_password
-DB_NAME=charityevents_db
-```
-
-Replace the username and password placeholders with your own values. Keep `.env` private; it is excluded from Git and delivery archives. The database connection currently uses MySQL's default **port 3306**; there is no `DB_PORT` setting in the current implementation.
-
-### 4. Install dependencies and start the API
-
-Run these commands inside `api/`:
-
-```sh
-npm ci
-npm start
-```
-
-`npm ci` installs the versions recorded in `package-lock.json` and requires internet access or a suitable npm cache. If PowerShell blocks `npm.ps1`, use `npm.cmd ci` and `npm.cmd start` instead.
-
-Keep the terminal open while using the website. The API and frontend run on **port 3000**.
-
-### 5. Open the website and check the connection
-
-- Website: [http://localhost:3000/](http://localhost:3000/)
-- Database health check: [http://localhost:3000/api/health](http://localhost:3000/api/health)
-
-A successful health check returns:
-
-```json
-{"status":"ok","database":"connected"}
-```
-
-If events do not load, check that MySQL is running, `charityevents_db` exists, the credentials in `api/.env` are correct, and the API terminal is still running. Restart the API after changing `.env`. An empty upcoming-events list can also be valid when all sample event dates have passed.
-
-For archive extraction instructions and more setup details, see the [local setup guide](docs/a2-local-setup.md).
-
-## API endpoints
-
-Base URL: `http://localhost:3000`
-
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| GET | `/api/health` | Check database connectivity. |
-| GET | `/api/categories` | Retrieve categories for the search dropdown. |
-| GET | `/api/events/upcoming` | Retrieve active events dated today or later in Brisbane. |
-| GET | `/api/events/search` | Search active events using optional `date`, `location` and `categoryId` filters. |
-| GET | `/api/events/:id` | Retrieve an active event and its charity contact details. |
-
-Example search: [events in Brisbane](http://localhost:3000/api/events/search?location=Brisbane). Dates use `YYYY-MM-DD`; category and event IDs must be positive safe integers. Invalid filter values or IDs return `400`, missing or suspended events return `404`, and database failures return `500` with a generic error response.
-
-See the [API guide](api/README.md) and [API demonstration checklist](docs/a2-api-demo-checklist.md) for further details.
-
-## Verification
-
-After starting the application:
-
-1. Check that `/api/health` returns `status: ok` and `database: connected`.
-2. Open the homepage and follow an event's **View details** link. If there are no upcoming events, use the search page to find an active sample event.
-3. Search by date, location and category, try combined filters and a search with no matches, then confirm **Clear filters** resets both the form and results.
-4. Confirm the detail page displays ticket information, fundraising progress and charity contacts. Click **Register** to check the construction notice.
-5. Open `/detail.html?id=abc` to check the invalid-ID message and `/api/events/search?date=2026-02-30` to check an HTTP `400` response.
-
-The [regression checklist](docs/a2-final-test-checklist.md) records checks performed on **2026-10-03**, including search combinations, invalid dates and parameters, missing or suspended events, database and network failures, and detail-page loading and error states. Its follow-up verification records fixes for the earlier failures. These are documented prior results, not a claim that every possible scenario has been tested. Upcoming-event counts change with the current date.
-
-There is no `npm test` script in the current API package. Use the linked checklists for verification steps, recorded results and test limitations.
-
-## A2 scope
-
-The **Register** button displays:
-
-> This feature is currently under construction.
-
-It is disabled while event details are loading or after an error. This A2 version does not process registrations or payments; the API provides read-only event information.
-
-## Documentation and delivery
-
-- [Local setup and archive extraction](docs/a2-local-setup.md)
-- [API demonstration and error checks](docs/a2-api-demo-checklist.md)
-- [Regression results and test limitations](docs/a2-final-test-checklist.md)
-- [Packaging instructions](docs/a2-packaging-checklist.md)
-- [Reproducibility and delivery checklist](docs/a2-delivery-checklist.md)
-- [Full documentation index](docs/README.md)
-
-The packaging script writes the client/API archives, SQL copy and verification manifests to the ignored `submission/` directory. Packaging does not submit files to the school; the report, demonstration video, repository access and final upload remain separate delivery tasks.
+See the [M12 packaging and delivery checklist](docs/m12-delivery-checklist.md) for a reproducible source archive and remaining individual tasks. Manual acceptance and personal deployment evidence have not been supplied; do not infer completion from the automated results.
