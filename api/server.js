@@ -142,7 +142,7 @@ app.get('/api/events/search', async (req, res, next) => {
       SELECT
         e.event_id,
         e.name,
-        e.event_datetime,
+        DATE_FORMAT(e.event_datetime, '%Y-%m-%dT%H:%i:%s+10:00') AS event_datetime,
         e.location,
         e.purpose,
         e.short_description,
@@ -180,7 +180,7 @@ app.get('/api/events/:id', async (req, res, next) => {
       SELECT
         e.event_id,
         e.name,
-        e.event_datetime,
+        DATE_FORMAT(e.event_datetime, '%Y-%m-%dT%H:%i:%s+10:00') AS event_datetime,
         e.location,
         e.purpose,
         e.short_description,
