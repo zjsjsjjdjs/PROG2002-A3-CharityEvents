@@ -5,10 +5,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Subject, combineLatest, of, startWith, switchMap, tap } from 'rxjs';
 import { EventDetail, PublicEventsApi } from '@charity/shared';
 import { AudPipe, BrisbaneDatePipe, LoadState, loadState, progressPercent } from './event-view';
+import { EventWeather } from './event-weather';
 import { searchFilters } from './search';
 @Component({
   selector: 'hh-event-detail',
-  imports: [RouterLink, AudPipe, BrisbaneDatePipe],
+  imports: [RouterLink, AudPipe, BrisbaneDatePipe, EventWeather],
   templateUrl: './detail.html',
 })
 export class DetailPage {

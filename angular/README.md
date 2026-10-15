@@ -3,9 +3,11 @@
 Based on M12-merged main (`ac81f5a`): two standalone Angular applications and shared
 source. Public home, search and event detail pages now use the existing API.
 Angular registration now uses its own reactive form. Admin list/create/edit pages
-are available from PR #16; weather and production deployment are separate work. See the
+are available from PR #16. Event-day weather and exceptional states are implemented
+locally; production deployment remains separate. See the
 [public-page migration notes](../docs/angular-public-pages.md) and
-[registration workflow](../docs/angular-registration.md).
+[registration workflow](../docs/angular-registration.md) and
+[weather implementation and acceptance](../docs/angular-weather.md).
 
 ## Install and start
 

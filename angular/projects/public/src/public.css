@@ -392,3 +392,35 @@ footer {
     grid-row: 1;
   }
 }
+
+.weather-panel {
+  background: #edf4f1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-top: 4px solid var(--leaf);
+}
+.weather-panel h2 {
+  margin-top: 0;
+}
+.weather-condition {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--harbour);
+}
+.weather-temperatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+}
+.weather-temperatures dt {
+  color: var(--muted);
+}
+.weather-temperatures dd {
+  margin: 0.4rem 0 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.weather-credit {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}

@@ -392,6 +392,13 @@ async function main() {
       });
     }
     passed("All four public pages fit a 390 px viewport");
+    await require("./test-angular-weather.cjs")({
+      page,
+      connection,
+      uiOrigin,
+      output,
+      passed,
+    });
     assert.deepEqual(pageErrors, []);
     passed("No unhandled browser page errors");
     fs.writeFileSync(

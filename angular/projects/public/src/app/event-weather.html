@@ -1,0 +1,37 @@
+<section class="detail-section weather-panel" aria-labelledby="weather-title">
+  <p class="eyebrow">Plan your day</p>
+  <h2 id="weather-title">Weather for this event</h2>
+  <div aria-live="polite" aria-atomic="true" [attr.aria-busy]="state().status === 'loading'">
+    @let result = state();
+    @if (result.status === 'loading') {
+      <p role="status">Loading the event-day forecast…</p>
+    } @else if (result.status === 'ready') {
+      <p class="muted">
+        {{ result.date + 'T00:00:00Z' | date: 'd MMM y' : 'UTC' }} · Brisbane date
+      </p>
+      <p class="weather-condition">{{ result.condition }}</p>
+      <dl class="weather-temperatures">
+        <div>
+          <dt>Daily low</dt>
+          <dd>{{ result.low }} °C</dd>
+        </div>
+        <div>
+          <dt>Daily high</dt>
+          <dd>{{ result.high }} °C</dd>
+        </div>
+      </dl>
+      <p class="muted">
+        Daily forecast at the event location. Conditions may change closer to the event.
+      </p>
+    } @else {
+      <p>{{ result.message }}</p>
+    }
+  </div>
+  @if (state().status === 'error') {
+    <button type="button" (click)="refresh.next()">Retry weather</button>
+  }
+  <p class="weather-credit">
+    Weather data by
+    <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo ↗</a>
+  </p>
+</section>
