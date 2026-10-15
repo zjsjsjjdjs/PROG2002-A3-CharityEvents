@@ -1,0 +1,77 @@
+<header class="public-page-heading">
+  <p class="eyebrow">Find your way to help</p>
+  <h1>Search events</h1>
+  <p class="lead">Choose a date, place or cause. All dates and times are shown in Brisbane time.</p>
+</header>
+@let categoryResult = categories();
+<form class="search-form" [formGroup]="form" (ngSubmit)="submit()" aria-label="Search events">
+  <div class="search-fields">
+    <div>
+      <label for="search-date">Date</label
+      ><input
+        id="search-date"
+        type="date"
+        min="1000-01-01"
+        max="9999-12-31"
+        formControlName="date"
+      />
+    </div>
+    <div>
+      <label for="search-location">Location</label
+      ><input
+        id="search-location"
+        type="search"
+        placeholder="Suburb or venue"
+        formControlName="location"
+      />
+    </div>
+    <div>
+      <label for="search-category">Category</label
+      ><select id="search-category" formControlName="categoryId">
+        <option value="">All categories</option>
+        @if (categoryResult.status === 'ready') {
+          @for (category of categoryResult.data; track category.category_id) {
+            <option [value]="category.category_id">{{ category.name }}</option>
+          }
+        }
+      </select>
+    </div>
+  </div>
+  @if (categories().status === 'loading') {
+    <p role="status">Loading categories…</p>
+  }
+  @if (categoryResult.status === 'error') {
+    <p class="error" role="alert">
+      {{ categoryResult.message }}
+      <button type="button" class="plain-button" (click)="categoryRefresh.next()">
+        Retry categories
+      </button>
+    </p>
+  }
+  <div class="form-actions">
+    <button type="submit">Search events</button
+    ><button type="button" class="secondary-button" (click)="clear()">Clear filters</button>
+  </div>
+</form>
+<section aria-labelledby="results-title" [attr.aria-busy]="state().status === 'loading'">
+  <div class="section-heading"><h2 id="results-title">Search results</h2></div>
+  @let result = state();
+  @if (result.status === 'loading') {
+    <p class="status-panel" role="status">Searching events…</p>
+  } @else if (result.status === 'error') {
+    <div class="status-panel error" role="alert">
+      <p>{{ result.message }}</p>
+      <button (click)="refresh.next()">Try again</button>
+    </div>
+  } @else if (result.data.length === 0) {
+    <div class="status-panel" role="status">
+      <h3>No matching events</h3>
+      <p>Try another date, location or category, or clear the filters to see all events.</p>
+    </div>
+  } @else {
+    <p class="result-count" role="status">
+      {{ result.data.length }} {{ result.data.length === 1 ? 'event' : 'events' }} found
+    </p>
+    <hh-event-cards [events]="result.data" [filters]="appliedFilters" />
+  }
+</section>
