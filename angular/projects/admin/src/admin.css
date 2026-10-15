@@ -126,7 +126,7 @@ td small {
   display: block;
   min-width: 180px;
 }
-td:nth-child(2) {
+.events-table td:nth-child(2) {
   min-width: 160px;
 }
 td a {
@@ -215,4 +215,41 @@ legend {
   main {
     padding-inline: 16px;
   }
+}
+
+.row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+.actions-cell {
+  min-width: 240px;
+  max-width: 340px;
+}
+.actions-cell small {
+  margin-top: 0.6rem;
+  min-width: 0;
+}
+.danger {
+  color: #9a2929;
+  border: 1px solid #9a2929;
+  background: #fff3f1;
+}
+.action-confirmation {
+  margin-top: 0.8rem;
+  padding: 0.8rem;
+  background: #fff8e8;
+  border: 1px solid #dbc595;
+  max-width: 320px;
+}
+.action-confirmation p {
+  margin: 0 0 0.7rem;
+}
+.action-confirmation button {
+  margin: 0.2rem 0.3rem 0.2rem 0;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }

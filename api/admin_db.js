@@ -43,4 +43,17 @@ async function deleteEvent(id) {
   } catch(error) { await connection.rollback(); throw error; }
   finally { connection.release(); }
 }
-module.exports = { createEvent, getEvent, updateEvent, deleteEvent };
+// Update only status; never replay stale form fields when pausing an event.
+// The parent row lock is shared with registration creation and deletion.
+async function updateEventStatus(id, status) {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    const [rows] = await connection.execute('SELECT event_id FROM events WHERE event_id = ? FOR UPDATE', [id]);
+    if (!rows.length) { await connection.rollback(); return false; }
+    await connection.execute('UPDATE events SET status = ? WHERE event_id = ?', [status, id]);
+    await connection.commit(); return true;
+  } catch (error) { await connection.rollback(); throw error; }
+  finally { connection.release(); }
+}
+module.exports = { createEvent, getEvent, updateEvent, deleteEvent, updateEventStatus };

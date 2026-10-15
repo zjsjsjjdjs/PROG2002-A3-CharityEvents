@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AdminEventsApi, type AdminEventSummary } from '@charity/shared';
+import { EventActions } from './event-actions';
 import { AdminFeedback, requestError } from './admin-feedback';
 @Component({
   selector: 'hh-event-list',
-  imports: [RouterLink, FormsModule, CurrencyPipe, DatePipe],
+  imports: [RouterLink, FormsModule, CurrencyPipe, DatePipe, EventActions],
   templateUrl: './event-list.html',
 })
 export class EventListPage {
@@ -16,6 +17,7 @@ export class EventListPage {
   readonly feedback = inject(AdminFeedback);
   readonly events = signal<AdminEventSummary[]>([]);
   readonly loading = signal(false);
+  readonly mutating = signal(false);
   readonly error = signal('');
   readonly query = signal('');
   readonly status = signal('');
@@ -32,7 +34,7 @@ export class EventListPage {
     this.load();
   }
   load() {
-    if (this.loading()) return;
+    if (this.loading() || this.mutating()) return;
     this.loading.set(true);
     this.error.set('');
     this.events.set([]);
@@ -51,6 +53,7 @@ export class EventListPage {
       });
   }
   clear() {
+    if (this.mutating()) return;
     this.query.set('');
     this.status.set('');
   }

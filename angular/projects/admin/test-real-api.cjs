@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, '../../..');
 const mysql = require(path.join(root, 'api/node_modules/mysql2/promise'));
 const dotenv = require(path.join(root, 'api/node_modules/dotenv'));
 const express = require(path.join(root, 'api/node_modules/express'));
-const { chromium } = require(path.join(root, 'api/node_modules/@playwright/test'));
+const { chromium, expect } = require(path.join(root, 'api/node_modules/@playwright/test'));
 const env = dotenv.parse(fs.readFileSync(path.join(root, 'api/.env')));
 const database =
   'user2_angular_test_' + Date.now() + '_' + require('node:crypto').randomBytes(3).toString('hex');
@@ -144,6 +144,195 @@ async function close(server) {
     assert.equal(data.event_datetime, '2030-11-02T14:30:05+10:00');
     const publicData = await (await fetch(base + '/api/events/' + id)).json();
     assert.equal(publicData.name, 'Angular updated event');
+    // Dedicated status changes must preserve other fields and existing registrations.
+    const beforeStatus = data;
+    const eventRow = page.locator('tbody tr').filter({ hasText: 'Angular updated event' });
+    await expect(eventRow.getByRole('button', { name: 'Delete', exact: true })).toBeDisabled();
+    await eventRow.getByRole('button', { name: 'Suspend', exact: true }).click();
+    await eventRow.getByRole('button', { name: 'Cancel', exact: true }).click();
+    assert.equal((await (await fetch(base + '/api/admin/events/' + id)).json()).status, 'active');
+    await eventRow.getByRole('button', { name: 'Suspend', exact: true }).click();
+    await eventRow.getByRole('button', { name: 'Confirm suspend', exact: true }).click();
+    await expect(eventRow.getByRole('button', { name: 'Resume', exact: true })).toBeVisible();
+    data = await (await fetch(base + '/api/admin/events/' + id)).json();
+    assert.deepEqual(data, { ...beforeStatus, status: 'suspended' });
+    assert.equal((await fetch(base + '/api/events/' + id)).status, 404);
+    const unavailableRegistration = await fetch(base + '/api/events/' + id + '/registrations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Paused guest', email: 'paused@example.test', tickets: 1 }),
+    });
+    assert.equal(unavailableRegistration.status, 404);
+    const apiSend = (url, method, body) =>
+      fetch(base + url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: body === undefined ? undefined : JSON.stringify(body),
+      });
+    const statusUrl = '/api/admin/events/' + id + '/status';
+    assert.equal((await apiSend(statusUrl, 'PATCH', { status: 'past' })).status, 400);
+    assert.equal(
+      (await apiSend(statusUrl, 'PATCH', { status: 'active', name: 'must not change' })).status,
+      400,
+    );
+    assert.equal(
+      (await apiSend('/api/admin/events/no/status', 'PATCH', { status: 'active' })).status,
+      400,
+    );
+    assert.equal(
+      (await apiSend('/api/admin/events/2147483647/status', 'PATCH', { status: 'active' })).status,
+      404,
+    );
+    assert.equal(
+      (
+        await fetch(base + statusUrl, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'text/plain' },
+          body: 'suspended',
+        })
+      ).status,
+      415,
+    );
+    assert.equal(
+      (
+        await fetch(base + statusUrl, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Origin: 'https://different-origin.invalid',
+          },
+          body: JSON.stringify({ status: 'active' }),
+        })
+      ).status,
+      403,
+    );
+    await eventRow
+      .getByRole('link', { name: 'View registrations for Angular updated event', exact: true })
+      .click();
+    await expect(page.getByText('1 registrations · 2 tickets', { exact: true })).toBeVisible();
+    await page.reload();
+    await expect(page.getByText('Angular Test Guest', { exact: true })).toBeVisible();
+    await page.getByLabel('Find a participant').fill('unknown');
+    await expect(page.getByText('No matching participants.', { exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Clear search', exact: true }).click();
+    fs.mkdirSync(artifacts, { recursive: true });
+    await page.setViewportSize({ width: 390, height: 844 });
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({
+      path: path.join(artifacts, 'registrations-mobile.png'),
+      fullPage: true,
+    });
+    await page.getByRole('link', { name: '← All events', exact: true }).click();
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await eventRow.getByRole('button', { name: 'Resume', exact: true }).click();
+    await eventRow.getByRole('button', { name: 'Confirm resume', exact: true }).click();
+    await expect(eventRow.getByRole('button', { name: 'Suspend', exact: true })).toBeVisible();
+    assert.equal((await fetch(base + '/api/events/' + id)).status, 200);
+    assert.deepEqual(await (await fetch(base + '/api/admin/events/' + id)).json(), beforeStatus);
+
+    // The stale list says zero, but a registration arrives before DELETE.
+    const input = { ...values, organisation_id: 1, category_id: 1, status: 'active' };
+    const createdEmpty = await apiSend('/api/admin/events', 'POST', {
+      ...input,
+      name: 'Delete race test',
+    });
+    assert.equal(createdEmpty.status, 201);
+    const protectedId = (await createdEmpty.json()).event_id;
+    await page.getByRole('button', { name: 'Refresh', exact: true }).click();
+    const staleRow = page.locator('tbody tr').filter({ hasText: 'Delete race test' });
+    await expect(staleRow.getByRole('button', { name: 'Delete', exact: true })).toBeEnabled();
+    assert.equal(
+      (
+        await apiSend('/api/events/' + protectedId + '/registrations', 'POST', {
+          name: 'Late guest',
+          email: 'late@example.test',
+          tickets: 3,
+        })
+      ).status,
+      201,
+    );
+    await staleRow.getByRole('button', { name: 'Delete', exact: true }).click();
+    await staleRow.getByRole('button', { name: 'Confirm delete', exact: true }).click();
+    await expect(staleRow.getByRole('alert')).toContainText('has registrations');
+    await expect(staleRow.getByRole('button', { name: 'Delete', exact: true })).toBeDisabled();
+    assert.equal(
+      (await (await fetch(base + '/api/admin/events/' + protectedId)).json()).registrations.length,
+      1,
+    );
+    const createdDeletable = await apiSend('/api/admin/events', 'POST', {
+      ...input,
+      name: 'Delete empty test',
+    });
+    const deleteId = (await createdDeletable.json()).event_id;
+    await page.getByRole('button', { name: 'Refresh', exact: true }).click();
+    const emptyRow = page.locator('tbody tr').filter({ hasText: 'Delete empty test' });
+    await emptyRow
+      .getByRole('link', { name: 'View registrations for Delete empty test', exact: true })
+      .click();
+    await expect(page.getByText('No registrations yet.', { exact: true })).toBeVisible();
+    await page.getByRole('link', { name: '← All events', exact: true }).click();
+    await emptyRow.getByRole('button', { name: 'Delete', exact: true }).click();
+    await emptyRow.getByRole('button', { name: 'Cancel', exact: true }).click();
+    assert.equal((await fetch(base + '/api/admin/events/' + deleteId)).status, 200);
+    await emptyRow.getByRole('button', { name: 'Delete', exact: true }).click();
+    await emptyRow.getByRole('button', { name: 'Confirm delete', exact: true }).click();
+    await expect(emptyRow).toHaveCount(0);
+    assert.equal((await fetch(base + '/api/admin/events/' + deleteId)).status, 404);
+    assert.equal((await fetch(base + '/api/events/' + deleteId)).status, 404);
+
+    // A concurrent public registration either wins and protects the event, or is rejected.
+    for (let n = 0; n < 3; n++) {
+      const createdRace = await apiSend('/api/admin/events', 'POST', {
+        ...input,
+        name: 'Concurrent delete ' + n,
+      });
+      const raceId = (await createdRace.json()).event_id;
+      const [registration, deletion] = await Promise.all([
+        apiSend('/api/events/' + raceId + '/registrations', 'POST', {
+          name: 'Race guest',
+          email: 'race' + n + '@example.test',
+          tickets: 1,
+        }),
+        apiSend('/api/admin/events/' + raceId, 'DELETE'),
+      ]);
+      assert.ok(
+        (registration.status === 201 && deletion.status === 409) ||
+          (registration.status === 404 && deletion.status === 200),
+      );
+    }
+    // Suspension and registration share a parent-row lock. Once paused, new registrations fail.
+    const pausing = await apiSend('/api/admin/events', 'POST', {
+      ...input,
+      name: 'Concurrent suspension',
+    });
+    const pauseId = (await pausing.json()).event_id;
+    const [firstRegistration, pauseResult] = await Promise.all([
+      apiSend('/api/events/' + pauseId + '/registrations', 'POST', {
+        name: 'Before pause',
+        email: 'before-pause@example.test',
+        tickets: 1,
+      }),
+      apiSend('/api/admin/events/' + pauseId + '/status', 'PATCH', { status: 'suspended' }),
+    ]);
+    assert.equal(pauseResult.status, 200);
+    assert.ok([201, 404].includes(firstRegistration.status));
+    const pausedData = await (await fetch(base + '/api/admin/events/' + pauseId)).json();
+    assert.equal(pausedData.status, 'suspended');
+    assert.equal(pausedData.registrations.length, firstRegistration.status === 201 ? 1 : 0);
+    assert.equal(
+      (
+        await apiSend('/api/events/' + pauseId + '/registrations', 'POST', {
+          name: 'After pause',
+          email: 'after-pause@example.test',
+          tickets: 1,
+        })
+      ).status,
+      404,
+    );
+    const [[orphans]] = await connection.query(
+      'SELECT COUNT(*) AS total FROM registrations r LEFT JOIN events e ON r.event_id=e.event_id WHERE e.event_id IS NULL',
+    );
+    assert.equal(orphans.total, 0);
     fs.mkdirSync(artifacts, { recursive: true });
     await page.screenshot({ path: path.join(artifacts, 'list-desktop.png'), fullPage: true });
     await page.goto(base + '/events/' + id + '/edit');
@@ -172,7 +361,7 @@ async function close(server) {
     await page.locator('tbody tr').first().waitFor();
     assert.deepEqual(pageErrors, []);
     console.log(
-      'PASS: real API list/filter/create/persist/edit/public sync/registration preservation/timezone/deep reload/mobile/error recovery.',
+      'PASS: real API list/filter/create/persist/edit/public sync/registration preservation/timezone/deep reload/mobile/error recovery; suspend/resume/registration rejection/roster/stale-count delete protection/cancel/delete/concurrent registration.',
     );
   } finally {
     if (browser) await browser.close();
