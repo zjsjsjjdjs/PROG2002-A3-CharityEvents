@@ -25,6 +25,13 @@ Keep api and clientside as siblings. The entry point is api/app.js. No frontend
 build is required. Development administration without credentials is restricted
 to loopback access. Production requires HTTPS and explicit admin credentials.
 
+## Angular migration foundation
+
+The [Angular workspace](angular/README.md) provides separate public and admin preview
+apps, shared API contracts and a local proxy. It requires a compatible newer Node
+runtime and has its own install/build commands. Business migration and deployment
+are subsequent work; the existing startup instructions above remain valid.
+
 ## Verification and delivery
 
 Code 26cb134 passed 80 tests on 2026-10-07 using Node 24.10.0, MariaDB 10.4.32 and Chrome. This is the recorded full regression result; the M12 documentation upload does not claim a new application test run.
