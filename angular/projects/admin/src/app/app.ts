@@ -1,9 +1,35 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AppShell } from '@charity/shared';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppShell],
-  template: '<hh-shell area="Event management"><router-outlet /></hh-shell>',
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  template: `
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="site-nav">
+        <a class="brand" routerLink="/events"
+          ><span class="brand-mark" aria-hidden="true">HH</span
+          ><span><strong>Harbour Hope</strong><small>Event management</small></span></a
+        >
+        <nav aria-label="Management navigation">
+          <a
+            routerLink="/events"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ariaCurrentWhenActive="page"
+            >All events</a
+          >
+          <a routerLink="/events/new" routerLinkActive="active" ariaCurrentWhenActive="page"
+            >New event</a
+          >
+          <a routerLink="/connection" routerLinkActive="active" ariaCurrentWhenActive="page"
+            >Connection</a
+          >
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><router-outlet /></main>
+    <footer>Harbour Hope Charity · Community care in Brisbane</footer>
+  `,
 })
 export class App {}
