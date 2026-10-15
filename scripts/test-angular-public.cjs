@@ -282,6 +282,7 @@ async function main() {
     await expect(
       page.getByRole("heading", { name: "Registration confirmed" }),
     ).toBeVisible();
+    await expect(page.locator("#success-title")).toBeFocused();
     assert.equal(await page.locator("form").count(), 0);
     assert.ok(!page.url().includes("email") && !page.url().includes("Guest"));
     await page

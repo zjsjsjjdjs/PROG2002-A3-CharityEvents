@@ -17,7 +17,7 @@
   @if (receipt(); as saved) {
     <section class="registration-success" role="status" aria-labelledby="success-title">
       <p class="eyebrow">You're on the list</p>
-      <h2 id="success-title">Registration confirmed</h2>
+      <h2 id="success-title" #confirmation tabindex="-1">Registration confirmed</h2>
       <p>
         Thank you, {{ saved.name }}. Your place at <strong>{{ event.name }}</strong> is confirmed.
       </p>

@@ -72,7 +72,10 @@
         @if (attendees().length === 0) {
           <p>No registrations yet. Be the first to join us.</p>
         } @else {
-          <p class="muted">{{ attendees().length }} registrations · Newest first</p>
+          <p class="muted">
+            {{ attendees().length }}
+            {{ attendees().length === 1 ? 'registration' : 'registrations' }} · Newest first
+          </p>
           <ol class="attendee-list" aria-label="Registered attendees, newest first">
             @for (person of attendees(); track person.registration_id) {
               <li>
