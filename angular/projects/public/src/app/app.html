@@ -1,0 +1,24 @@
+<a class="skip-link" href="#main" (click)="skipToContent($event)">Skip to content</a>
+<header class="site-header">
+  <div class="site-nav">
+    <a class="brand" routerLink="/" aria-label="Harbour Hope home"
+      ><span class="brand-mark" aria-hidden="true">HH</span
+      ><span><strong>Harbour Hope</strong><small>Charity events</small></span></a
+    >
+    <nav aria-label="Main navigation">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+        >Home</a
+      ><a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page"
+        >Search events</a
+      >
+    </nav>
+  </div>
+</header>
+<main id="main" class="public-main" tabindex="-1"><router-outlet /></main>
+<footer>
+  <strong>Harbour Hope Charity</strong><span>Community care in Brisbane · All prices in AUD</span>
+</footer>
