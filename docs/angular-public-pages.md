@@ -22,7 +22,11 @@ Routes: `/`, `/search`, `/events/:id`. Legacy `index.html`, `search.html` and
 are local to the public app; shared source, admin pages, Express and SQL are unchanged.
 The separate connection diagnostic and not-found route remain available.
 
-## Temporary registration bridge
+## Historical first-release registration bridge
+
+The local Angular registration follow-up replaces this bridge; see
+[the current registration notes](angular-registration.md). The description below
+records PR #15, not the current local registration branch.
 
 This PR does not implement the Angular registration form or weather. The event
 page links to `/register.html?id=...`, the existing working form. The public-only
