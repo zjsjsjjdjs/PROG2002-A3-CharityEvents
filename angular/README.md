@@ -1,9 +1,10 @@
 # Harbour Hope Angular foundation
 
 Based on M12-merged main (`ac81f5a`): two standalone Angular applications and shared
-source. This is a development preview. Event pages, registration, admin CRUD,
-weather and production deployment are subsequent work. The existing `../clientside`,
-Express API and database remain the working application.
+source. Public home, search and event detail pages now use the existing API.
+Angular registration, admin CRUD, weather and production deployment are subsequent
+work. Registration currently links to the working legacy page. See the
+[public-page migration notes](../docs/angular-public-pages.md).
 
 ## Install and start
 
@@ -24,12 +25,15 @@ Open http://127.0.0.1:4200. In a second terminal in this directory:
 npm run start:admin
 ```
 
-Open http://127.0.0.1:4201. Both apps have `/`, `/connection` and a not-found route.
+Open http://127.0.0.1:4201. Public routes are `/`, `/search`, `/events/:id` and
+`/connection`. Admin still has its foundation routes. Both have a not-found page.
 The connection button performs a read-only health check. Start the existing API
 using the root README instructions. Preview pages render without it; connection
 checks report unavailable until the API and database run.
 
-The local proxy forwards `/api/**` to http://127.0.0.1:3000. For another local API
+The local proxy forwards `/api/**` to http://127.0.0.1:3000. The public dev server
+also proxies `/register.html` and `/assets/**` to the existing Express site for the
+registration bridge; no admin proxy behavior changes. For another local API
 port, set this before starting the frontend (PowerShell):
 
 ```powershell

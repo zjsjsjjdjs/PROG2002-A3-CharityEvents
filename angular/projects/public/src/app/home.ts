@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Subject, startWith, switchMap } from 'rxjs';
+import { PublicEventsApi } from '@charity/shared';
+import { EventCards } from './event-cards';
+import { loadState } from './event-view';
 @Component({
   selector: 'hh-home',
-  imports: [RouterLink],
-  template: `
-    <section class="page-panel" aria-labelledby="home-title">
-      <p class="eyebrow">Harbour Hope / Charity events</p>
-      <h1 id="home-title">Together, we make a difference.</h1>
-      <p>
-        The public website foundation is ready. Event browsing, registration and weather will be
-        added in the next development step.
-      </p>
-      <p><strong>Development preview</strong> · This application is not yet the live website.</p>
-      <a class="button" routerLink="/connection">Check service connection</a>
-    </section>
-  `,
+  imports: [RouterLink, EventCards],
+  templateUrl: './home.html',
 })
-export class HomePage {}
+export class HomePage {
+  private readonly api = inject(PublicEventsApi);
+  readonly refresh = new Subject<void>();
+  readonly state = toSignal(
+    this.refresh.pipe(
+      startWith(undefined),
+      switchMap(() =>
+        loadState(this.api.upcoming(), 'Upcoming events could not be loaded. Please try again.'),
+      ),
+    ),
+    { requireSync: true },
+  );
+}

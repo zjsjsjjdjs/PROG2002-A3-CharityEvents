@@ -1,0 +1,104 @@
+<a class="back-link" routerLink="/search" [queryParams]="filters">← Back to search</a>
+@let result = state();
+@if (result.status === 'loading') {
+  <h1>Event details</h1>
+  <p class="status-panel" role="status">Loading event details…</p>
+} @else if (result.status === 'error') {
+  <h1>Event unavailable</h1>
+  <div class="status-panel error" role="alert">
+    <p>{{ result.message }}</p>
+    <button (click)="refresh.next()">Try again</button>
+  </div>
+} @else {
+  @let event = result.data;
+  <header class="public-page-heading">
+    <p class="eyebrow">{{ event.category_name }} / Harbour Hope</p>
+    <h1>{{ event.name }}</h1>
+    <p class="lead">{{ event.short_description }}</p>
+  </header>
+  <div class="detail-layout">
+    <article>
+      <dl class="event-facts">
+        <div>
+          <dt>Date and time · Brisbane</dt>
+          <dd>
+            <time [attr.datetime]="event.event_datetime">{{
+              event.event_datetime | brisbaneDate
+            }}</time>
+          </dd>
+        </div>
+        <div>
+          <dt>Location</dt>
+          <dd>{{ event.location }}</dd>
+        </div>
+        <div>
+          <dt>Fundraising purpose</dt>
+          <dd>{{ event.purpose }}</dd>
+        </div>
+      </dl>
+      <section class="detail-section">
+        <h2>About this event</h2>
+        <p class="description">{{ event.full_description }}</p>
+      </section>
+      <section class="detail-section">
+        <h2>Every contribution counts</h2>
+        <p>
+          {{ event.current_progress | aud }} raised of a {{ event.fundraising_goal | aud }} goal
+        </p>
+        <progress
+          max="100"
+          [value]="progress(event.current_progress, event.fundraising_goal)"
+          aria-label="Fundraising progress"
+        ></progress>
+      </section>
+      <section class="detail-section">
+        <h2>Meet the charity</h2>
+        <h3>{{ event.organisation_name }}</h3>
+        <p>{{ event.organisation_mission }}</p>
+        <dl class="event-facts">
+          <div>
+            <dt>Email</dt>
+            <dd>{{ event.contact_email }}</dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd>{{ event.contact_phone }}</dd>
+          </div>
+        </dl>
+      </section>
+      <section class="detail-section" aria-labelledby="attendees-title">
+        <h2 id="attendees-title">Registered attendees</h2>
+        @if (attendees().length === 0) {
+          <p>No registrations yet. Be the first to join us.</p>
+        } @else {
+          <p class="muted">{{ attendees().length }} registrations · Newest first</p>
+          <ol class="attendee-list" aria-label="Registered attendees, newest first">
+            @for (person of attendees(); track person.registration_id) {
+              <li>
+                <strong>{{ person.name }}</strong
+                ><span
+                  >{{ person.tickets }} {{ person.tickets === 1 ? 'ticket' : 'tickets' }} ·
+                  {{ person.registered_at | brisbaneDate }} Brisbane</span
+                >
+              </li>
+            }
+          </ol>
+        }
+      </section>
+    </article>
+    <aside class="booking-panel" aria-labelledby="booking-title">
+      <p class="eyebrow">Be part of it</p>
+      <h2 id="booking-title">Your place at the event</h2>
+      <p class="booking-price">
+        {{ +event.ticket_price === 0 ? 'Free entry' : (event.ticket_price | aud) }}
+      </p>
+      @if (+event.ticket_price !== 0) {
+        <p class="muted">per ticket · AUD</p>
+      }
+      <a class="primary-link" [href]="registrationLink(event.event_id)"
+        >Register for this event →</a
+      >
+      <p>Choose your tickets and leave your contact details on the registration page.</p>
+    </aside>
+  </div>
+}
