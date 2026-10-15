@@ -14,7 +14,7 @@ Management pages live within `angular/projects/admin/`. The status-only endpoint
 - Dates display Brisbane UTC+10 and submit Brisbane wall time, regardless of browser timezone. Past is derived by the server; editable states are active/suspended.
 - Failed saves retain the entered fields; repeated clicks while saving cannot issue a duplicate request.
 
-Production sign-in/access integration and cPanel hosting are subsequent work. Existing API access protection remains in place; this version is a local development milestone, not final deployment acceptance.
+Local production-style hosting and administrator sessions are implemented in the deployment module; see `docs/angular-cpanel-deployment.md` and `docs/user2-angular-acceptance.md` at the repository root. Real cPanel acceptance remains pending. Existing API access protection remains in place.
 
 ## Start locally
 
