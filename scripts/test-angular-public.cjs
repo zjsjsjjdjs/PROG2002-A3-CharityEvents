@@ -243,16 +243,51 @@ async function main() {
     await page.goto(uiOrigin + "/events/not-valid");
     await expect(page.getByRole("alert")).toContainText("No valid event");
     passed("Suspended and invalid events cannot expose a registration action");
-    await page.goto(uiOrigin + "/events/1");
+    await page.goto(uiOrigin + "/events/1?categoryId=" + fixture.category_id);
     await page
       .getByRole("link", { name: "Register for this event", exact: false })
       .click();
+    await expect(page).toHaveURL(new RegExp("/events/1/register"));
     await expect(page.locator("#attendee-name")).toBeEnabled();
+    await expect(
+      page.getByRole("heading", {
+        name: "Angular acceptance event",
+        exact: true,
+      }),
+    ).toBeVisible();
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(page.getByRole("alert")).toContainText("highlighted fields");
     await page.locator("#attendee-name").fill("Angular Browser Guest");
     await page.locator("#attendee-email").fill("angular-browser@example.test");
+    await page.locator("#attendee-tickets").fill("0");
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(page.locator("#tickets-hint")).toContainText("whole number");
+    const [[before]] = await connection.query(
+      "SELECT COUNT(*) AS count FROM registrations WHERE email = 'angular-browser@example.test'",
+    );
+    assert.equal(before.count, 0);
+    passed("Angular form prevents invalid submissions before database writes");
     await page.locator("#attendee-tickets").fill("2");
-    await page.getByRole("button", { name: /submit registration/i }).click();
-    await page.waitForURL("**/detail.html?id=1");
+    await page.screenshot({
+      path: path.join(output, "registration-desktop.png"),
+      fullPage: true,
+    });
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(
+      page.getByRole("heading", { name: "Registration confirmed" }),
+    ).toBeVisible();
+    assert.equal(await page.locator("form").count(), 0);
+    assert.ok(!page.url().includes("email") && !page.url().includes("Guest"));
+    await page
+      .getByRole("link", { name: "View event details", exact: false })
+      .click();
+    await expect(page).toHaveURL(new RegExp("/events/1\\?categoryId="));
     await expect(page.locator(".attendee-list li").first()).toContainText(
       "Angular Browser Guest",
     );
@@ -261,13 +296,87 @@ async function main() {
     );
     assert.equal(saved.tickets, 2);
     passed(
-      "Existing registration page saves into the isolated DB and returns to Angular detail",
+      "Angular registration confirms and refreshes real attendee data, retaining search filters",
+    );
+    async function fillRegistration(id, email, name = "Angular Browser Guest") {
+      await page.goto(uiOrigin + "/events/" + id + "/register");
+      await expect(page.locator("#attendee-name")).toBeEnabled();
+      await page.locator("#attendee-name").fill(name);
+      await page.locator("#attendee-email").fill(email);
+      await page.locator("#attendee-tickets").fill("2");
+    }
+    await fillRegistration(1, " ANGULAR-BROWSER@EXAMPLE.TEST ");
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(page.getByRole("alert")).toContainText("already registered");
+    await expect(page.locator("#attendee-name")).toHaveValue(
+      "Angular Browser Guest",
+    );
+    const [[duplicates]] = await connection.query(
+      "SELECT COUNT(*) AS count FROM registrations WHERE event_id=1 AND email='angular-browser@example.test'",
+    );
+    assert.equal(duplicates.count, 1);
+    passed(
+      "Duplicate email with changed case/spacing is rejected without losing input",
+    );
+    await connection.query(
+      "UPDATE events SET status='active' WHERE event_id=3",
+    );
+    await fillRegistration(3, "angular-browser@example.test");
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(
+      page.getByRole("heading", { name: "Registration confirmed" }),
+    ).toBeVisible();
+    passed("The same email can register for a different event");
+    await fillRegistration(1, "network-guest@example.test", "Network Guest");
+    await page.route("**/api/events/1/registrations", (route) =>
+      route.abort("failed"),
+    );
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(page.getByRole("alert")).toContainText(
+      "could not be confirmed",
+    );
+    await expect(page.locator("#attendee-name")).toHaveValue("Network Guest");
+    await expect(page.locator("#attendee-tickets")).toHaveValue("2");
+    await page.unroute("**/api/events/1/registrations");
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(
+      page.getByRole("heading", { name: "Registration confirmed" }),
+    ).toBeVisible();
+    passed("Network failure keeps input and a deliberate retry can succeed");
+    await fillRegistration(3, "suspended-guest@example.test");
+    await connection.query(
+      "UPDATE events SET status='suspended' WHERE event_id=3",
+    );
+    await page
+      .getByRole("button", { name: "Submit registration", exact: true })
+      .click();
+    await expect(page.getByRole("alert")).toContainText("no longer available");
+    await expect(
+      page.getByRole("button", { name: "Submit registration", exact: true }),
+    ).toBeDisabled();
+    passed("Suspension between loading and submit blocks registration safely");
+    await page.goto(uiOrigin + "/register.html?id=1");
+    await expect(page.locator("#attendee-name")).toBeEnabled();
+    await page.goto(uiOrigin + "/register.html?id=1&id=2");
+    await expect(page.getByRole("alert")).toContainText("No valid event");
+    assert.equal(await page.locator("form").count(), 0);
+    passed(
+      "Legacy registration bookmarks open Angular; duplicate IDs are rejected",
     );
     await page.setViewportSize({ width: 390, height: 844 });
     for (const [label, url, selector] of [
       ["home", "/", ".event-card"],
       ["search", "/search", ".event-card"],
       ["detail", "/events/1", ".booking-panel"],
+      ["registration", "/events/1/register", ".registration-form"],
     ]) {
       await page.goto(uiOrigin + url);
       await page.locator(selector).first().waitFor();
@@ -282,7 +391,7 @@ async function main() {
         fullPage: true,
       });
     }
-    passed("All three pages fit a 390 px viewport");
+    passed("All four public pages fit a 390 px viewport");
     assert.deepEqual(pageErrors, []);
     passed("No unhandled browser page errors");
     fs.writeFileSync(

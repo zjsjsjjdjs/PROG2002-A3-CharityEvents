@@ -1,0 +1,148 @@
+<header class="public-page-heading">
+  <p class="eyebrow">Join your community</p>
+  <h1>Register for an event</h1>
+  <p class="lead">Choose your tickets and tell us who is joining.</p>
+</header>
+@let result = state();
+@if (result.status === 'loading') {
+  <p class="status-panel" role="status">Loading your selected event…</p>
+} @else if (result.status === 'error') {
+  <div class="status-panel error" role="alert">
+    <p>{{ result.message }}</p>
+    <button (click)="refresh.next()">Try again</button>
+  </div>
+  <p><a routerLink="/search" [queryParams]="filters">Return to search</a></p>
+} @else {
+  @let event = result.data;
+  @if (receipt(); as saved) {
+    <section class="registration-success" role="status" aria-labelledby="success-title">
+      <p class="eyebrow">You're on the list</p>
+      <h2 id="success-title">Registration confirmed</h2>
+      <p>
+        Thank you, {{ saved.name }}. Your place at <strong>{{ event.name }}</strong> is confirmed.
+      </p>
+      <dl class="event-facts">
+        <div>
+          <dt>Tickets</dt>
+          <dd>{{ saved.tickets }}</dd>
+        </div>
+        <div>
+          <dt>Registration reference</dt>
+          <dd>{{ saved.registration_id }}</dd>
+        </div>
+        <div>
+          <dt>Registered · Brisbane</dt>
+          <dd>{{ saved.registered_at | brisbaneDate }}</dd>
+        </div>
+      </dl>
+      <p>
+        <a class="primary-link" [routerLink]="['/events', event.event_id]" [queryParams]="filters"
+          >View event details →</a
+        >
+      </p>
+      <p>Your registration will appear in the attendee list.</p>
+    </section>
+  } @else {
+    <div class="registration-layout">
+      <form
+        class="registration-form"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        novalidate
+        [attr.aria-busy]="pending()"
+        aria-labelledby="form-heading"
+      >
+        <h2 id="form-heading">Your registration</h2>
+        @if (submitError()) {
+          <p class="status-panel error" role="alert">{{ submitError() }}</p>
+        }
+        @if (pending()) {
+          <p role="status">Saving your registration…</p>
+        }
+        <fieldset [disabled]="pending() || blocked()">
+          <legend class="visually-hidden">Attendee information</legend>
+          <label for="attendee-name">Full name</label
+          ><input
+            id="attendee-name"
+            name="name"
+            autocomplete="name"
+            formControlName="name"
+            required
+            [attr.aria-invalid]="invalid('name')"
+            aria-describedby="name-hint"
+          />
+          <p id="name-hint" class="field-hint" [class.error]="invalid('name')">
+            {{
+              invalid('name')
+                ? 'Enter a name of 1 to 120 characters, without control characters.'
+                : 'Use the name you want shown in the attendee list.'
+            }}
+          </p>
+          <label for="attendee-email">Email address</label
+          ><input
+            id="attendee-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="254"
+            formControlName="email"
+            required
+            [attr.aria-invalid]="invalid('email')"
+            aria-describedby="email-hint"
+          />
+          <p id="email-hint" class="field-hint" [class.error]="invalid('email')">
+            {{
+              invalid('email')
+                ? 'Enter a valid email address, for example name@example.com.'
+                : 'One registration per email for each event. Your email is not shown in the attendee list.'
+            }}
+          </p>
+          <label for="attendee-tickets">Number of tickets</label
+          ><input
+            id="attendee-tickets"
+            name="tickets"
+            type="text"
+            inputmode="numeric"
+            formControlName="tickets"
+            required
+            [attr.aria-invalid]="invalid('tickets')"
+            aria-describedby="tickets-hint"
+          />
+          <p id="tickets-hint" class="field-hint" [class.error]="invalid('tickets')">
+            {{
+              invalid('tickets')
+                ? 'Enter a whole number from 1 to 2147483647.'
+                : 'Choose at least one ticket. Use whole numbers only.'
+            }}
+          </p>
+          @if (total() !== null) {
+            <p class="registration-total">
+              Ticket total: <strong>{{ total()! | aud }}</strong>
+            </p>
+          }
+          <button type="submit" id="submit-registration">
+            {{ pending() ? 'Submitting…' : 'Submit registration' }}
+          </button>
+        </fieldset>
+        <p>
+          <a [routerLink]="['/events', event.event_id]" [queryParams]="filters"
+            >Back to event details</a
+          >
+        </p>
+      </form>
+      <aside class="booking-panel" aria-labelledby="selected-event-title">
+        <p class="eyebrow">Your selected event</p>
+        <h2 id="selected-event-title">{{ event.name }}</h2>
+        <p>{{ event.event_datetime | brisbaneDate }} · Brisbane</p>
+        <p>{{ event.location }}</p>
+        <p class="booking-price">
+          {{ +event.ticket_price === 0 ? 'Free entry' : (event.ticket_price | aud) }}
+        </p>
+        @if (+event.ticket_price !== 0) {
+          <p class="muted">per ticket · AUD</p>
+        }
+        <p>{{ event.short_description }}</p>
+      </aside>
+    </div>
+  }
+}
