@@ -143,7 +143,7 @@ describe('public browsing routes', () => {
     expect(root.textContent).toContain('2:00 pm');
     expect(root.querySelector('.attendee-list li')?.textContent).toContain('Newer guest');
     expect(root.querySelector('.booking-panel a')?.getAttribute('href')).toBe(
-      '/register.html?id=5',
+      '/events/5/register?categoryId=2',
     );
     expect(root.querySelector('.back-link')?.getAttribute('href')).toBe('/search?categoryId=2');
     expect(root.querySelector('img')).toBeNull();

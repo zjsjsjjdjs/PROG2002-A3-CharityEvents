@@ -95,7 +95,10 @@
       @if (+event.ticket_price !== 0) {
         <p class="muted">per ticket · AUD</p>
       }
-      <a class="primary-link" [href]="registrationLink(event.event_id)"
+      <a
+        class="primary-link"
+        [routerLink]="['/events', event.event_id, 'register']"
+        [queryParams]="filters"
         >Register for this event →</a
       >
       <p>Choose your tickets and leave your contact details on the registration page.</p>

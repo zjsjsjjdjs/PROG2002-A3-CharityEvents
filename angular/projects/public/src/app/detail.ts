@@ -1,4 +1,4 @@
-import { Component, InjectionToken, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -6,10 +6,6 @@ import { Subject, combineLatest, of, startWith, switchMap, tap } from 'rxjs';
 import { EventDetail, PublicEventsApi } from '@charity/shared';
 import { AudPipe, BrisbaneDatePipe, LoadState, loadState, progressPercent } from './event-view';
 import { searchFilters } from './search';
-/** Temporary bridge until the Angular registration form is delivered. Override for subpath hosting. */
-export const LEGACY_REGISTRATION_PATH = new InjectionToken<string>('LEGACY_REGISTRATION_PATH', {
-  factory: () => '/register.html',
-});
 @Component({
   selector: 'hh-event-detail',
   imports: [RouterLink, AudPipe, BrisbaneDatePipe],
@@ -19,7 +15,6 @@ export class DetailPage {
   private readonly api = inject(PublicEventsApi);
   private readonly route = inject(ActivatedRoute);
   private readonly title = inject(Title);
-  private readonly registrationPath = inject(LEGACY_REGISTRATION_PATH);
   readonly refresh = new Subject<void>();
   readonly progress = progressPercent;
   readonly state = toSignal(
@@ -64,8 +59,5 @@ export class DetailPage {
   get filters() {
     const filters = searchFilters(this.route.snapshot.queryParamMap);
     return typeof filters === 'string' ? {} : filters;
-  }
-  registrationLink(id: number) {
-    return this.registrationPath + '?id=' + id;
   }
 }
