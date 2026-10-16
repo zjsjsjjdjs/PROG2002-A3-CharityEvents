@@ -7,7 +7,7 @@ const { spawn } = require('node:child_process');
 // Create and dispose only a database owned by this invocation; keep local .env intact.
 async function main() {
   const root = path.resolve(__dirname, '..');
-  const env = dotenv.parse(fs.readFileSync(path.join(root, 'api/.env')));
+  const env = dotenv.parse(fs.readFileSync(process.env.ANGULAR_TEST_ENV_FILE || path.join(root, 'api/.env')));
   const database = 'user1_a3_test_joint_' + Date.now() + '_' + require('node:crypto').randomBytes(4).toString('hex');
   const connection = await mysql.createConnection({
     host: env.DB_HOST || 'localhost', port: Number(env.DB_PORT || 3306),

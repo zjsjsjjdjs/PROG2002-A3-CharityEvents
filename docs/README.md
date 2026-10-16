@@ -1,5 +1,15 @@
 # A3 documentation
 
+## Angular migration — current local delivery
+
+- [user1 local handoff and deployment contract](user1-angular-handoff.md)
+- [2026-10-15 local acceptance record](user1-local-acceptance.md)
+- [Public pages](angular-public-pages.md), [registration](angular-registration.md),
+  [weather](angular-weather.md)
+
+The records below retain the earlier HTML implementation and historical checks.
+Use the Angular handoff for current public routes and packaging.
+
 - [Delivery, source and personal contributions](a3-delivery.md)
 - [M12 packaging and remaining delivery tasks](m12-delivery-checklist.md)
 - [Collaboration contract](a3-collaboration.md)

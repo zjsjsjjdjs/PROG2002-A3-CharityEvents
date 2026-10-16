@@ -229,7 +229,18 @@ app.use('/api/events/:id/registrations', registrationRouter);
 app.use('/api/admin', protectAdmin, require('./admin'));
 app.get(['/admin.html', '/admin-event.html'], protectAdmin);
 
-// Serve only public client files, keeping API credentials outside the web root.
+// Prefer the built Angular public site when installed beside the API directory.
+// API routes and protected legacy admin pages above retain their existing handlers.
+const angularPublicRoot = path.join(__dirname, '..', 'angular-public');
+if (require('node:fs').existsSync(path.join(angularPublicRoot, 'index.html'))) {
+  app.use(express.static(angularPublicRoot));
+  app.get([
+    '/', '/index.html', '/search', '/search.html', '/connection',
+    '/events/:id', '/events/:id/register', '/detail.html', '/register.html'
+  ], (req, res) => res.sendFile(path.join(angularPublicRoot, 'index.html')));
+}
+
+// Keep legacy admin pages and their assets available during the public migration.
 app.use(express.static(path.join(__dirname, '..', 'clientside')));
 
 app.use((req, res) => {
