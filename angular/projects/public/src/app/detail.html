@@ -1,24 +1,31 @@
-<a class="back-link" routerLink="/search" [queryParams]="filters">← Back to search</a>
 @let result = state();
 @if (result.status === 'loading') {
-  <h1>Event details</h1>
+  <header class="page-title"><h1>Event details</h1></header>
   <p class="status-panel" role="status">Loading event details…</p>
 } @else if (result.status === 'error') {
-  <h1>Event unavailable</h1>
+  <header class="page-title"><h1>Event unavailable</h1></header>
   <div class="status-panel error" role="alert">
     <p>{{ result.message }}</p>
-    <button (click)="refresh.next()">Try again</button>
+    <button class="button primary-button" (click)="refresh.next()">Try again</button>
   </div>
 } @else {
   @let event = result.data;
-  <header class="public-page-heading">
-    <p class="eyebrow">{{ event.category_name }} / Harbour Hope</p>
+  <header class="page-title">
+    <p class="eyebrow">Event details</p>
     <h1>{{ event.name }}</h1>
-    <p class="lead">{{ event.short_description }}</p>
   </header>
-  <div class="detail-layout">
-    <article>
-      <dl class="event-facts">
+  <div class="content-section detail-layout">
+    <article class="detail-content">
+      <div class="tag-row detail-tags">
+        <span class="tag">{{ event.category_name }}</span
+        ><span
+          class="tag timing-tag"
+          [class.past]="timing(event.event_datetime) === 'past'"
+          [class.upcoming]="timing(event.event_datetime) === 'upcoming'"
+          >{{ timing(event.event_datetime) }}</span
+        >
+      </div>
+      <dl class="event-facts detail-summary">
         <div>
           <dt>Date and time · Brisbane</dt>
           <dd>
@@ -32,30 +39,54 @@
           <dd>{{ event.location }}</dd>
         </div>
         <div>
-          <dt>Fundraising purpose</dt>
+          <dt>Purpose</dt>
           <dd>{{ event.purpose }}</dd>
+        </div>
+        <div>
+          <dt>Ticket price</dt>
+          <dd>
+            {{
+              +event.ticket_price === 0 ? 'Free entry' : (event.ticket_price | aud) + ' per ticket'
+            }}
+          </dd>
         </div>
       </dl>
       <section class="detail-section">
-        <h2>About this event</h2>
-        <p class="description">{{ event.full_description }}</p>
+        <h2 class="detail-heading">About this event</h2>
+        <p class="description detail-description">{{ event.full_description }}</p>
       </section>
       <section class="detail-section">
-        <h2>Every contribution counts</h2>
-        <p>
-          {{ event.current_progress | aud }} raised of a {{ event.fundraising_goal | aud }} goal
-        </p>
-        <progress
-          max="100"
-          [value]="progress(event.current_progress, event.fundraising_goal)"
-          aria-label="Fundraising progress"
-        ></progress>
+        <h2 class="detail-heading">Goal vs progress</h2>
+        <div class="progress-block">
+          <p class="progress-label">
+            {{ event.current_progress | aud }} raised of {{ event.fundraising_goal | aud }} goal
+          </p>
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [attr.aria-valuenow]="progress(event.current_progress, event.fundraising_goal)"
+            aria-label="Fundraising progress"
+          >
+            <span
+              class="progress-fill"
+              [style.width.%]="progress(event.current_progress, event.fundraising_goal)"
+            ></span>
+          </div>
+        </div>
       </section>
       <section class="detail-section">
-        <h2>Meet the charity</h2>
-        <h3>{{ event.organisation_name }}</h3>
-        <p>{{ event.organisation_mission }}</p>
-        <dl class="event-facts">
+        <h2 class="detail-heading">Charity contact</h2>
+        <dl class="event-facts detail-summary">
+          <div>
+            <dt>Organisation</dt>
+            <dd>{{ event.organisation_name }}</dd>
+          </div>
+          <div>
+            <dt>Mission</dt>
+            <dd>{{ event.organisation_mission }}</dd>
+          </div>
           <div>
             <dt>Email</dt>
             <dd>{{ event.contact_email }}</dd>
@@ -66,9 +97,8 @@
           </div>
         </dl>
       </section>
-      <hh-event-weather [event]="event" />
       <section class="detail-section" aria-labelledby="attendees-title">
-        <h2 id="attendees-title">Registered attendees</h2>
+        <h2 class="detail-heading" id="attendees-title">Registered attendees</h2>
         @if (attendees().length === 0) {
           <p>No registrations yet. Be the first to join us.</p>
         } @else {
@@ -89,23 +119,23 @@
           </ol>
         }
       </section>
+      <hh-event-weather [event]="event" />
+      <p><a class="back-link" routerLink="/search" [queryParams]="filters">← Back to search</a></p>
     </article>
-    <aside class="booking-panel" aria-labelledby="booking-title">
-      <p class="eyebrow">Be part of it</p>
-      <h2 id="booking-title">Your place at the event</h2>
-      <p class="booking-price">
-        {{ +event.ticket_price === 0 ? 'Free entry' : (event.ticket_price | aud) }}
+    <aside class="register-panel booking-panel" aria-labelledby="booking-title">
+      <p class="panel-label">Registration</p>
+      <p class="register-event-name" id="booking-title">{{ event.name }}</p>
+      <p class="register-ticket">
+        {{ +event.ticket_price === 0 ? 'Free entry' : (event.ticket_price | aud) + ' per ticket' }}
       </p>
-      @if (+event.ticket_price !== 0) {
-        <p class="muted">per ticket · AUD</p>
-      }
+      <p class="register-date">{{ event.event_datetime | brisbaneDate }}</p>
       <a
         class="primary-link"
         [routerLink]="['/events', event.event_id, 'register']"
         [queryParams]="filters"
-        >Register for this event →</a
+        aria-label="Register for this event"
+        >Register</a
       >
-      <p>Choose your tickets and leave your contact details on the registration page.</p>
     </aside>
   </div>
 }

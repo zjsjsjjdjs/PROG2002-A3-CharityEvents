@@ -319,8 +319,14 @@ async function main() {
       "Angular admin suspension blocks an already-open public form and retains existing attendees",
     );
     for (const [url, heading] of [
-      ["/index.html", "Local events."],
-      ["/search.html?location=none-joint", "Search events"],
+      [
+        "/index.html",
+        "Local events that turn ticket sales into practical help.",
+      ],
+      [
+        "/search.html?location=none-joint",
+        "Search by date, location, or category.",
+      ],
       ["/detail.html?id=1", null],
       ["/register.html?id=1", "Register for an event"],
       ["/not-a-real-page", "Page not found"],

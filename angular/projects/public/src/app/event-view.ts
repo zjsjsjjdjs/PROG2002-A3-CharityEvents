@@ -47,3 +47,20 @@ export class AudPipe implements PipeTransform {
 export function progressPercent(raised: string | number, goal: string | number): number {
   return Number(goal) > 0 ? Math.max(0, Math.min(100, (Number(raised) / Number(goal)) * 100)) : 0;
 }
+
+/** Match the original site's calendar-day labels in Brisbane, independent of the host timezone. */
+export function eventTiming(value: string, now = new Date()): 'past' | 'upcoming' {
+  const formatter = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Australia/Brisbane',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  const key = (date: Date) => {
+    const parts = formatter.formatToParts(date);
+    return ['year', 'month', 'day']
+      .map((type) => parts.find((part) => part.type === type)!.value)
+      .join('-');
+  };
+  return key(new Date(value)) < key(now) ? 'past' : 'upcoming';
+}
