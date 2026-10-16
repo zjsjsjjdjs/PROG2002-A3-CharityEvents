@@ -128,7 +128,7 @@ async function main() {
     await page.getByLabel("Password", { exact: true }).fill(password);
     await page.getByRole("button", { name: "Sign in", exact: true }).click();
     await expect(
-      page.getByRole("heading", { name: "All events", exact: true }),
+      page.getByRole("heading", { name: "Manage events", exact: true }),
     ).toBeVisible();
     await expect(page.locator("tbody tr")).toHaveCount(8);
     const cookies = await context.cookies();
@@ -137,7 +137,7 @@ async function main() {
         (c) => c.name === "hh_admin" && c.httpOnly && c.sameSite === "Strict",
       ),
     );
-    await page.getByRole("link", { name: "Create event", exact: true }).click();
+    await page.getByRole("link", { name: "+ New event", exact: true }).click();
     for (const [key, value] of Object.entries({
       name: "Release acceptance event",
       location: "Brisbane",

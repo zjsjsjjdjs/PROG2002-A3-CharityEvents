@@ -6,37 +6,40 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="site-nav">
-        <a class="brand" routerLink="/events"
-          ><span class="brand-mark" aria-hidden="true">HH</span
-          ><span><strong>Harbour Hope</strong><small>Event management</small></span></a
+    <header class="admin-header">
+      <a class="brand" routerLink="/events"
+        ><span class="brand-mark" aria-hidden="true">HH</span
+        ><span
+          ><span class="brand-name">Harbour Hope</span
+          ><span class="brand-subtitle">Event management</span></span
+        ></a
+      >
+      <nav aria-label="Management navigation">
+        <a
+          routerLink="/events"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          >All events</a
         >
-        <nav aria-label="Management navigation">
-          <a
-            routerLink="/events"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            ariaCurrentWhenActive="page"
-            >All events</a
-          >
-          <a routerLink="/events/new" routerLinkActive="active" ariaCurrentWhenActive="page"
-            >New event</a
-          >
-          <a routerLink="/connection" routerLinkActive="active" ariaCurrentWhenActive="page"
-            >Connection</a
-          >
-          @if (hosted) {
-            <a href="/">Public events</a><a href="/admin/login">Sign in</a>
-            <form action="/admin/logout" method="post" class="session-tools">
-              <button type="submit" class="secondary">Sign out</button>
-            </form>
-          }
-        </nav>
-      </div>
+        <a routerLink="/events/new" routerLinkActive="active" ariaCurrentWhenActive="page"
+          >New event</a
+        >
+        <a routerLink="/connection" routerLinkActive="active" ariaCurrentWhenActive="page"
+          >Connection</a
+        >
+        @if (hosted) {
+          <a href="/">Public website ↗</a><a href="/admin/login">Sign in</a>
+          <form action="/admin/logout" method="post" class="session-tools">
+            <button type="submit" class="secondary">Sign out</button>
+          </form>
+        }
+      </nav>
     </header>
-    <main id="main" tabindex="-1"><router-outlet /></main>
-    <footer>Harbour Hope Charity · Community care in Brisbane</footer>
+    <main class="admin-main" id="main" tabindex="-1"><router-outlet /></main>
+    <footer class="admin-footer">
+      Harbour Hope Charity · Community events, carefully managed.
+    </footer>
   `,
 })
 export class App {

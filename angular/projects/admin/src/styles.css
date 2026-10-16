@@ -1,2 +1,3 @@
-@import '../../shared/src/styles.css';
 @import './admin.css';
+@import './legacy-admin.css';
+@import './admin-states.css';

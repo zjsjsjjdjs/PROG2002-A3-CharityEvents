@@ -1,10 +1,12 @@
 <section aria-labelledby="form-title">
-  <a class="back-link" routerLink="/events">← All events</a>
-  <p class="eyebrow">Event management</p>
-  <h1 id="form-title">{{ editing() ? 'Edit event' : 'New event' }}</h1>
-  <p class="muted">
-    All fields are required except coordinates. Enter event times in Brisbane (UTC+10).
-  </p>
+  <div class="admin-heading">
+    <div>
+      <p class="eyebrow">Harbour Hope / Event management</p>
+      <h1 id="form-title">{{ editing() ? 'Edit event' : 'New event' }}</h1>
+      <p class="admin-muted">Tell your community what is happening and how they can help.</p>
+    </div>
+    <a class="back-link" routerLink="/events">← All events</a>
+  </div>
   @if (loading()) {
     <p class="notice" role="status">Loading event form…</p>
   }
@@ -17,58 +19,22 @@
     </div>
   }
   @if (ready()) {
-    <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <form class="admin-form admin-workspace" [formGroup]="form" (ngSubmit)="save()" novalidate>
       <fieldset [disabled]="saving()">
         <legend>Event details</legend>
         <div class="form-grid">
-          @for (field of textFields; track field.key) {
-            <div [class.full-width]="field.long">
-              <label [for]="field.key">{{ field.label }}</label>
-              @if (field.long) {
-                <textarea
-                  [id]="field.key"
-                  [formControlName]="field.key"
-                  rows="4"
-                  required
-                  [attr.aria-invalid]="errors()[field.key] ? 'true' : null"
-                  [attr.aria-describedby]="errors()[field.key] ? field.key + '-error' : null"
-                ></textarea>
-              } @else {
-                <input
-                  [id]="field.key"
-                  [formControlName]="field.key"
-                  required
-                  [attr.aria-invalid]="errors()[field.key] ? 'true' : null"
-                  [attr.aria-describedby]="errors()[field.key] ? field.key + '-error' : null"
-                />
-              }
-              @if (errors()[field.key]) {
-                <p class="field-error" [id]="field.key + '-error'">{{ errors()[field.key] }}</p>
-              }
-            </div>
-          }
-          <div>
-            <label for="event_datetime">Brisbane date &amp; time</label
-            ><input
-              id="event_datetime"
-              type="datetime-local"
-              step="1"
-              min="1000-01-01T00:00"
-              max="9999-12-31T23:59:59"
-              formControlName="event_datetime"
+          <div class="full">
+            <label for="name">Event name</label>
+            <input
+              id="name"
+              formControlName="name"
               required
-              [attr.aria-invalid]="errors().event_datetime ? 'true' : null"
-              aria-describedby="event_datetime-error"
+              [attr.aria-invalid]="errors().name ? 'true' : null"
+              [attr.aria-describedby]="errors().name ? 'name-error' : null"
             />
-            <p class="field-error" id="event_datetime-error">{{ errors().event_datetime }}</p>
-          </div>
-          <div>
-            <label for="status">Status</label
-            ><select id="status" formControlName="status" aria-describedby="status-error">
-              <option value="active">Active</option>
-              <option value="suspended">Suspended</option></select
-            ><small>Past is determined automatically from the event date.</small>
-            <p class="field-error" id="status-error">{{ errors().status }}</p>
+            @if (errors().name) {
+              <p class="field-error" id="name-error">{{ errors().name }}</p>
+            }
           </div>
           <div>
             <label for="category_id">Category</label
@@ -102,11 +68,57 @@
             </select>
             <p class="field-error" id="organisation_id-error">{{ errors().organisation_id }}</p>
           </div>
-        </div>
-      </fieldset>
-      <fieldset [disabled]="saving()">
-        <legend>Tickets &amp; fundraising</legend>
-        <div class="form-grid">
+          <div>
+            <label for="event_datetime">Date and time · Brisbane</label
+            ><input
+              id="event_datetime"
+              type="datetime-local"
+              step="1"
+              min="1000-01-01T00:00"
+              max="9999-12-31T23:59:59"
+              formControlName="event_datetime"
+              required
+              [attr.aria-invalid]="errors().event_datetime ? 'true' : null"
+              aria-describedby="event_datetime-error"
+            />
+            <p class="field-error" id="event_datetime-error">{{ errors().event_datetime }}</p>
+          </div>
+          <div>
+            <label for="status">Visibility</label
+            ><select id="status" formControlName="status" aria-describedby="status-error">
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option></select
+            ><small>Past is determined automatically from the event date.</small>
+            <p class="field-error" id="status-error">{{ errors().status }}</p>
+          </div>
+          @for (field of textFields; track field.key) {
+            @if (field.key !== 'name') {
+              <div class="full">
+                <label [for]="field.key">{{ field.label }}</label>
+                @if (field.long) {
+                  <textarea
+                    [id]="field.key"
+                    [formControlName]="field.key"
+                    [rows]="field.key === 'full_description' ? 5 : 2"
+                    required
+                    [attr.aria-invalid]="errors()[field.key] ? 'true' : null"
+                    [attr.aria-describedby]="errors()[field.key] ? field.key + '-error' : null"
+                  ></textarea>
+                } @else {
+                  <input
+                    [id]="field.key"
+                    [formControlName]="field.key"
+                    required
+                    [attr.aria-invalid]="errors()[field.key] ? 'true' : null"
+                    [attr.aria-describedby]="errors()[field.key] ? field.key + '-error' : null"
+                  />
+                }
+                @if (errors()[field.key]) {
+                  <p class="field-error" [id]="field.key + '-error'">{{ errors()[field.key] }}</p>
+                }
+              </div>
+            }
+          }
           @for (field of moneyFields; track field.key) {
             <div>
               <label [for]="field.key">{{ field.label }}</label
@@ -121,16 +133,10 @@
               <p class="field-error" [id]="field.key + '-error'">{{ errors()[field.key] }}</p>
             </div>
           }
-        </div>
-      </fieldset>
-      <fieldset [disabled]="saving()">
-        <legend>Location coordinates <span class="muted">(optional)</span></legend>
-        <p>Provide both coordinates for weather information, or leave both blank.</p>
-        <div class="form-grid">
           @for (key of ['latitude', 'longitude']; track key) {
             <div>
               <label [for]="key">{{
-                key === 'latitude' ? 'Latitude (−90 to 90)' : 'Longitude (−180 to 180)'
+                key === 'latitude' ? 'Latitude · optional' : 'Longitude · optional'
               }}</label
               ><input
                 [id]="key"
@@ -138,6 +144,9 @@
                 inputmode="decimal"
                 [attr.aria-describedby]="key + '-error'"
               />
+              @if (key === 'longitude') {
+                <small>Provide both coordinates or leave both blank.</small>
+              }
               <p class="field-error" [id]="key + '-error'">
                 {{ key === 'latitude' ? errors().latitude : errors().longitude }}
               </p>
@@ -153,35 +162,30 @@
       </div>
     </form>
     @if (editing()) {
-      <section class="registrations" aria-labelledby="registration-title">
-        <h2 id="registration-title">Registrations ({{ registrations().length }})</h2>
-        <p>
-          Updating this event keeps existing registrations. Open the registration list from All
-          events to refresh it without changing this form.
+      <section
+        class="admin-form admin-workspace registration-panel"
+        aria-labelledby="registration-title"
+      >
+        <h2 id="registration-title">Registrations</h2>
+        <p class="registration-description">
+          {{ registrations().length }} registrations. Updating this event keeps all existing
+          registrations.
+        </p>
+        <p class="registration-description">
+          Open the registration list from All events to refresh it without changing this form.
         </p>
         @if (!registrations().length) {
-          <p class="muted">No registrations yet.</p>
+          <p class="registration-description muted">No registrations yet.</p>
         } @else {
-          <div class="table-wrap" tabindex="0" role="region" aria-label="Registrations">
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Tickets</th>
-                  <th scope="col">Registered (Brisbane)</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (person of registrations(); track person.registration_id) {
-                  <tr>
-                    <td>{{ person.name }}</td>
-                    <td>{{ person.tickets }}</td>
-                    <td>{{ person.registered_at | date: 'dd MMM yyyy, HH:mm' : '+1000' }}</td>
-                  </tr>
-                }
-              </tbody>
-            </table>
-          </div>
+          <ul>
+            @for (person of registrations(); track person.registration_id) {
+              <li>
+                {{ person.name }} · {{ person.tickets }}
+                {{ person.tickets === 1 ? 'ticket' : 'tickets' }} ·
+                {{ person.registered_at | date: 'd MMM yyyy, h:mm a' : '+1000' }}
+              </li>
+            }
+          </ul>
         }
       </section>
     }
