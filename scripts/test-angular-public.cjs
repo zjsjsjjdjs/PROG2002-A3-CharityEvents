@@ -282,6 +282,7 @@ async function main() {
     await expect(
       page.getByRole("heading", { name: "Registration confirmed" }),
     ).toBeVisible();
+    await expect(page.locator("#success-title")).toBeFocused();
     assert.equal(await page.locator("form").count(), 0);
     assert.ok(!page.url().includes("email") && !page.url().includes("Guest"));
     await page
@@ -392,6 +393,31 @@ async function main() {
       });
     }
     passed("All four public pages fit a 390 px viewport");
+    await page.goto(uiOrigin);
+    const menu = page.getByRole("button", { name: "Menu", exact: true });
+    await expect(menu).toHaveAttribute("aria-expanded", "false");
+    await menu.click();
+    await expect(menu).toHaveAttribute("aria-expanded", "true");
+    await page.getByRole("link", { name: "Contact", exact: true }).click();
+    await expect(page.locator("#charity-contact")).toBeInViewport();
+    await expect(menu).toHaveAttribute("aria-expanded", "false");
+    await menu.click();
+    await page
+      .getByRole("link", { name: "Search events", exact: true })
+      .click();
+    await expect(page).toHaveURL(/\/search$/);
+    await expect(menu).toHaveAttribute("aria-expanded", "false");
+    passed(
+      "Restored mobile menu opens, navigates to home anchors and closes after routing",
+    );
+
+    await require("./test-angular-weather.cjs")({
+      page,
+      connection,
+      uiOrigin,
+      output,
+      passed,
+    });
     assert.deepEqual(pageErrors, []);
     passed("No unhandled browser page errors");
     fs.writeFileSync(

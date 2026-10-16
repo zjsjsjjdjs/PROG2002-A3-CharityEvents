@@ -1,24 +1,57 @@
 <a class="skip-link" href="#main" (click)="skipToContent($event)">Skip to content</a>
 <header class="site-header">
-  <div class="site-nav">
-    <a class="brand" routerLink="/" aria-label="Harbour Hope home"
-      ><span class="brand-mark" aria-hidden="true">HH</span
-      ><span><strong>Harbour Hope</strong><small>Charity events</small></span></a
+  <nav class="site-nav" aria-label="Main navigation">
+    <a
+      class="brand"
+      routerLink="/"
+      aria-label="Harbour Hope Charity home"
+      (click)="menuOpen.set(false)"
     >
-    <nav aria-label="Main navigation">
+      <span class="brand-mark" aria-hidden="true">HH</span>
+      <span
+        ><span class="brand-name">Harbour Hope</span
+        ><span class="brand-subtitle">Charity events</span></span
+      >
+    </a>
+    <button
+      class="nav-toggle"
+      #menuButton
+      type="button"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="primary-navigation"
+      (click)="menuOpen.set(!menuOpen())"
+    >
+      Menu
+    </button>
+    <div
+      class="nav-links"
+      id="primary-navigation"
+      [class.open]="menuOpen()"
+      (keydown.escape)="menuOpen.set(false); menuButton.focus()"
+    >
       <a
         routerLink="/"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         ariaCurrentWhenActive="page"
+        (click)="menuOpen.set(false)"
         >Home</a
-      ><a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page"
+      >
+      <a
+        routerLink="/search"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        (click)="menuOpen.set(false)"
         >Search events</a
       >
-    </nav>
-  </div>
+      @if (isHome) {
+        <a routerLink="/" fragment="events" (click)="menuOpen.set(false)">Events</a>
+        <a routerLink="/" fragment="charity-contact" (click)="menuOpen.set(false)">Contact</a>
+      }
+    </div>
+  </nav>
 </header>
 <main id="main" class="public-main" tabindex="-1"><router-outlet /></main>
-<footer>
-  <strong>Harbour Hope Charity</strong><span>Community care in Brisbane · All prices in AUD</span>
+<footer class="site-footer">
+  <p>© 2026 Harbour Hope Charity. Built for PROG2002 coursework.</p>
 </footer>

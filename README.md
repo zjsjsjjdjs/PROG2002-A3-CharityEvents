@@ -25,12 +25,16 @@ Keep api and clientside as siblings. The entry point is api/app.js. No frontend
 build is required. Development administration without credentials is restricted
 to loopback access. Production requires HTTPS and explicit admin credentials.
 
-## Angular migration foundation
+## Angular migration
 
-The [Angular workspace](angular/README.md) provides separate public and admin preview
-apps, shared API contracts and a local proxy. It requires a compatible newer Node
-runtime and has its own install/build commands. Business migration and deployment
-are subsequent work; the existing startup instructions above remain valid.
+The [Angular workspace](angular/README.md) contains public and admin applications.
+Public home, search, detail, registration and event-day weather are implemented.
+The current local snapshot includes user2's admin list/create/edit work; remaining
+admin features and live hosting are coordinated separately. Start Angular using
+its own README; the original `clientside` pages remain for regression coverage.
+See [user1's local handoff](docs/user1-angular-handoff.md) and
+[local acceptance evidence](docs/user1-local-acceptance.md) for production builds,
+verified scope, packaging and outstanding deployment work.
 
 ## Verification and delivery
 

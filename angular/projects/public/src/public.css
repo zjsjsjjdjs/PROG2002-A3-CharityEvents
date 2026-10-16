@@ -1,372 +1,152 @@
-/* Public-only styles: shared/admin presentation remains unchanged. */
-.public-main h1,
-.public-main h2,
-.public-main h3 {
-  text-wrap: balance;
+/* Angular-only states and accessibility additions to the original public styles. */
+:root {
+  color-scheme: light;
 }
-.public-main h1 {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 700;
-  color: var(--ink);
+.public-main {
+  min-height: 70vh;
 }
-.public-main h2 {
-  font-size: 1.8rem;
-  line-height: 1.2;
-  margin: 0 0 1rem;
+.public-main:focus {
+  outline: none;
 }
-.public-main h3 {
-  font-size: 1.25rem;
-  line-height: 1.35;
+.skip-link {
+  position: fixed;
+  top: -5rem;
+  left: 1rem;
+  z-index: 20;
+  background: white;
+  padding: 0.6rem;
 }
-.public-main .lead {
-  font-size: 1.13rem;
-  color: var(--muted);
+.skip-link:focus {
+  top: 0.5rem;
 }
-.public-hero {
-  display: grid;
-  grid-template-columns: 1.65fr 1fr;
-  align-items: center;
-  gap: 3rem;
-  padding-bottom: 3.5rem;
-  border-bottom: 1px solid var(--line);
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--harbour);
+  outline-offset: 3px;
 }
-.contact-panel {
-  background: #eef4f1;
-  padding: 2rem;
-  border-top: 6px solid var(--harbour);
-  border-radius: 8px;
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
-.contact-panel a {
-  display: block;
-  overflow-wrap: anywhere;
-}
-.primary-link {
-  display: inline-block;
-  background: var(--harbour);
-  color: white;
-  border-radius: 6px;
-  padding: 0.85rem 1.2rem;
-  text-decoration: none;
-  font-weight: bold;
-}
-.section-heading {
-  display: flex;
-  gap: 1rem;
-  align-items: baseline;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 2.5rem 0 1.25rem;
-}
-.section-heading h2 {
-  margin-bottom: 0;
-}
-.event-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-.event-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 1.6rem;
-  display: flex;
-  flex-direction: column;
-  overflow-wrap: anywhere;
-}
-.event-card h3 {
-  margin: 1rem 0;
-}
-.event-card h3 a {
-  text-decoration: none;
-}
-.event-card p {
-  margin: 0.35rem 0;
-}
-.category-tag {
-  align-self: start;
-  background: #e7f1ed;
-  color: #246348;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 0.15rem 0.6rem;
-  border-radius: 4px;
-}
-.event-date {
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-.event-location {
-  color: var(--harbour);
-}
-.muted,
-.fund-label {
-  color: var(--muted);
-}
-.card-bottom {
-  margin-top: auto;
-  padding-top: 1rem;
-}
-.ticket-price {
-  font-weight: bold;
-}
-.fund-label {
-  font-size: 0.85rem;
-}
-progress {
-  display: block;
-  width: 100%;
-  height: 9px;
-  margin: 0.6rem 0 1.4rem;
-  border: 0;
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--line);
-  accent-color: var(--leaf);
-}
-progress::-webkit-progress-bar {
-  background: var(--line);
-}
-progress::-webkit-progress-value {
-  background: var(--leaf);
-}
-progress::-moz-progress-bar {
-  background: var(--leaf);
-}
-.text-link {
-  font-weight: bold;
-}
-.status-panel {
-  padding: 1.5rem;
-  background: #eef4f1;
-  border-left: 4px solid var(--harbour);
-}
-.status-panel.error {
-  background: #fff4ee;
-  border-color: #9a2929;
-}
-.public-page-heading {
-  padding-bottom: 1.5rem;
-}
-.search-form {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-top: 5px solid var(--harbour);
-  padding: 1.5rem;
-  border-radius: 8px;
+html {
+  scroll-padding-top: 100px;
 }
 .search-fields {
   display: grid;
-  grid-template-columns: 1fr 1.3fr 1fr;
-  gap: 1rem;
+  gap: 10px;
 }
-.search-fields label {
+.search-fields > div {
   display: grid;
-  gap: 0.4rem;
-  font-weight: bold;
+  gap: 10px;
   min-width: 0;
 }
-.search-fields input,
-.search-fields select {
-  box-sizing: border-box;
+.results-panel {
   min-width: 0;
-  width: 100%;
-  font: inherit;
-  color: var(--ink);
-  padding: 0.65rem;
-  background: white;
-  border: 1px solid #8caaa1;
-  border-radius: 5px;
 }
-.search-fields :focus-visible {
-  outline: 3px solid var(--leaf);
-  outline-offset: 3px;
+.results-panel .section-heading {
+  margin-bottom: 12px;
 }
-.form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-top: 1.2rem;
+.results-panel h2 {
+  font-size: 1.45rem;
 }
-.secondary-button {
-  background: white;
-  color: var(--harbour);
-  border: 1px solid var(--harbour);
+.status-panel {
+  border-left: 4px solid var(--sun);
+  background: #fff7e4;
+  color: #654d18;
+  padding: 14px 16px;
+  border-radius: 0 8px 8px 0;
+}
+.status-panel.error {
+  border-color: var(--rose);
+  background: #fbeaea;
+  color: #803030;
+}
+.error {
+  color: #803030;
+}
+.muted,
+.field-hint {
+  color: var(--muted);
 }
 .plain-button {
   background: transparent;
   color: var(--harbour);
-  text-decoration: underline;
+  border: 0;
   padding: 0.25rem;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .back-link {
   display: inline-block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
-.detail-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
-  gap: 2.5rem;
-  align-items: start;
+.detail-summary > div {
+  display: contents;
 }
-.event-facts {
-  margin: 0;
-  display: grid;
-  gap: 1rem;
-}
-.event-facts dt {
-  font-size: 0.85rem;
-  font-weight: bold;
+.detail-summary dt {
   color: var(--muted);
+  font-weight: 800;
 }
-.event-facts dd {
-  margin: 0.15rem 0 0;
+.detail-summary dd {
+  margin: 0;
   overflow-wrap: anywhere;
-}
-.detail-section {
-  border-top: 1px solid var(--line);
-  margin-top: 2rem;
-  padding-top: 1.8rem;
 }
 .description {
   white-space: pre-line;
-  overflow-wrap: anywhere;
-}
-.booking-panel {
-  padding: 1.5rem;
-  background: white;
-  border: 1px solid var(--line);
-  border-top: 5px solid var(--harbour);
-  border-radius: 8px;
-  position: sticky;
-  top: 1rem;
-}
-.booking-panel h2 {
-  font-size: 1.4rem;
-}
-.booking-price {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0;
-}
-.booking-panel .primary-link {
-  display: block;
-  text-align: center;
-  margin-top: 1rem;
-}
-.attendee-list {
-  list-style: none;
-  padding: 0;
 }
 .attendee-list li {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--line);
+  margin-bottom: 12px;
   overflow-wrap: anywhere;
 }
 .attendee-list span {
   display: block;
-  font-size: 0.9rem;
   color: var(--muted);
+  font-weight: 700;
 }
-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-}
-@media (max-width: 760px) {
-  .public-hero,
-  .detail-layout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  .search-fields {
-    grid-template-columns: 1fr;
-  }
-  .booking-panel {
-    position: static;
-  }
-}
-@media (max-width: 540px) {
-  .event-grid {
-    grid-template-columns: 1fr;
-  }
-  .event-card {
-    padding: 1.2rem;
-  }
-  .contact-panel {
-    padding: 1.5rem;
-  }
-  .public-main h1 {
-    font-size: 2.4rem;
-    overflow-wrap: anywhere;
-  }
-}
-
-.search-fields > div {
-  display: grid;
-  gap: 0.4rem;
-  min-width: 0;
-}
-
-.registration-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 2.5rem;
-  align-items: start;
-}
-.registration-form,
-.registration-success {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-top: 5px solid var(--harbour);
-  padding: 1.8rem;
+.primary-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
   border-radius: 8px;
+  padding: 11px 16px;
+  background: var(--leaf);
+  color: white;
+  font-weight: 800;
+  text-decoration: none;
 }
-.registration-form fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  min-width: 0;
+.primary-link:hover {
+  background: #256748;
 }
-.registration-form label {
-  display: block;
-  font-weight: bold;
-  margin-top: 1.3rem;
-}
-.registration-form input {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  font: inherit;
-  padding: 0.7rem;
-  border: 1px solid #8caaa1;
-  border-radius: 5px;
-  margin-top: 0.35rem;
-}
-.registration-form input:focus-visible {
-  outline: 3px solid var(--leaf);
-  outline-offset: 3px;
+.registration-form h2 {
+  font:
+    bold 1.45rem Georgia,
+    'Times New Roman',
+    serif;
+  margin: 0 0 20px;
 }
 .registration-form input[aria-invalid='true'] {
-  border-color: #9a2929;
+  border-color: var(--rose);
 }
 .field-hint {
-  font-size: 0.88rem;
-  margin: 0.4rem 0 0;
-  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 6px 0 0;
 }
 .field-hint.error {
-  color: #9a2929;
+  color: #803030;
 }
 .registration-total {
-  border-top: 1px solid var(--line);
-  margin-top: 1.4rem;
-  padding-top: 1rem;
+  margin: 20px 0;
 }
 .registration-success {
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   max-width: 760px;
+}
+.registration-success h2 {
+  font-family: Georgia, 'Times New Roman', serif;
 }
 .registration-success p,
 .registration-success dd {
@@ -383,12 +163,78 @@ footer {
   white-space: nowrap;
   border: 0;
 }
-@media (max-width: 760px) {
-  .registration-layout {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+.page-panel {
+  width: min(100% - 32px, 740px);
+  margin: 56px auto;
+  padding: 24px;
+  border-left: 5px solid var(--sun);
+}
+.page-panel h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+.event-card,
+.hero-panel,
+.register-panel {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 380px) {
+  .event-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
-  .registration-layout > .booking-panel {
-    grid-row: 1;
-  }
+}
+.weather-panel {
+  background: #edf4f1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-top: 4px solid var(--leaf);
+}
+.weather-panel h2 {
+  margin-top: 0;
+}
+.weather-condition {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--harbour);
+}
+.weather-temperatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+}
+.weather-temperatures dt {
+  color: var(--muted);
+}
+.weather-temperatures dd {
+  margin: 0.4rem 0 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.weather-credit {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.weather-panel {
+  margin-top: 30px;
+}
+.weather-panel h2 {
+  font:
+    bold 1.45rem Georgia,
+    'Times New Roman',
+    serif;
+}
+.weather-panel button,
+.page-panel button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  padding: 11px 16px;
+  background: var(--leaf);
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+}
+hh-event-detail > .status-panel {
+  width: min(100% - 32px, var(--max-width));
+  margin: 0 auto 56px;
 }

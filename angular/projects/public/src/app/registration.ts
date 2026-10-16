@@ -1,4 +1,13 @@
-import { Component, DestroyRef, ElementRef, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  afterRenderEffect,
+  computed,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -33,6 +42,10 @@ export class RegistrationPage {
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly eventChanged = new Subject<void>();
   private currentId: number | null | undefined;
+  private readonly confirmation = viewChild<ElementRef<HTMLElement>>('confirmation');
+  constructor() {
+    afterRenderEffect(() => this.confirmation()?.nativeElement.focus());
+  }
   readonly refresh = new Subject<void>();
   readonly pending = signal(false);
   readonly blocked = signal(false);
