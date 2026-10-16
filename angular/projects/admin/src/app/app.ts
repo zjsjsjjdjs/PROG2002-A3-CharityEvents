@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
@@ -25,6 +26,12 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
           <a routerLink="/connection" routerLinkActive="active" ariaCurrentWhenActive="page"
             >Connection</a
           >
+          @if (hosted) {
+            <a href="/">Public events</a><a href="/admin/login">Sign in</a>
+            <form action="/admin/logout" method="post" class="session-tools">
+              <button type="submit" class="secondary">Sign out</button>
+            </form>
+          }
         </nav>
       </div>
     </header>
@@ -32,4 +39,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     <footer>Harbour Hope Charity · Community care in Brisbane</footer>
   `,
 })
-export class App {}
+export class App {
+  readonly hosted = new URL(inject(DOCUMENT).baseURI).pathname === '/admin/';
+}
