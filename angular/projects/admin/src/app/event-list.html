@@ -25,21 +25,29 @@
     <label
       >Find an event<input
         type="search"
+        [disabled]="mutating()"
         [ngModel]="query()"
         (ngModelChange)="query.set($event)"
         placeholder="Name, place or category"
     /></label>
     <div>
       <label for="status-filter">Status</label
-      ><select id="status-filter" [ngModel]="status()" (ngModelChange)="status.set($event)">
+      ><select
+        [disabled]="mutating()"
+        id="status-filter"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)"
+      >
         <option value="">All statuses</option>
         <option>Active</option>
         <option>Past</option>
         <option>Suspended</option>
       </select>
     </div>
-    <button class="secondary" (click)="clear()">Clear filters</button
-    ><button class="secondary" (click)="load()" [disabled]="loading()">Refresh</button>
+    <button class="secondary" (click)="clear()" [disabled]="mutating()">Clear filters</button
+    ><button class="secondary" (click)="load()" [disabled]="loading() || mutating()">
+      Refresh
+    </button>
   </div>
   @if (loading()) {
     <p class="notice" role="status">Loading events…</p>
@@ -60,11 +68,11 @@
       <div class="empty">
         <h2>No matching events</h2>
         <p>Try another search or clear your filters.</p>
-        <button class="secondary" (click)="clear()">Clear filters</button>
+        <button class="secondary" (click)="clear()" [disabled]="mutating()">Clear filters</button>
       </div>
     } @else {
       <div class="table-wrap" tabindex="0" role="region" aria-label="Events table">
-        <table>
+        <table class="events-table">
           <thead>
             <tr>
               <th scope="col">Event</th>
@@ -92,13 +100,20 @@
                   >
                 </td>
                 <td>{{ event.ticket_price | currency: 'AUD' : 'symbol' : '1.2-2' }}</td>
-                <td>{{ event.registration_count }}</td>
                 <td>
                   <a
-                    [routerLink]="['/events', event.event_id, 'edit']"
-                    [attr.aria-label]="'Edit ' + event.name"
-                    >Edit</a
+                    [routerLink]="['/events', event.event_id, 'registrations']"
+                    [attr.aria-label]="'View registrations for ' + event.name"
+                    >{{ event.registration_count }} registrations</a
                   >
+                </td>
+                <td class="actions-cell">
+                  <hh-event-actions
+                    [event]="event"
+                    [locked]="mutating()"
+                    (working)="mutating.set($event)"
+                    (changed)="load()"
+                  />
                 </td>
               </tr>
             }

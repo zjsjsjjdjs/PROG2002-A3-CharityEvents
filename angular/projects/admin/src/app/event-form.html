@@ -155,7 +155,10 @@
     @if (editing()) {
       <section class="registrations" aria-labelledby="registration-title">
         <h2 id="registration-title">Registrations ({{ registrations().length }})</h2>
-        <p>Updating this event keeps existing registrations.</p>
+        <p>
+          Updating this event keeps existing registrations. Open the registration list from All
+          events to refresh it without changing this form.
+        </p>
         @if (!registrations().length) {
           <p class="muted">No registrations yet.</p>
         } @else {

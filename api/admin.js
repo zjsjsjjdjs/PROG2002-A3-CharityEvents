@@ -17,7 +17,7 @@ router.get('/events', async (req, res, next) => {
     res.json(events);
   } catch (error) { next(error); }
 });
-const { createEvent, getEvent, updateEvent, deleteEvent } = require('./admin_db');
+const { createEvent, getEvent, updateEvent, deleteEvent, updateEventStatus } = require('./admin_db');
 const { validate } = require('../clientside/assets/js/admin-validation');
 function validatedBody(req, res) {
   if (!req.is('application/json')) { res.status(415).json({code:'UNSUPPORTED_MEDIA_TYPE',message:'Use application/json.'}); return null; }
@@ -53,6 +53,18 @@ router.put('/events/:id', async (req,res,next) => {
     const found = await updateEvent(Number(req.params.id), event);
     if (!found) return res.status(404).json({code:'EVENT_NOT_FOUND',message:'Event not found.'});
     res.json({message:'Event updated.',event_id:Number(req.params.id)});
+  } catch(error) { next(error); }
+});
+
+router.patch('/events/:id/status', async (req,res,next) => {
+  if (!req.is('application/json')) return res.status(415).json({code:'UNSUPPORTED_MEDIA_TYPE',message:'Use application/json.'});
+  if (!req.body || Array.isArray(req.body) || Object.keys(req.body).length !== 1 ||
+      !['active','suspended'].includes(req.body.status))
+    return res.status(400).json({code:'INVALID_STATUS',message:'Provide only status: active or suspended.'});
+  try {
+    if (!await updateEventStatus(Number(req.params.id), req.body.status))
+      return res.status(404).json({code:'EVENT_NOT_FOUND',message:'Event not found.'});
+    res.json({message:req.body.status === 'suspended' ? 'Event suspended.' : 'Event resumed.',event_id:Number(req.params.id)});
   } catch(error) { next(error); }
 });
 
