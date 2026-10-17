@@ -2,6 +2,11 @@ const express = require('express');
 const { createRegistration } = require('./event_db');
 const router = express.Router({ mergeParams: true });
 
+/**
+ * Validate the ASCII email format accepted by registration without testing mailbox existence.
+ * @param {string} email - Trimmed, lowercase input from the route.
+ * @returns {boolean} Whether the address satisfies length and syntax constraints.
+ */
 function validEmail(email) {
   if (email.length > 254 || !/^[\x21-\x7e]+$/.test(email)) return false;
   const parts = email.split('@');

@@ -30,6 +30,9 @@ import { AudPipe, BrisbaneDatePipe, LoadState, loadState } from './event-view';
 import { searchFilters } from './search';
 import { emailValidator, nameValidator, ticketsValidator } from './registration-validation';
 
+/**
+ * Reactive registration page: validates input, prevents repeated pending submissions and keeps the receipt tied to the selected event.
+ */
 @Component({
   selector: 'hh-registration',
   imports: [RouterLink, ReactiveFormsModule, AudPipe, BrisbaneDatePipe],

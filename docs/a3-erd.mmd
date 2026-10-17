@@ -1,0 +1,44 @@
+erDiagram
+  organisations ||--o{ events : organises
+  categories ||--o{ events : classifies
+  events ||--o{ registrations : receives
+  organisations {
+    int organisation_id PK
+    varchar name
+    varchar mission
+    varchar contact_email
+    varchar contact_phone
+    varchar website_url
+  }
+  categories {
+    int category_id PK
+    varchar name UQ
+    varchar description
+  }
+  events {
+    int event_id PK
+    int organisation_id FK
+    int category_id FK
+    varchar name
+    datetime event_datetime
+    varchar location
+    varchar purpose
+    varchar short_description
+    text full_description
+    decimal ticket_price
+    decimal fundraising_goal
+    decimal current_progress
+    enum status
+    decimal latitude
+    decimal longitude
+    timestamp created_at
+    timestamp updated_at
+  }
+  registrations {
+    int registration_id PK
+    int event_id FK
+    varchar name
+    varchar email
+    timestamp registered_at
+    int tickets
+  }

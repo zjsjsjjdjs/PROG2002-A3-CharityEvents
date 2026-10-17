@@ -6,6 +6,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subscription } from 'rxjs';
 import { AdminEventsApi, type AdminEventDetail } from '@charity/shared';
 import { requestError } from './admin-feedback';
+/**
+ * Per-event registration roster with name filtering and a ticket total; cancels stale requests when the event changes.
+ */
 @Component({
   selector: 'hh-event-registrations',
   imports: [DatePipe, FormsModule, RouterLink],

@@ -13,6 +13,11 @@ export type WeatherState =
   | { status: 'unavailable' | 'error'; message: string }
   | { status: 'ready'; date: string; condition: string; low: number; high: number };
 
+/**
+ * Convert an instant into a Brisbane calendar date, independent of the browser timezone.
+ * @param date - Valid JavaScript Date to format.
+ * @returns Calendar date in YYYY-MM-DD form.
+ */
 export function brisbaneDay(date: Date): string {
   const parts = new Intl.DateTimeFormat('en-AU', {
     timeZone: 'Australia/Brisbane',
@@ -63,6 +68,13 @@ function record(value: unknown): Record<string, unknown> {
     ? (value as Record<string, unknown>)
     : {};
 }
+/**
+ * Validate Open-Meteo daily arrays and extract the requested event-day forecast.
+ * @param body - Untrusted JSON response from the weather provider.
+ * @param date - Brisbane date key in YYYY-MM-DD form.
+ * @returns Ready weather or an unavailable state when the requested day is absent.
+ * @throws Error when response arrays, Celsius units or selected values are invalid.
+ */
 export function readForecast(body: unknown, date: string): WeatherState {
   const response = record(body),
     daily = record(response['daily']);
@@ -113,6 +125,11 @@ export function readForecast(body: unknown, date: string): WeatherState {
 export class EventWeatherApi {
   private readonly http = inject(HttpClient);
   private readonly now = inject(WEATHER_NOW);
+  /**
+   * Load weather only for valid coordinates and dates from today through the next 15 Brisbane days.
+   * @param event - Event coordinates and an ISO timestamp with an explicit timezone.
+   * @returns Lazy stream of loading/ready/unavailable/error states; timeout or network failure becomes a UI error after at most 10 seconds.
+   */
   load(event: WeatherEvent): Observable<WeatherState> {
     return defer(() => {
       const latitude = coordinate(event.latitude, 90),

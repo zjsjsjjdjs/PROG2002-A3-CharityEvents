@@ -13,6 +13,12 @@ function origin(value, name) {
       parsed.pathname !== '/' || parsed.search || parsed.hash) throw new Error(name + ' must be an HTTP(S) origin without a path or credentials.');
   return parsed.origin;
 }
+/**
+ * Read and validate runtime settings; production requires HTTPS and explicit admin/database settings.
+ * @param {Object<string, string|undefined>} [env=process.env] - Environment variable map.
+ * @returns {object} Normalized server, origin, administrator and database settings.
+ * @throws {Error} When credentials, origins or numeric ranges are inconsistent.
+ */
 function readConfig(env = process.env) {
   const production = env.NODE_ENV === 'production';
   const publicOrigin = env.PUBLIC_ORIGIN ? origin(env.PUBLIC_ORIGIN,'PUBLIC_ORIGIN') : '';

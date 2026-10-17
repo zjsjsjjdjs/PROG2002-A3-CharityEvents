@@ -11,6 +11,9 @@ import {
 import { AdminFeedback, requestError } from './admin-feedback';
 
 type Action = 'suspend' | 'resume' | 'delete';
+/**
+ * Reusable row actions with confirmation, in-flight locking and server-authoritative registration protection.
+ */
 @Component({
   selector: 'hh-event-actions',
   imports: [RouterLink],

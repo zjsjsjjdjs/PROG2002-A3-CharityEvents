@@ -4,6 +4,13 @@ const path = require("node:path");
 const fs = require("node:fs");
 const { config } = require("./config");
 const { adminSessions } = require("./admin-session");
+/**
+ * Check that a built Angular entry point exists and has the expected deployment base.
+ * @param {string} directory - Path to the browser build directory.
+ * @param {string} baseHref - Expected base URL (/ or /admin/).
+ * @returns {void}
+ * @throws {Error} When index.html is missing or its base href does not match.
+ */
 function checkBuild(directory, baseHref) {
   const index = path.join(directory, "index.html");
   if (!fs.existsSync(index))
@@ -18,6 +25,12 @@ function checkBuild(directory, baseHref) {
       "Incorrect Angular base href; expected " + baseHref + " in " + index,
     );
 }
+/**
+ * Serve a browser build with SPA route fallback; missing asset/private paths return 404.
+ * @param {string} directory - Absolute build directory.
+ * @param {boolean} [privateFiles=false] - Apply no-store to all admin assets.
+ * @returns {import("express").Router} Static assets and client-side route middleware.
+ */
 function spa(directory, privateFiles = false) {
   const router = express.Router();
   router.use(
@@ -49,6 +62,12 @@ function spa(directory, privateFiles = false) {
   });
   return router;
 }
+/**
+ * Assemble the same-origin public Angular app, protected admin app and existing REST API.
+ * @param {object} [options={}] - Optional config, publicDir, adminDir and API overrides for testing/hosting.
+ * @returns {import("express").Express} Express app; the caller owns listening and shutdown.
+ * @throws {Error} When either browser build is missing or has an incorrect base href.
+ */
 function createAngularServer(options = {}) {
   const settings = options.config || config;
   const publicDir = path.resolve(

@@ -13,6 +13,11 @@ const escape = (value) =>
         ch
       ],
   );
+/**
+ * Restrict post-login navigation to a local admin path and exclude login/logout loops.
+ * @param {unknown} value - Untrusted returnTo query or form value.
+ * @returns {string} Sanitized admin path/query, or /admin/ as the safe default.
+ */
 function safeReturn(value) {
   if (
     typeof value !== "string" ||
@@ -28,6 +33,12 @@ function safeReturn(value) {
     return "/admin/";
   return parsed.pathname + parsed.search;
 }
+/**
+ * Create in-memory admin sessions, login throttling and same-origin middleware.
+ * Sessions expire after one hour and are lost on process restart. Passwords remain server-side.
+ * @param {object} config - Validated runtime configuration from readConfig.
+ * @returns {object} Login/logout router plus protect(isApi) and sameOrigin middleware.
+ */
 function adminSessions(config) {
   const sessions = new Map(),
     attempts = new Map();
