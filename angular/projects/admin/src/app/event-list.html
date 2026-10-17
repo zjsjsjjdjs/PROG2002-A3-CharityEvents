@@ -1,13 +1,13 @@
 <section aria-labelledby="list-title">
-  <div class="page-heading">
+  <div class="admin-heading">
     <div>
-      <p class="eyebrow">Community events</p>
-      <h1 id="list-title">All events</h1>
+      <p class="eyebrow">Harbour Hope / Administration</p>
+      <h1 id="list-title">Manage events</h1>
       <p class="muted">
-        Manage upcoming, past and suspended events. Times are shown in Brisbane (UTC+10).
+        Keep your community informed, from the first invitation to the final fundraiser.
       </p>
     </div>
-    <a class="button" routerLink="/events/new">Create event</a>
+    <a class="admin-button" routerLink="/events/new">+ New event</a>
   </div>
   @if (feedback.notice()) {
     <div class="notice success" role="status">
@@ -21,105 +21,123 @@
       </button>
     </div>
   }
-  <div class="filter-bar">
-    <label
-      >Find an event<input
-        type="search"
-        [disabled]="mutating()"
-        [ngModel]="query()"
-        (ngModelChange)="query.set($event)"
-        placeholder="Name, place or category"
-    /></label>
-    <div>
-      <label for="status-filter">Status</label
-      ><select
-        [disabled]="mutating()"
-        id="status-filter"
-        [ngModel]="status()"
-        (ngModelChange)="status.set($event)"
-      >
-        <option value="">All statuses</option>
-        <option>Active</option>
-        <option>Past</option>
-        <option>Suspended</option>
-      </select>
-    </div>
-    <button class="secondary" (click)="clear()" [disabled]="mutating()">Clear filters</button
-    ><button class="secondary" (click)="load()" [disabled]="loading() || mutating()">
-      Refresh
-    </button>
-  </div>
-  @if (loading()) {
-    <p class="notice" role="status">Loading events…</p>
-  } @else if (error()) {
-    <div class="notice error" role="alert">
-      <p>{{ error() }}</p>
-      <button (click)="load()">Retry</button>
-    </div>
-  } @else {
-    <p class="result-count" role="status">{{ visible().length }} of {{ events().length }} events</p>
-    @if (!events().length) {
-      <div class="empty">
-        <h2>No events yet</h2>
-        <p>Create your first community event.</p>
-        <a routerLink="/events/new">Create event</a>
+  <section class="admin-workspace" aria-label="Event directory">
+    <div class="admin-toolbar">
+      <label
+        >Find an event<input
+          type="search"
+          [disabled]="mutating()"
+          [ngModel]="query()"
+          (ngModelChange)="query.set($event)"
+          placeholder="Search name, location or category"
+      /></label>
+      <div class="filter-status">
+        <label for="status-filter">Status</label
+        ><select
+          [disabled]="mutating()"
+          id="status-filter"
+          [ngModel]="status()"
+          (ngModelChange)="status.set($event)"
+        >
+          <option value="">All statuses</option>
+          <option>Active</option>
+          <option>Past</option>
+          <option>Suspended</option>
+        </select>
       </div>
-    } @else if (!visible().length) {
-      <div class="empty">
-        <h2>No matching events</h2>
-        <p>Try another search or clear your filters.</p>
-        <button class="secondary" (click)="clear()" [disabled]="mutating()">Clear filters</button>
+      <div class="filter-buttons">
+        <button class="secondary" (click)="clear()" [disabled]="mutating()">Clear filters</button
+        ><button class="secondary" (click)="load()" [disabled]="loading() || mutating()">
+          Refresh
+        </button>
+      </div>
+    </div>
+    @if (loading()) {
+      <p class="notice" role="status">Loading events…</p>
+    } @else if (error()) {
+      <div class="notice error" role="alert">
+        <p>{{ error() }}</p>
+        <button (click)="load()">Retry</button>
       </div>
     } @else {
-      <div class="table-wrap" tabindex="0" role="region" aria-label="Events table">
-        <table class="events-table">
-          <thead>
-            <tr>
-              <th scope="col">Event</th>
-              <th scope="col">Brisbane date &amp; time</th>
-              <th scope="col">Status</th>
-              <th scope="col">Ticket</th>
-              <th scope="col">Registrations</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (event of visible(); track event.event_id) {
+      <p class="result-count" role="status">
+        {{ visible().length }} of {{ events().length }} events
+      </p>
+      @if (!events().length) {
+        <div class="empty">
+          <h2>No events yet</h2>
+          <p>Create your first community event.</p>
+          <a routerLink="/events/new">Create event</a>
+        </div>
+      } @else if (!visible().length) {
+        <div class="empty">
+          <h2>No matching events</h2>
+          <p>Try another search or clear your filters.</p>
+          <button class="secondary" (click)="clear()" [disabled]="mutating()">Clear filters</button>
+        </div>
+      } @else {
+        <div class="admin-table-wrap" tabindex="0" role="region" aria-label="Events table">
+          <table class="admin-table events-table">
+            <caption class="sr-only">
+              All charity events and management actions
+            </caption>
+            <thead>
               <tr>
-                <td>
-                  <strong>{{ event.name }}</strong
-                  ><small>{{ event.category_name }} · {{ event.location }}</small>
-                </td>
-                <td>{{ event.event_datetime | date: 'dd MMM yyyy, HH:mm' : '+1000' }}</td>
-                <td>
-                  <span
-                    class="status"
-                    [class.suspended]="event.display_status === 'Suspended'"
-                    [class.past]="event.display_status === 'Past'"
-                    >{{ event.display_status }}</span
-                  >
-                </td>
-                <td>{{ event.ticket_price | currency: 'AUD' : 'symbol' : '1.2-2' }}</td>
-                <td>
-                  <a
-                    [routerLink]="['/events', event.event_id, 'registrations']"
-                    [attr.aria-label]="'View registrations for ' + event.name"
-                    >{{ event.registration_count }} registrations</a
-                  >
-                </td>
-                <td class="actions-cell">
-                  <hh-event-actions
-                    [event]="event"
-                    [locked]="mutating()"
-                    (working)="mutating.set($event)"
-                    (changed)="load()"
-                  />
-                </td>
+                <th scope="col">Event</th>
+                <th scope="col">Date · Brisbane</th>
+                <th scope="col">Status</th>
+                <th scope="col">Registrations</th>
+                <th scope="col">Actions</th>
               </tr>
-            }
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              @for (event of visible(); track event.event_id) {
+                <tr>
+                  <td>
+                    <strong class="event-name">{{ event.name }}</strong
+                    ><small>{{ event.category_name }} · {{ event.location }}</small>
+                    <small
+                      >{{ event.ticket_price | currency: 'AUD' : 'symbol' : '1.2-2' }} per
+                      ticket</small
+                    >
+                  </td>
+                  <td class="event-time">
+                    {{ event.event_datetime | date: 'd MMM yyyy, h:mm a' : '+1000' }}
+                  </td>
+                  <td>
+                    <span
+                      class="status-pill"
+                      [class.suspended]="event.display_status === 'Suspended'"
+                      [class.past]="event.display_status === 'Past'"
+                      >{{ event.display_status }}</span
+                    >
+                  </td>
+                  <td>
+                    <a
+                      [routerLink]="['/events', event.event_id, 'registrations']"
+                      class="registration-count"
+                      [attr.aria-label]="'View registrations for ' + event.name"
+                      >{{ event.registration_count }}</a
+                    >
+                  </td>
+                  <td class="actions-cell">
+                    <hh-event-actions
+                      [event]="event"
+                      [locked]="mutating()"
+                      (working)="mutating.set($event)"
+                      (changed)="load()"
+                    />
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
     }
-  }
+  </section>
+  <p class="admin-footnote">
+    Past is based on the Brisbane calendar date. Suspended events stay hidden from the public
+    website.
+  </p>
 </section>

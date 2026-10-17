@@ -1,0 +1,238 @@
+/* Angular controls and states that were not present in the legacy admin. */
+.admin-header nav {
+  align-items: center;
+  justify-content: flex-end;
+}
+.admin-header .session-tools {
+  margin: 0;
+}
+.admin-header .session-tools button {
+  font: inherit;
+  padding: 0;
+  color: var(--harbour);
+  background: transparent;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  cursor: pointer;
+}
+.admin-header :focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 3px;
+}
+.admin-header nav a[aria-current='page'] {
+  text-decoration-thickness: 2px;
+}
+.admin-main {
+  min-height: 70vh;
+}
+.admin-main h1 {
+  font:
+    700 clamp(2rem, 4vw, 3rem)/1.15 Georgia,
+    serif;
+  letter-spacing: -1px;
+}
+.admin-main .muted,
+.admin-main small {
+  color: var(--muted);
+}
+.admin-main button,
+.admin-main .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border: 1px solid var(--harbour);
+  border-radius: 6px;
+  background: var(--harbour);
+  color: white;
+  font:
+    700 0.9rem/1.4 Arial,
+    sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+.admin-main button.secondary {
+  background: white;
+  color: var(--harbour);
+}
+.admin-main button.danger {
+  background: #fff4f2;
+  border-color: #9d3c36;
+  color: #8d2d28;
+}
+.admin-main button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.admin-main .text-button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-decoration: underline;
+  padding: 0.2rem 0.5rem;
+}
+.admin-toolbar .filter-status {
+  display: grid;
+  gap: 6px;
+}
+.admin-toolbar .filter-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.result-count {
+  padding: 0 24px;
+  min-height: 26px;
+}
+.notice {
+  margin: 16px 0;
+  padding: 16px 24px;
+  background: #eff5f3;
+  border-left: 4px solid var(--harbour);
+}
+.admin-workspace > .notice {
+  margin: 16px 24px;
+}
+.notice p {
+  margin: 0 0 8px;
+}
+.notice.error,
+.field-error {
+  color: #a02c25;
+}
+.notice.error {
+  background: #fff4f2;
+  border-color: #a02c25;
+}
+.notice.success {
+  border-color: var(--leaf);
+}
+.empty {
+  padding: 12px 24px 24px;
+}
+.admin-table td {
+  vertical-align: middle;
+}
+.admin-table .event-name {
+  overflow-wrap: anywhere;
+}
+.admin-table .event-time {
+  min-width: 160px;
+}
+.admin-table .registration-count {
+  color: var(--ink);
+  text-underline-offset: 4px;
+}
+.admin-table .actions-cell {
+  width: 280px;
+  min-width: 250px;
+}
+.row-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.row-actions a {
+  font-weight: 700;
+  color: var(--harbour);
+}
+.actions-cell small {
+  white-space: normal;
+  max-width: 270px;
+  font-size: 0.78rem;
+}
+.action-confirmation {
+  margin-top: 12px;
+  padding: 12px;
+  background: #fff8e8;
+  border: 1px solid #dbc595;
+  border-radius: 6px;
+  max-width: 300px;
+}
+.action-confirmation p {
+  margin: 0 0 10px;
+}
+.action-confirmation button {
+  margin: 3px 4px 3px 0;
+}
+.form-grid > div {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+}
+.form-grid > div > label {
+  gap: 0;
+}
+.field-error {
+  font-size: 0.85rem;
+  margin: 0;
+}
+.field-error:empty {
+  display: none;
+}
+.admin-main [aria-invalid='true'] {
+  border-color: #a02c25;
+}
+.admin-form .form-grid small {
+  font-size: 0.8rem;
+}
+.admin-form .form-actions {
+  margin: 0;
+}
+.registration-panel .registration-description {
+  padding: 0 24px;
+}
+.registration-panel li {
+  overflow-wrap: anywhere;
+}
+.roster-body {
+  padding: 24px;
+}
+.roster-body .admin-table-wrap {
+  margin: 20px -24px -24px;
+}
+.back-link {
+  color: var(--harbour);
+  text-underline-offset: 4px;
+}
+.page-panel {
+  max-width: 920px;
+}
+.page-panel a {
+  color: var(--harbour);
+}
+@media (max-width: 700px) {
+  .admin-header nav {
+    justify-content: flex-start;
+    gap: 14px 20px;
+  }
+  .admin-toolbar .filter-status {
+    flex: 1;
+  }
+  .admin-toolbar .filter-buttons {
+    width: 100%;
+  }
+  .admin-table .actions-cell {
+    min-width: 250px;
+  }
+  .admin-main .admin-heading h1 {
+    overflow-wrap: anywhere;
+  }
+  .roster-body {
+    padding: 16px;
+  }
+  .roster-body .admin-table-wrap {
+    margin-inline: -16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

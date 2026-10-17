@@ -1,64 +1,75 @@
 <section aria-labelledby="registrations-title">
-  <a class="back-link" routerLink="/events">← All events</a>
-  <p class="eyebrow">Event management</p>
-  <h1 id="registrations-title">Registration list</h1>
-  <button class="secondary" (click)="load()" [disabled]="loading()">Refresh registrations</button>
-  @if (loading()) {
-    <p class="notice" role="status">Loading registrations…</p>
-  } @else if (error()) {
-    <div class="notice error" role="alert">
-      <p>{{ error() }}</p>
-      <button (click)="load()">Retry</button>
+  <div class="admin-heading">
+    <div>
+      <p class="eyebrow">Harbour Hope / Event management</p>
+      <h1 id="registrations-title">Registration list</h1>
     </div>
-  } @else if (event(); as item) {
-    <h2>{{ item.name }}</h2>
-    <p>
-      {{ item.event_datetime | date: 'dd MMM yyyy, HH:mm' : '+1000' }} · Brisbane (UTC+10) ·
-      {{ item.status === 'suspended' ? 'Suspended' : 'Active status' }}
-    </p>
-    <a [routerLink]="['/events', item.event_id, 'edit']">Edit this event</a>
-    <p class="notice" role="status">
-      {{ people().length }} registrations · {{ tickets() }} tickets
-    </p>
-    <p>
-      Names, ticket quantities and registration times are shown. Email addresses are not included.
-    </p>
-    @if (!people().length) {
-      <p class="empty">No registrations yet.</p>
-    } @else {
-      <label for="attendee-search">Find a participant</label
-      ><input
-        id="attendee-search"
-        type="search"
-        [ngModel]="query()"
-        (ngModelChange)="query.set($event)"
-      />
-      <p>{{ visible().length }} of {{ people().length }} registrations</p>
-      @if (!visible().length) {
-        <p>No matching participants.</p>
-        <button class="secondary" (click)="query.set('')">Clear search</button>
-      } @else {
-        <div class="table-wrap" tabindex="0" role="region" aria-label="Registration list">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Tickets</th>
-                <th scope="col">Registered (Brisbane)</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (person of visible(); track person.registration_id) {
-                <tr>
-                  <td>{{ person.name }}</td>
-                  <td>{{ person.tickets }}</td>
-                  <td>{{ person.registered_at | date: 'dd MMM yyyy, HH:mm' : '+1000' }}</td>
-                </tr>
-              }
-            </tbody>
-          </table>
+    <a class="back-link" routerLink="/events">← All events</a>
+  </div>
+  <div class="admin-workspace">
+    <div class="roster-body">
+      <button class="secondary" (click)="load()" [disabled]="loading()">
+        Refresh registrations
+      </button>
+      @if (loading()) {
+        <p class="notice" role="status">Loading registrations…</p>
+      } @else if (error()) {
+        <div class="notice error" role="alert">
+          <p>{{ error() }}</p>
+          <button (click)="load()">Retry</button>
         </div>
+      } @else if (event(); as item) {
+        <h2>{{ item.name }}</h2>
+        <p>
+          {{ item.event_datetime | date: 'dd MMM yyyy, HH:mm' : '+1000' }} · Brisbane (UTC+10) ·
+          {{ item.status === 'suspended' ? 'Suspended' : 'Active status' }}
+        </p>
+        <a [routerLink]="['/events', item.event_id, 'edit']">Edit this event</a>
+        <p class="notice" role="status">
+          {{ people().length }} registrations · {{ tickets() }} tickets
+        </p>
+        <p>
+          Names, ticket quantities and registration times are shown. Email addresses are not
+          included.
+        </p>
+        @if (!people().length) {
+          <p class="empty">No registrations yet.</p>
+        } @else {
+          <label for="attendee-search">Find a participant</label
+          ><input
+            id="attendee-search"
+            type="search"
+            [ngModel]="query()"
+            (ngModelChange)="query.set($event)"
+          />
+          <p>{{ visible().length }} of {{ people().length }} registrations</p>
+          @if (!visible().length) {
+            <p>No matching participants.</p>
+            <button class="secondary" (click)="query.set('')">Clear search</button>
+          } @else {
+            <div class="admin-table-wrap" tabindex="0" role="region" aria-label="Registration list">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Tickets</th>
+                    <th scope="col">Registered (Brisbane)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (person of visible(); track person.registration_id) {
+                    <tr>
+                      <td>{{ person.name }}</td>
+                      <td>{{ person.tickets }}</td>
+                      <td>{{ person.registered_at | date: 'dd MMM yyyy, HH:mm' : '+1000' }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        }
       }
-    }
-  }
+    </div>
+  </div>
 </section>

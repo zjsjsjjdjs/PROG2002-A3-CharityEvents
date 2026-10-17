@@ -83,14 +83,14 @@ async function close(server) {
     const pageErrors = [];
     page.on('pageerror', (e) => pageErrors.push(e.message));
     await page.goto(base + '/');
-    await page.getByRole('heading', { name: 'All events', exact: true }).waitFor();
+    await page.getByRole('heading', { name: 'Manage events', exact: true }).waitFor();
     await page.locator('tbody tr').first().waitFor();
     const initial = await page.locator('tbody tr').count();
     assert.equal(initial, 8);
     await page.getByLabel('Status', { exact: true }).selectOption('Suspended');
     assert.ok((await page.locator('tbody tr').count()) > 0);
     await page.getByRole('button', { name: 'Clear filters' }).click();
-    await page.getByRole('link', { name: 'Create event', exact: true }).click();
+    await page.getByRole('link', { name: '+ New event', exact: true }).click();
     await page.locator('#name').waitFor();
     await page.getByRole('button', { name: 'Create event', exact: true }).click();
     await page.getByText('Event name is required.', { exact: true }).waitFor();
