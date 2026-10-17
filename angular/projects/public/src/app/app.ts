@@ -1,5 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+/**
+ * Persistent public application shell: app.html defines Header, Nav, main/router-outlet and Footer once for all public routes.
+ */
 @Component({
   selector: 'app-root',
   imports: [RouterLink, RouterLinkActive, RouterOutlet],

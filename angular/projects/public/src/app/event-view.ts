@@ -4,6 +4,13 @@ import { Observable, catchError, map, of, startWith, timeout } from 'rxjs';
 
 export type LoadState<T> =
   { status: 'loading' } | { status: 'ready'; data: T } | { status: 'error'; message: string };
+/**
+ * Convert an HTTP stream into accessible loading, ready and error UI states.
+ * @param request - Observable request; cancelled when the consuming subscription ends.
+ * @param message - Fallback user-facing error message.
+ * @param missing - Optional replacement message for HTTP 404.
+ * @returns State stream with a 15-second request timeout and an initial loading state.
+ */
 export function loadState<T>(
   request: Observable<T>,
   message: string,
@@ -44,6 +51,12 @@ export class AudPipe implements PipeTransform {
     );
   }
 }
+/**
+ * Calculate the fundraising progress bar value.
+ * @param raised - Funds raised as a number or API decimal string.
+ * @param goal - Fundraising target as a number or API decimal string.
+ * @returns Percentage clamped to 0..100; zero for a non-positive goal.
+ */
 export function progressPercent(raised: string | number, goal: string | number): number {
   return Number(goal) > 0 ? Math.max(0, Math.min(100, (Number(raised) / Number(goal)) * 100)) : 0;
 }

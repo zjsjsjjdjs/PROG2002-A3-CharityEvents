@@ -6,6 +6,11 @@ export function nameValidator(control: AbstractControl): ValidationErrors | null
     ? { name: true }
     : null;
 }
+/**
+ * Check normalized email syntax against the server registration contract.
+ * @param control - Email form control; values are trimmed and lowercased for validation.
+ * @returns An email error or null. Server-side validation remains authoritative.
+ */
 export function emailValidator(control: AbstractControl): ValidationErrors | null {
   const email = String(control.value ?? '')
     .trim()
@@ -32,6 +37,11 @@ export function emailValidator(control: AbstractControl): ValidationErrors | nul
     ? null
     : { email: true };
 }
+/**
+ * Require a positive whole ticket count within the signed MySQL INT limit.
+ * @param control - Ticket-count form control.
+ * @returns A tickets error or null for integers from 1 to 2147483647.
+ */
 export function ticketsValidator(control: AbstractControl): ValidationErrors | null {
   const text = String(control.value ?? '').trim(),
     value = Number(text);

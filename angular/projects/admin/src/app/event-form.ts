@@ -21,6 +21,9 @@ import {
   type EventDraft,
   type FieldKey,
 } from './event-fields';
+/**
+ * Shared create/edit page with field validation, API lookup data, preserved registration records and focus on invalid input.
+ */
 @Component({
   selector: 'hh-event-form',
   imports: [ReactiveFormsModule, RouterLink, DatePipe],

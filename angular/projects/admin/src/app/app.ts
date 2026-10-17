@@ -1,6 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+/**
+ * Persistent management shell: Header, Nav, main/router-outlet and Footer are reused across all Angular admin routes.
+ */
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],

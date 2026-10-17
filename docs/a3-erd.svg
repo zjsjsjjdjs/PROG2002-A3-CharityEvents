@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1190" viewBox="0 0 1720 1190"><rect width="1720" height="1190" fill="#fbfaf5"/><style>text{font-family:Arial,sans-serif;fill:#17201d}.title{font-size:32px;font-weight:bold}.head{fill:white;font-size:22px;font-weight:bold}.field{font-size:17px}.note{font-size:20px}.edge{stroke:#0f4c5c;stroke-width:3;fill:none}</style>
+<text class="title" x="35" y="48">A3 Charity Events — Entity Relationship Diagram</text>
+<text class="note" x="35" y="82">Derived from database/a3-fresh-install.sql · PK primary key · FK foreign key · UQ unique</text>
+<rect x="35" y="140" width="475" height="232" rx="8" fill="white" stroke="#9aacaa"/>
+<rect x="35" y="140" width="475" height="45" rx="8" fill="#0f4c5c"/>
+<text class="head" x="51" y="170">organisations</text>
+<text class="field" x="51" y="212">organisation_id  INT  [PK]</text>
+<text class="field" x="51" y="241">name  VARCHAR(120)</text>
+<text class="field" x="51" y="270">mission  VARCHAR(500)</text>
+<text class="field" x="51" y="299">contact_email  VARCHAR(120)</text>
+<text class="field" x="51" y="328">contact_phone  VARCHAR(30)</text>
+<text class="field" x="51" y="357">website_url  VARCHAR(255)</text>
+<rect x="1210" y="140" width="475" height="145" rx="8" fill="white" stroke="#9aacaa"/>
+<rect x="1210" y="140" width="475" height="45" rx="8" fill="#0f4c5c"/>
+<text class="head" x="1226" y="170">categories</text>
+<text class="field" x="1226" y="212">category_id  INT  [PK]</text>
+<text class="field" x="1226" y="241">name  VARCHAR(80)  [UQ]</text>
+<text class="field" x="1226" y="270">description  VARCHAR(255)</text>
+<rect x="580" y="240" width="560" height="551" rx="8" fill="white" stroke="#9aacaa"/>
+<rect x="580" y="240" width="560" height="45" rx="8" fill="#0f4c5c"/>
+<text class="head" x="596" y="270">events</text>
+<text class="field" x="596" y="312">event_id  INT  [PK]</text>
+<text class="field" x="596" y="341">organisation_id  INT  [FK]</text>
+<text class="field" x="596" y="370">category_id  INT  [FK]</text>
+<text class="field" x="596" y="399">name  VARCHAR(150)</text>
+<text class="field" x="596" y="428">event_datetime  DATETIME</text>
+<text class="field" x="596" y="457">location  VARCHAR(180)</text>
+<text class="field" x="596" y="486">purpose  VARCHAR(255)</text>
+<text class="field" x="596" y="515">short_description  VARCHAR(300)</text>
+<text class="field" x="596" y="544">full_description  TEXT</text>
+<text class="field" x="596" y="573">ticket_price  DECIMAL(8, 2)</text>
+<text class="field" x="596" y="602">fundraising_goal  DECIMAL(10, 2)</text>
+<text class="field" x="596" y="631">current_progress  DECIMAL(10, 2)</text>
+<text class="field" x="596" y="660">status  ENUM(&#x27;active&#x27;, &#x27;suspended&#x27;)</text>
+<text class="field" x="596" y="689">latitude  DECIMAL(9, 6)</text>
+<text class="field" x="596" y="718">longitude  DECIMAL(9, 6)</text>
+<text class="field" x="596" y="747">created_at  TIMESTAMP</text>
+<text class="field" x="596" y="776">updated_at  TIMESTAMP</text>
+<rect x="580" y="870" width="560" height="232" rx="8" fill="white" stroke="#9aacaa"/>
+<rect x="580" y="870" width="560" height="45" rx="8" fill="#0f4c5c"/>
+<text class="head" x="596" y="900">registrations</text>
+<text class="field" x="596" y="942">registration_id  INT  [PK]</text>
+<text class="field" x="596" y="971">event_id  INT  [FK]</text>
+<text class="field" x="596" y="1000">name  VARCHAR(120)</text>
+<text class="field" x="596" y="1029">email  VARCHAR(254)</text>
+<text class="field" x="596" y="1058">registered_at  TIMESTAMP</text>
+<text class="field" x="596" y="1087">tickets  INT</text>
+<path class="edge" d="M510 220 H545 V325 H580"/><text class="note" x="517" y="207">1</text><text class="field" x="529" y="354">0..*</text>
+<path class="edge" d="M1210 220 H1170 V354 H1140"/><text class="note" x="1180" y="207">1</text><text class="field" x="1147" y="383">0..*</text>
+<path class="edge" d="M860 791 V870"/><text class="field" x="875" y="836">1</text><text class="field" x="875" y="862">0..*</text>
+<text class="note" x="35" y="520">Relationships</text><text class="field" x="35" y="558">Each event belongs to one organisation</text><text class="field" x="35" y="586">and one category.</text><text class="field" x="35" y="626">An event may have zero or many registrations.</text><text class="field" x="35" y="654">Each registration refers to one event.</text>
+<text class="note" x="1200" y="520">Registration constraints</text><text class="field" x="1200" y="558">UNIQUE (event_id, email)</text><text class="field" x="1200" y="586">Email comparison is case-insensitive.</text><text class="field" x="1200" y="626">ON DELETE RESTRICT</text><text class="field" x="1200" y="654">ON UPDATE RESTRICT</text><text class="field" x="1200" y="694">tickets &gt; 0; name/email must not be blank.</text>
+<text class="field" x="35" y="1140">No separate users table: registrant identity is stored on each registration. The same email can register for different events.</text><text class="field" x="35" y="1172">Admin accounts are environment/session configuration, not a database entity. Weather is retrieved externally and is not stored in these tables.</text></svg>

@@ -6,6 +6,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AdminEventsApi, type AdminEventSummary } from '@charity/shared';
 import { EventActions } from './event-actions';
 import { AdminFeedback, requestError } from './admin-feedback';
+/**
+ * Management event list with client-side name/location/category filtering and separate status filtering.
+ */
 @Component({
   selector: 'hh-event-list',
   imports: [RouterLink, FormsModule, CurrencyPipe, DatePipe, EventActions],
