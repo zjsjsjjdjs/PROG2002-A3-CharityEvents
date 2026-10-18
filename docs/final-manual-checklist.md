@@ -1,5 +1,7 @@
 # A3 最终手动验收清单
 
+Historical record: retained for its original stage. Current Angular deployment, online acceptance and delivery status are in [deployment](angular-cpanel-deployment.md), [acceptance](user2-angular-acceptance.md) and [final delivery](a3-delivery.md). Do not treat old pending items or HTML startup steps below as the final status.
+
 代码基线：26cb134，已通过 PR #12 合入。2026-10-07 自动化回归已通过；以下人工结果尚未提供，由实际测试者操作后填写。
 
 请在独立手测数据库中导入 database/a3-fresh-install.sql，配置 api/.env 后从项目根目录运行 npm.cmd start --prefix api。使用页面实际配置的端口；确认正在运行的服务已包含 26cb134 的修复，不能仅凭目录名判断版本。测试活动名统一以 FINAL-TEST 开头，便于识别。

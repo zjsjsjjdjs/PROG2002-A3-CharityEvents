@@ -1,13 +1,6 @@
 # Harbour Hope Angular foundation
 
-Based on M12-merged main (`ac81f5a`): two standalone Angular applications and shared
-source. Public home, search and event detail pages now use the existing API.
-Angular registration now uses its own reactive form. Admin list/create/edit pages
-are available from PR #16. Event-day weather and exceptional states are implemented
-locally; production deployment remains separate. See the
-[public-page migration notes](../docs/angular-public-pages.md) and
-[registration workflow](../docs/angular-registration.md) and
-[weather implementation and acceptance](../docs/angular-weather.md).
+Final application main is `61f293c` after PR #21. Both Angular applications are implemented: public browsing, registration and weather, plus protected activity management with suspension, deletion protection and registration views. Restored appearance retains Angular functionality. User2's cPanel deployment and manual core acceptance were confirmed on 17 October 2026; see [current deployment](../docs/angular-cpanel-deployment.md) and [acceptance](../docs/user2-angular-acceptance.md).
 
 ## Install and start
 
@@ -47,8 +40,7 @@ npm run start:admin
 The proxy preserves Host for existing same-origin admin checks. Use a local API
 in development mode with PUBLIC_ORIGIN unset or matching the preview origin.
 Do not change production admin protection for a preview. The shared service does
-not store passwords or inject Authorization; admin authentication UX is part of
-the admin migration. Never put database credentials in browser source.
+not store passwords or inject Authorization; production admin authentication is provided by the Express session wrapper at `/admin/login`. Never put database credentials in browser source.
 
 ## Ownership and extension points
 
@@ -90,9 +82,7 @@ npm run ng -- build admin --base-href /admin/
 
 Production hosting must return each app's index.html for its own client routes,
 while keeping `/api/**` under Express and preserving admin protection. The dev
-proxy is not included in production. cPanel configuration and authentication
-acceptance belong to deployment. Do not replace the live website with these
-preview screens; ng serve is for local development only.
+proxy is not included in production. Use the current cPanel guide for the production wrapper and verified account paths. ng serve is for local development only.
 
 ## Collaboration
 

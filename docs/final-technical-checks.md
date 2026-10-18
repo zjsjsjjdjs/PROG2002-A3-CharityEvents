@@ -1,5 +1,7 @@
 # A3 final technical verification
 
+Historical record: retained for its original stage. Current Angular deployment, online acceptance and delivery status are in [deployment](angular-cpanel-deployment.md), [acceptance](user2-angular-acceptance.md) and [final delivery](a3-delivery.md). Do not treat old pending items or HTML startup steps below as the final status.
+
 Candidate code: 26cb134, checked 2026-10-07.
 Runtime: Node.js v24.10.0; MariaDB 10.4.32; installed Chrome; Windows.
 

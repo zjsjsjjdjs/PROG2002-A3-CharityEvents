@@ -6,9 +6,7 @@ Ouyang's M02–M05 work. Their original Git commits remain in this branch.
 
 ## Open and use the backend
 
-Start the API with `npm start --prefix api`. Open `/admin.html` on the same
-host and port as the public website. The development default port is 3000;
-the prepared isolated acceptance environment uses 3001.
+Build and start the Angular application using the root README. With APP_FRONTEND=angular, open `/admin/` on the same host as the public website. The development default port is 3000. The old `/admin.html` link redirects to Angular administration.
 
 1. Find an event by name/location or filter Active, Past or Suspended.
 2. Choose **New event**, select a category/organisation and complete the form.
@@ -26,14 +24,12 @@ the prepared isolated acceptance environment uses 3001.
 Past is a date label, not a third database status. An active event on a date before
 today in Brisbane is labelled Past. A suspended event is always labelled Suspended.
 
-In production the browser prompts for the administrator username/password before
-opening the backend. Each cPanel owner supplies their own credentials through
-environment variables; no real credentials are shipped in source code.
+Production administration uses `/admin/login` and a server-side session cookie. Sign out invalidates the session. Each cPanel owner supplies credentials privately through environment variables; no real credentials are shipped in source. In-memory sessions expire after one hour and are cleared by restart.
 
 ## Backend API
 
 The base path is `/api/admin`. Admin requests use the same origin as the admin UI.
-Production requires HTTP Basic authentication over HTTPS.
+The Angular login supplies a protected session cookie over HTTPS. Explicit HTTP Basic clients are retained for compatibility; neither mechanism puts passwords into Angular source or browser storage.
 
 | Method | Path | Response |
 | --- | --- | --- |
@@ -42,6 +38,7 @@ Production requires HTTP Basic authentication over HTTPS.
 | GET | /events/:id | Event object with all editable fields and registrations |
 | POST | /events | 201 with message and event_id |
 | PUT | /events/:id | 200 with message and event_id |
+| PATCH | /events/:id/status | 200 with message and event_id; body contains only status active or suspended |
 | DELETE | /events/:id | 200 with message and event_id, or 409 if registrations exist |
 
 The edit detail endpoint reuses the registration module's
@@ -101,7 +98,9 @@ last line of protection. No route cascades registration deletion.
 - M11 time serialization is integrated in commit 3972153. The admin/deployment hooks and original contributors remain intact.
 - Follow-up fixes in 26cb134 preserve list error/loading states, reject ambiguous editor IDs and preflight test setup before database access.
 
-## Personal contribution and delivery
+## Historical contribution and delivery record
+
+For current Angular deployment and manual acceptance see [user2 acceptance](user2-angular-acceptance.md) and [final delivery](a3-delivery.md). The following paragraph records the earlier M12 stage.
 
 Tianyi's module commits cover directory/navigation, create, edit, delete and
 deployment configuration. M09 tests exercise public registration followed by admin

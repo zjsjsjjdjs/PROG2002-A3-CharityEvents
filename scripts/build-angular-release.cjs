@@ -127,7 +127,7 @@ CORS_ALLOWED_ORIGINS=
 fs.writeFileSync(path.join(release, "api/.env.example"), example);
 fs.writeFileSync(
   path.join(release, "INSTALL.txt"),
-  "Upload this whole directory outside public_html. Create an empty database and import database/a3-fresh-install.sql. Register api as the Node application root, app.js as startup file, and domain URL /. Set variables using api/.env.example as a guide. Run npm ci --omit=dev inside api. Configure HTTPS. See docs/angular-cpanel-deployment.md. This is a candidate until both personal cPanel deployments and final weather integration are verified.\n",
+  "For a fresh installation, use this portable api/frontend/clientside layout outside public_html and import the supplied SQL only into an empty database. For an existing cPanel application, back up files/configuration/data and KEEP its registered application root; do not point the panel at an already populated folder. Update the existing API directory and use absolute ANGULAR_PUBLIC_DIR and ANGULAR_ADMIN_DIR paths for separate frontend builds. Preserve DB credentials and existing data. Set APP_FRONTEND=angular, install API production dependencies and restart. Read docs/angular-cpanel-deployment.md for the actual user2 procedure and limitations. This generated candidate is not itself evidence of a new online acceptance run.\n",
 );
 const manifest = {
   sourceCommit: revision,

@@ -14,7 +14,8 @@ if (!fs.existsSync(path.join(candidate, "manifest.json")))
     "Pass a generated release directory containing manifest.json.",
   );
 const release = path.join(candidate, "release"),
-  output = path.join(root, "submission/angular-deployment-qa");
+  output = path.join(candidate, "qa");
+const manifest = JSON.parse(fs.readFileSync(path.join(candidate, "manifest.json"), "utf8"));
 async function main() {
   const env = dotenv.parse(fs.readFileSync(path.join(root, "api/.env")));
   const db =
@@ -179,7 +180,7 @@ async function main() {
         exact: true,
       }),
     ).toBeVisible();
-    // Exercise the locally reviewed PR #17 Angular registration workflow.
+    // Exercise the merged public Angular registration workflow.
     await page
       .getByRole("link", { name: "Register for this event", exact: false })
       .click();
@@ -304,6 +305,8 @@ async function main() {
         {
           time: new Date().toISOString(),
           release: candidate,
+          sourceCommit: manifest.sourceCommit,
+          trackedChanges: manifest.trackedChanges,
           result: "passed",
           checks: [
             "packaged startup",
@@ -321,7 +324,7 @@ async function main() {
             "private files blocked",
           ],
           limitation:
-            "Local HTTP acceptance; live cPanel HTTPS, weather and live cPanel HTTPS remain pending; PR #17 was integrated locally for this review.",
+            "Local HTTP acceptance of this exact candidate; real cPanel HTTPS, hosting configuration and live weather remain pending. Public weather code is included; this CRUD scenario uses an event beyond the forecast window.",
         },
         null,
         2,

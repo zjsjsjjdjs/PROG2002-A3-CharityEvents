@@ -1,5 +1,7 @@
 # M12 delivery assembly
 
+Historical record: retained for its original stage. Current Angular deployment, online acceptance and delivery status are in [deployment](angular-cpanel-deployment.md), [acceptance](user2-angular-acceptance.md) and [final delivery](a3-delivery.md). Do not treat old pending items or HTML startup steps below as the final status.
+
 Prepared by Hongke Ouyang (user1, GitHub Sakitam630), 2026-10-14.
 Team repository: [PROG2002-A3-CharityEvents](https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents).
 
