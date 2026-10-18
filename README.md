@@ -6,9 +6,9 @@ deleted; updates and suspension preserve their registration records.
 
 - user1: Hongke Ouyang <2838356314@qq.com> — registration, integration and delivery assembly.
 - user2: Tianyi Li <id_09188388@foxmail.com> — original A2 author, administration and deployment configuration.
-- A2 source: https://github.com/zjsjsjjdjs/prog2002-charity-events
+- A2 source: https://github.com/zjsjsjjdjs/prog2002-charity-events (public).
 - A2 baseline: 5c800ac884e4dc4c50e2ca01b87347416c116f0d. Original commits and authors are retained.
-- A3 team repository: [PROG2002-A3-CharityEvents](https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents) (private).
+- A3 team repository: [PROG2002-A3-CharityEvents](https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents) (public).
 - GitHub accounts: user1 Sakitam630; user2/repository owner zjsjsjjdjs.
 - M02-M11 and follow-up fix 26cb134 are merged into main through PR #12. M12 is delivered as a separate documentation PR.
 
