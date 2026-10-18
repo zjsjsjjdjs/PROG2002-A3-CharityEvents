@@ -1,0 +1,9 @@
+{
+  "commit": "eae1b253e401a21d9c75ff44c36216b1e06ff44c",
+  "baseHref": "/",
+  "apiPrefix": "/api",
+  "files": 3,
+  "sha256": "255dded1b6f424b821ba743a195c91971993d2d58978b2bfa9a4c34496b38a31",
+  "archive": "E:\\workplace\\user1-A3\\submission\\angular-foundation-worktree\\submission\\angular-public-registration-local.zip",
+  "deployment": "Local production build only; cPanel routing and API configuration must match. No upload performed."
+}

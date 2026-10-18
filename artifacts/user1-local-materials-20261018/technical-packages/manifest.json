@@ -1,0 +1,83 @@
+{
+  "createdAt": "2026-10-17T14:57:37.250724+00:00",
+  "sourceCommit": "df0d5e6f21f7c171a2681fe86d182240ae4cfcfb",
+  "sourceBranch": "codex/user1-a2-feedback-fixes",
+  "remoteMainAtPackaging": "61f293caea27da8b09c1f58f0793a1e7317714c6",
+  "pullRequest": 22,
+  "pullRequestMergedAtPackaging": false,
+  "schoolUsername": "houyan10",
+  "scope": "technical-only; student-edited review documents and personal submission material excluded",
+  "node": "v24.19.0",
+  "checks": {
+    "productionBuilds": "public/admin passed",
+    "frontendMatchesPreviouslyReviewedBuild": [
+      {
+        "app": "public",
+        "base": "/",
+        "assetsAvailable": true,
+        "matchesReviewedBuildByteForByte": true,
+        "files": {
+          "3rdpartylicenses.txt": "1a6ade17e53ff0b2eacf4719253032e605e14cfdaa4c0d7b32d5e1ecca01c94c",
+          "index.html": "29719ccc37e29e8f8b5f01c2de11f49b680c480132ddf8a484dad941601358ba",
+          "main-WUE7RZMO.js": "03e8593982276bb27812be44ebd8dc9fd4af08272b6be1d897be6fec5b0b700d",
+          "styles-F6UPIFJF.css": "88fdd08fc97efd56c61e506a4553fd0a90bf5dffbd8a109b5ec53121bb482c5b"
+        }
+      },
+      {
+        "app": "admin",
+        "base": "/admin/",
+        "assetsAvailable": true,
+        "matchesReviewedBuildByteForByte": true,
+        "files": {
+          "3rdpartylicenses.txt": "1a6ade17e53ff0b2eacf4719253032e605e14cfdaa4c0d7b32d5e1ecca01c94c",
+          "index.html": "168c2a00a9c8f9d518c0da35548f6e290bbccddf6b4d5a522fbadf9b2f434e7d",
+          "main-OK6VEMMB.js": "6042eb7559de2b95a1c416b44b66dd21c5c23264ff3f1fd24964b4d2ab07185f",
+          "styles-RJBLR4YC.css": "a9518e02bfb48066b74ef53380376a5efb16eb479f893171b426e54732da9e6f"
+        }
+      }
+    ],
+    "trackedTechnicalSourceFilesCovered": 136,
+    "zipIntegrity": "all entries CRC and SHA256 passed",
+    "protectedDocuments": "unchanged",
+    "fullApplicationTestsRerun": false,
+    "uploaded": false,
+    "deployed": false
+  },
+  "archives": [
+    {
+      "path": "01-代码提交包/houyan10A3-clientside.zip",
+      "bytes": 219967,
+      "sha256": "68a5c386dd04d0266000b072a97f8456bb8325d35f8dae3ee5926f63e7a89bda",
+      "files": 53,
+      "integrity": "passed"
+    },
+    {
+      "path": "01-代码提交包/houyan10A3-adminside.zip",
+      "bytes": 217859,
+      "sha256": "64e6d27fb16ee140d91d4e276687046e1a97b607511b5531dc0e307bba971e48",
+      "files": 50,
+      "integrity": "passed"
+    },
+    {
+      "path": "01-代码提交包/houyan10A3-api.zip",
+      "bytes": 152148,
+      "sha256": "39be57a02a6f2293e801c4148cb2016094b326968c3eacab2c9965dfdc583549",
+      "files": 79,
+      "integrity": "passed"
+    },
+    {
+      "path": "02-cPanel备用部署包/complete-cpanel-release.zip",
+      "bytes": 271605,
+      "sha256": "126cf9a9ec03525abe2fd8f3fb9ec58e029c147b7b337e2c9d0272162f11695f",
+      "files": 26,
+      "integrity": "passed"
+    },
+    {
+      "path": "03-技术附件/technical-attachments.zip",
+      "bytes": 2372011,
+      "sha256": "5b1ce8bdd053c5db9e92776451496368a06240b3d5f8c04a6e543b4507433c2a",
+      "files": 49,
+      "integrity": "passed"
+    }
+  ]
+}

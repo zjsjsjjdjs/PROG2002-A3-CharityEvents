@@ -1,0 +1,27 @@
+{
+  "passed": 21,
+  "checks": [
+    "Home loads upcoming events from real Express and database",
+    "Combined date/location/category filters survive direct reload",
+    "Detail shows Brisbane wall time on a UTC+8 browser and restores search",
+    "Empty results and clear filters recover correctly",
+    "Failed search hides stale results and retry recovers",
+    "Suspended and invalid events cannot expose a registration action",
+    "Angular form prevents invalid submissions before database writes",
+    "Angular registration confirms and refreshes real attendee data, retaining search filters",
+    "Duplicate email with changed case/spacing is rejected without losing input",
+    "The same email can register for a different event",
+    "Network failure keeps input and a deliberate retry can succeed",
+    "Suspension between loading and submit blocks registration safely",
+    "Legacy registration bookmarks open Angular; duplicate IDs are rejected",
+    "All four public pages fit a 390 px viewport",
+    "Restored mobile menu opens, navigates to home anchors and closes after routing",
+    "Weather loading is independent; event-day forecast, Celsius and attribution render",
+    "Failed weather does not block registration; deliberate retry recovers",
+    "Malformed and missing-day provider data never show fabricated temperatures",
+    "Missing coordinates, distant and past dates avoid unnecessary provider requests",
+    "Weather success and retry states fit mobile screens",
+    "No unhandled browser page errors"
+  ],
+  "pageErrors": []
+}

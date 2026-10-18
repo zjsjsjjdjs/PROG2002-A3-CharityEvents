@@ -1,0 +1,49 @@
+{
+  "sourceCommit": "82e14e7bdb81e521d1865568154c0c543dd4622e",
+  "branch": "user1-angular-local-delivery",
+  "builtAtUtc": "2026-10-15T14:21:26.1184245Z",
+  "node": "24.19.0",
+  "publicBaseHref": "/",
+  "apiBase": "/api",
+  "uploaded": false,
+  "deployed": false,
+  "archives": [
+    {
+      "name": "user1-public-built.zip",
+      "sha256": "45472085AEFB5A385095560F3FF8562AC9A3765CE6263AF313F7FA642FB946FB",
+      "bytes": 118880
+    },
+    {
+      "name": "A3-complete-source.zip",
+      "sha256": "8954135FD039EDBAD80DEF7D39F65335DAB429998527C6CBB8077ECAA6623F0E",
+      "bytes": 277496
+    },
+    {
+      "name": "A3-api-database-source.zip",
+      "sha256": "53CD69DDDB6164FFD4C43898BAC9C13D5BF317614342EEA7BE013A6B73B973A9",
+      "bytes": 54144
+    }
+  ],
+  "publicFiles": [
+    {
+      "path": "3rdpartylicenses.txt",
+      "bytes": 18181,
+      "sha256": "1A6ADE17E53FF0B2EACF4719253032E605E14CFDAA4C0D7B32D5E1ECCA01C94C"
+    },
+    {
+      "path": "index.html",
+      "bytes": 977,
+      "sha256": "ED6FE7609CDA6D58710348B43B5AB48FD15B76E7B90B35BE9D0E0FEFE406D049"
+    },
+    {
+      "path": "main-JN7URAKK.js",
+      "bytes": 360951,
+      "sha256": "3BC0139EA686801AD66F162BFAADBA52783918B370968598CEFA7DE347DF607D"
+    },
+    {
+      "path": "styles-3H5CMAQN.css",
+      "bytes": 8300,
+      "sha256": "048E4F6274225D876A613AF83DA2496BEE13E36D49A8435600F1ED4BB5F8FD52"
+    }
+  ]
+}

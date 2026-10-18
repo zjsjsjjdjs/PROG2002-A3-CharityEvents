@@ -1,0 +1,23 @@
+{
+  "result": "passed",
+  "files": [
+    "angular/projects/admin/src/app/app.ts",
+    "angular/projects/admin/src/app/event-actions.ts",
+    "angular/projects/admin/src/app/event-form.ts",
+    "angular/projects/admin/src/app/event-list.ts",
+    "angular/projects/admin/src/app/event-registrations.ts",
+    "angular/projects/public/src/app/app.ts",
+    "angular/projects/public/src/app/event-view.ts",
+    "angular/projects/public/src/app/registration-validation.ts",
+    "angular/projects/public/src/app/registration.ts",
+    "angular/projects/public/src/app/weather.ts",
+    "angular/projects/shared/src/lib/api.ts",
+    "api/admin-session.js",
+    "api/admin_db.js",
+    "api/angular-server.js",
+    "api/config.js",
+    "api/event_db.js",
+    "api/registration.js"
+  ],
+  "check": "TypeScript lexer: every non-comment/non-whitespace token unchanged; no parse errors"
+}

@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "8d4b71cb36b1a479a5fdcdc28dd32584ef7aea19",
+  "runtime": "v18.20.8 win-x64",
+  "timeUTC": "2026-10-16T11:52:10Z",
+  "checks": [
+    "Actual app.js starts on Node 18.20.8 in production mode and serves public build",
+    "Actual public deep routes return built Angular HTML",
+    "Public index references available JS/CSS assets",
+    "Actual admin build/assets protected before login and served after valid login",
+    "Private/missing paths rejected and logout invalidates session"
+  ],
+  "limitations": [
+    "No live cPanel/Passenger or school database test",
+    "Smoke routes do not query a database; DB endpoint deliberately unavailable",
+    "Node hosting tests use fixture HTML and mock API; real startup smoke uses actual packaged files",
+    "npm reports dev-only Playwright Node >=20 engine warnings; dev dependencies omitted"
+  ]
+}

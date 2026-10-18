@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New event | Harbour Hope</title><link rel="stylesheet" href="assets/css/styles.css"><link rel="stylesheet" href="assets/css/admin.css">
+<script src="assets/js/admin-validation.js" defer></script><script src="assets/js/admin-event.js" defer></script></head>
+<body><header class="admin-header"><a class="brand" href="admin.html"><span class="brand-mark" aria-hidden="true">HH</span><span><span class="brand-name">Harbour Hope</span><span class="brand-subtitle">Event management</span></span></a><nav aria-label="Administration"><a href="admin.html">All events</a><a href="admin-event.html">New event</a><a href="index.html">Public website ↗</a></nav></header>
+<main class="admin-main"><div class="admin-heading"><div><p class="eyebrow">Harbour Hope / Event management</p><h1 id="form-title">New event</h1><p class="admin-muted">Tell your community what is happening and how they can help.</p></div><a href="admin.html">← All events</a></div>
+<form id="event-form" class="admin-form admin-workspace" novalidate>
+<p id="form-status" class="form-message" role="status" aria-live="polite">Loading categories and organisations…</p>
+<fieldset id="event-fields" disabled><legend>Event details</legend><div class="form-grid">
+<label class="full" for="name">Event name<input id="name" name="name" required maxlength="150"></label>
+<label for="category_id">Category<select id="category_id" name="category_id" aria-label="Category" required><option value="">Choose a category</option></select></label>
+<label for="organisation_id">Organisation<select id="organisation_id" name="organisation_id" aria-label="Organisation" required><option value="">Choose an organisation</option></select></label>
+<label for="event_datetime">Date and time · Brisbane<input id="event_datetime" name="event_datetime" type="datetime-local" step="1" min="1000-01-01T00:00" max="9999-12-31T23:59:59" required><small>All event times use Australia/Brisbane (UTC+10).</small></label>
+<label for="status">Visibility<select id="status" name="status" aria-label="Visibility"><option value="active">Active</option><option value="suspended">Suspended</option></select></label>
+<label class="full" for="location">Location<input id="location" name="location" required maxlength="180"></label>
+<label class="full" for="purpose">Fundraising purpose<input id="purpose" name="purpose" required maxlength="255"></label>
+<label class="full" for="short_description">Short description<textarea id="short_description" name="short_description" required maxlength="300" rows="2"></textarea></label>
+<label class="full" for="full_description">Full description<textarea id="full_description" name="full_description" required maxlength="16000" rows="5"></textarea></label>
+<label for="ticket_price">Ticket price · AUD<input id="ticket_price" name="ticket_price" type="number" min="0" max="999999.99" step=".01" value="0" required><small>Use 0 for free entry.</small></label>
+<label for="fundraising_goal">Fundraising goal · AUD<input id="fundraising_goal" name="fundraising_goal" type="number" min="0" max="99999999.99" step=".01" value="0" required></label>
+<label for="current_progress">Funds raised · AUD<input id="current_progress" name="current_progress" type="number" min="0" max="99999999.99" step=".01" value="0" required></label>
+<label for="latitude">Latitude · optional<input id="latitude" name="latitude" type="number" min="-90" max="90" step=".000001"></label>
+<label for="longitude">Longitude · optional<input id="longitude" name="longitude" type="number" min="-180" max="180" step=".000001"><small>Provide both coordinates or leave both blank.</small></label>
+</div></fieldset><div class="form-actions"><button id="save-event" class="admin-button" type="submit" disabled>Create event</button><a href="admin.html">Cancel</a><button id="retry-form" class="admin-button secondary" type="button" hidden>Retry loading</button></div></form>
+<section id="registrations" class="admin-form admin-workspace registration-panel" hidden><h2>Registrations</h2><p id="registration-summary" class="form-message"></p><ul id="registration-list"></ul></section>
+</main></body></html>

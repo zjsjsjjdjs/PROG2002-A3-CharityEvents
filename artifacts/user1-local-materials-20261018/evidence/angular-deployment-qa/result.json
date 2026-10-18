@@ -1,0 +1,21 @@
+{
+  "time": "2026-10-16T13:32:25.378Z",
+  "release": "E:\\workplace\\user1-A3\\submission\\angular-admin-appearance-worktree\\submission\\restored-candidate",
+  "result": "passed",
+  "checks": [
+    "packaged startup",
+    "public deep reload",
+    "admin sign in/out",
+    "cookie and API protection",
+    "create",
+    "Angular registration",
+    "roster",
+    "suspend/resume",
+    "edit preserves registrations",
+    "protected deletion",
+    "mobile",
+    "legacy home redirect",
+    "private files blocked"
+  ],
+  "limitation": "Local HTTP acceptance; live cPanel HTTPS, weather and live cPanel HTTPS remain pending; PR #17 was integrated locally for this review."
+}

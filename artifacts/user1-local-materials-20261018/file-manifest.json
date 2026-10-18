@@ -1,0 +1,1029 @@
+{
+  "snapshotDate": "2026-10-18",
+  "preservation": "byte-for-byte",
+  "files": [
+    {
+      "path": "evidence/a2-feedback-review/a3-erd.png",
+      "bytes": 123927,
+      "sha256": "e27a863c41a96b5ce3c33f8acedd7f22a8bf387d23760f9f41f0a2137f850c52"
+    },
+    {
+      "path": "evidence/a2-feedback-review/code-reference.html",
+      "bytes": 16230,
+      "sha256": "d9b37a762a655dc30d4a51e5d6c017c463b940f92dae333ff9884d4dcabc4570"
+    },
+    {
+      "path": "evidence/a2-feedback-review/code-reference.json",
+      "bytes": 17088,
+      "sha256": "25ca20e1325d571575058aae288d6d61d738223653442ac5fd7c273fda0a9b46"
+    },
+    {
+      "path": "evidence/a2-feedback-review/comment-verification.json",
+      "bytes": 871,
+      "sha256": "8fbc75195b0da2646e0c8b1dc9786f4d9a0d35b7a343e1d704fafee983e709ab"
+    },
+    {
+      "path": "evidence/a2-feedback-review/erd-layout-check.json",
+      "bytes": 8537,
+      "sha256": "18c9bb116a848f556a4eaee6fba78e9cbf4a20f641d88f8a4fedd45c0dcea0ae"
+    },
+    {
+      "path": "evidence/a2-feedback-review/index.html",
+      "bytes": 5295,
+      "sha256": "e54f37dbf64fbd028f4060308482076ab25d908e68d3a8489cd371119fee5ea7"
+    },
+    {
+      "path": "evidence/a2-feedback-review/live-link-check.json",
+      "bytes": 605,
+      "sha256": "6d7d7bc400f87e5340a13624f4b31a84bc734a41b96dc424d6a007f862b6fd95"
+    },
+    {
+      "path": "evidence/a2-feedback-review/schema-fields.json",
+      "bytes": 2260,
+      "sha256": "e870c920914dd7f50a071ed9fbd284a06fe22d46ef7793094e6e7d8b9f922f8c"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/old-edit-1440.png",
+      "bytes": 94182,
+      "sha256": "c811584173f9a96ea741d82f3956238525d393d9c11b1580430dbe1575a5b245"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/old-edit-390.png",
+      "bytes": 84839,
+      "sha256": "374487323032623b7585bf41bdcd77d22af33c0a47becd0f0d1e063c15600c43"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/old-list-1440.png",
+      "bytes": 95173,
+      "sha256": "c7f0fe12223ff291e281a851d14f54d16ee0b1df72e9fa0669c643aaa3688fac"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/old-list-390.png",
+      "bytes": 70278,
+      "sha256": "7ba4e9bdd9be1a91a808d2c803a4579bc3b016ec84693f0f15fa6f261701bd0a"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-create-1440.png",
+      "bytes": 61177,
+      "sha256": "1603470e3fa9a906f9cba850f7a2b6419881cb6090b39208f0fa2fcf6deeae79"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-create-390.png",
+      "bytes": 56925,
+      "sha256": "72ef8d89cfba5fb4c9edb3e4d89e93c7a8f375d0ac768382dbc0c0dd8a73f0a5"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-edit-1440.png",
+      "bytes": 101332,
+      "sha256": "d86efcab1ad2e71e25f814e97842fc809c22603e600fcd1e216cc8131c643e1e"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-edit-390.png",
+      "bytes": 92844,
+      "sha256": "062acc6fb0e221c9add1cfb0086547aee6dd940557fde02325759cc04562516e"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-list-1440.png",
+      "bytes": 128617,
+      "sha256": "3138d2e27ef27369d81a56956f68eb4e9772bfc72ee54b6f481f1479b014de2e"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-list-390.png",
+      "bytes": 82777,
+      "sha256": "4d01d26b7363241c290ef0e3e680ba1f2defee7518481ed334a91e3b436f71ca"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-roster-1440.png",
+      "bytes": 54301,
+      "sha256": "3edf61758a045bf8762de40753361d41177f7856d77f2a2a0f00989c0c0c1bf1"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/restored-roster-390.png",
+      "bytes": 44100,
+      "sha256": "5076e57f73107d39f5b8e74c40af185da0863dd1b3909f7617ce8d1504852e1d"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/results.json",
+      "bytes": 1656,
+      "sha256": "739d0124b02c0b10b5f3d3cd13320c990403b4b149faabd7b45a864f02a127e6"
+    },
+    {
+      "path": "evidence/admin-appearance-qa/validation-desktop.png",
+      "bytes": 78402,
+      "sha256": "967492134c4a1af093307de2fb3ec6dd7b0c37cd8ede35a42397afa2fadf7690"
+    },
+    {
+      "path": "evidence/angular-deployment-qa/admin-desktop.png",
+      "bytes": 140715,
+      "sha256": "4f2c2ca4befb518325c5f57d2883db1ee4b7dd16d550af0193d4f8bef71e481c"
+    },
+    {
+      "path": "evidence/angular-deployment-qa/login-desktop.png",
+      "bytes": 19649,
+      "sha256": "bdfaaf59b51867c1e67ff8a6fc158d1ee36a96299417802f8759bd66186562f9"
+    },
+    {
+      "path": "evidence/angular-deployment-qa/login-mobile.png",
+      "bytes": 15869,
+      "sha256": "562b4c97ad251364e404301b46515712c547177c997008887a721db5129e1006"
+    },
+    {
+      "path": "evidence/angular-deployment-qa/result.json",
+      "bytes": 672,
+      "sha256": "40a393f52c1fd46a6bc9fa99fcaf8dafcb9b12dc74c450de717aa8ad17606fe6"
+    },
+    {
+      "path": "evidence/angular-deployment-qa/roster-mobile.png",
+      "bytes": 40613,
+      "sha256": "0c5f7194e24c17f4f0556b5ba727dfcdc1d464499eb930826432c9f00317247e"
+    },
+    {
+      "path": "evidence/angular-integration-checks/public-joint-desktop.png",
+      "bytes": 127299,
+      "sha256": "dd439a04f31f2304ea1fd253a621ed4132b090670941935c6945c71db062915a"
+    },
+    {
+      "path": "evidence/angular-integration-checks/public-registration-tablet.png",
+      "bytes": 68554,
+      "sha256": "7cec8feb3c6c03b8eba1d73c521a177a7c95eab6fb0e461805711d085e4ae57e"
+    },
+    {
+      "path": "evidence/angular-integration-checks/results.json",
+      "bytes": 956,
+      "sha256": "7109a14632939f568a6d98c354374099df9c872d2d2bae06f077a47c348cdf1c"
+    },
+    {
+      "path": "evidence/angular-public-checks/angular.log",
+      "bytes": 768,
+      "sha256": "991a93cf7a0981010488bb6bf921ead4a4aa75c99ee0cbd1ac19e5a0d1ad432e"
+    },
+    {
+      "path": "evidence/angular-public-checks/api.log",
+      "bytes": 36,
+      "sha256": "186d07d0b6c291bd283cdf9342c3330b45703990c184b543a78b1544896b712a"
+    },
+    {
+      "path": "evidence/angular-public-checks/detail-desktop.png",
+      "bytes": 136447,
+      "sha256": "9ba5b44eba96777809a90dc4224bcdcddbda5b8a92afca91fc23d5dddd4b8c5b"
+    },
+    {
+      "path": "evidence/angular-public-checks/detail-mobile.png",
+      "bytes": 116283,
+      "sha256": "1976da19ddf5c1865d26e977b24a37542c7a9f43237a227fc1b8d889a1a7dbdc"
+    },
+    {
+      "path": "evidence/angular-public-checks/home-desktop.png",
+      "bytes": 148567,
+      "sha256": "156783230a44cc794e9070f8c23702acece2853ffb20da331a4fcacb60bea740"
+    },
+    {
+      "path": "evidence/angular-public-checks/home-mobile.png",
+      "bytes": 127382,
+      "sha256": "0486d466cdc9fc8c4a3900decf7203c802708e5f330ae0ee95d6286129121da7"
+    },
+    {
+      "path": "evidence/angular-public-checks/registration-desktop.png",
+      "bytes": 92972,
+      "sha256": "65bc87f4737004f197f70a67d7c82003dc34203830439c38b1e2001242142646"
+    },
+    {
+      "path": "evidence/angular-public-checks/registration-mobile.png",
+      "bytes": 61756,
+      "sha256": "c0b532857edf9a407d33956646f115931a3ff4a04ccd5377107d5dd2f9e8d402"
+    },
+    {
+      "path": "evidence/angular-public-checks/results.json",
+      "bytes": 1556,
+      "sha256": "98c64ec787be681ddd58c49715bbfee281b9d424f8560dcbe797f6cc539a338a"
+    },
+    {
+      "path": "evidence/angular-public-checks/search-desktop.png",
+      "bytes": 99940,
+      "sha256": "e0494fa471419423a91764f1e9eebca1600f405621af7b1d471fce63ca9af8d0"
+    },
+    {
+      "path": "evidence/angular-public-checks/search-mobile.png",
+      "bytes": 154607,
+      "sha256": "565dbc1553be2748a50d37a2efdbd85f8cb79c308198a7613065f2980eb9d537"
+    },
+    {
+      "path": "evidence/angular-public-checks/weather-error-mobile.png",
+      "bytes": 12556,
+      "sha256": "ea7f881d91e9ad2d80a0d88d1e9af055c7e5d9afce34a461c124c616f4eda064"
+    },
+    {
+      "path": "evidence/angular-public-checks/weather-ready-desktop.png",
+      "bytes": 20703,
+      "sha256": "3b39b4f820f1cd7966a4fd0a160ba30897a876d4bdee2c404408385279cbe372"
+    },
+    {
+      "path": "evidence/angular-public-checks/weather-ready-mobile.png",
+      "bytes": 19702,
+      "sha256": "dcaf04327353935c09ed75a8a4288b5ec0422bc9434aff8b60960249b9f5ede9"
+    },
+    {
+      "path": "evidence/earlier-checks/M12-archive-checks.json",
+      "bytes": 226,
+      "sha256": "a6d1060997a20212f418307fde86a75cb14395c6b50993965d16524619557356"
+    },
+    {
+      "path": "evidence/earlier-checks/M12-precommit-checks.json",
+      "bytes": 756,
+      "sha256": "45a987e76ad290b73e2a57b268fcbb59b3ea0e73bc05a6cb9b0146478ba45967"
+    },
+    {
+      "path": "evidence/earlier-checks/final-after-fix.log",
+      "bytes": 7514,
+      "sha256": "9cd63ab486063a85812eea58074a496a37413abf6afe3973389ad01f1a8ef669"
+    },
+    {
+      "path": "evidence/earlier-checks/final-before-fix.log",
+      "bytes": 5942,
+      "sha256": "908c389e3812f194063749ff6f8d0554513b8ae2a145985378f7abc068bc25c2"
+    },
+    {
+      "path": "evidence/earlier-checks/m11-joint-test.log",
+      "bytes": 7081,
+      "sha256": "f2b69e68ba2ba5a1b8115d489154f6c552deaaf2b80316a49dd02e55c12c98b4"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/clientside/admin-event.html",
+      "bytes": 4296,
+      "sha256": "8dec43cc32f465365f96175555d92634df0e642b8b0059c553a5b4dcdc172812"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/clientside/admin.html",
+      "bytes": 2325,
+      "sha256": "e72583b964ced999327474fc530e65bdba9f322cf14132db292521bc06a0b910"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/clientside/detail.html",
+      "bytes": 1940,
+      "sha256": "2c2abae036f8807528e753ca9e846ecaa9d41dd3c97ee9ecf0c8918f554a26b9"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/clientside/index.html",
+      "bytes": 2394,
+      "sha256": "1ec9070f6096f03cc9eedfd5ca8aee81b91c6eeef5572d955a1dc734c71751b3"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/clientside/register.html",
+      "bytes": 3569,
+      "sha256": "767f012bab887d2f6d1c901020c853a351a28c689b9aa755ed138be9a1e5d21d"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/clientside/search.html",
+      "bytes": 2438,
+      "sha256": "f40b5cffe6f0379b43afe0b8db3b7d174a1531ed8160a2adc991af85974fe880"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/home-comparison.jpg",
+      "bytes": 71717,
+      "sha256": "c377ad556b2e2246b81b036dbe531dea5f402e3a1ccdaa7483434635e2d5cdf3"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/mobile-comparison.jpg",
+      "bytes": 127658,
+      "sha256": "6f975f53cba4e159a3d56bf9719063457b012bf6444d4708bd1a746d014fd35d"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/old-detail.png",
+      "bytes": 113482,
+      "sha256": "5caeeddd97369c07f0c0ab4e0c782543113b4852f63ae3b74af9d454b7173a5b"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/old-home-mobile.png",
+      "bytes": 107044,
+      "sha256": "a34b5fd54dcd7e788f73f344b5590afee12280403e03beb0f32afe2193463869"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/old-home.png",
+      "bytes": 134949,
+      "sha256": "631510d5411f3439c9c7ef44a6e3d027b90a858fd044187bbfb1a6b6757d2833"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/old-registration.png",
+      "bytes": 80039,
+      "sha256": "53f34ff1f33c1dce97504a8df3e6f3743ea1955ca634eef80138b218e8545535"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/old-search.png",
+      "bytes": 76737,
+      "sha256": "be4ad132a4859b25eda46c67941922df4b1b3977a9c05c5752d08eeee914ec2b"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/pages-review.jpg",
+      "bytes": 124764,
+      "sha256": "0d153d80b0a262513046351075bcf793e4c265ba59f11b23af0976fe100008c6"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/preview.err.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/preview.json",
+      "bytes": 160,
+      "sha256": "1bbe5356d2d7eb20ed532e41d9e8a478ca5aac78a450bc38fa24a06a7c27ae4c"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/preview.out.log",
+      "bytes": 70,
+      "sha256": "f8a2e5e6e381d1a0ace44d4f63b0f6d7aad4bf54127c1a506d99a57b03e1989b"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/restored-detail.png",
+      "bytes": 132554,
+      "sha256": "d5d19eb7a5f3f209a6316779de844cc3004ba8af0685d4684d61b369cf3a0c89"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/restored-home-mobile.png",
+      "bytes": 106983,
+      "sha256": "0cea80a4594b0f6c8ed639ae3c79c8c43a67ba737a3cb50cd510fd09cc9488d0"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/restored-home.png",
+      "bytes": 134922,
+      "sha256": "d4580c7747324795cc4676e064eaa7455aaed8f7a19a19a433d77a40629551b7"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/restored-registration.png",
+      "bytes": 84703,
+      "sha256": "2ed116de0c070928c372dcfee257faa0041e57f21504b219b3d4e4d22c453866"
+    },
+    {
+      "path": "evidence/legacy-appearance-reference/restored-search.png",
+      "bytes": 219671,
+      "sha256": "6e5d97f21b3b6cab8a6c87bb0f1fc8a15e32a8787b182caf8a5c3af547407a3f"
+    },
+    {
+      "path": "evidence/logs/admin-build.log",
+      "bytes": 528,
+      "sha256": "cc597f9513caabfabcaed0dd7ace5bc632548ab176b8e38f0a7d455b38d9e55e"
+    },
+    {
+      "path": "evidence/logs/admin-restored-integration.log",
+      "bytes": 126,
+      "sha256": "aefff717e521c1f77d2c75ad2b2b84380fdd3e29faf960309aaddf06a4dffae3"
+    },
+    {
+      "path": "evidence/logs/admin-tests.log",
+      "bytes": 378,
+      "sha256": "aff8a317ced829524344c656bb477d5e93aca69e2f340e6004acc4638109c506"
+    },
+    {
+      "path": "evidence/logs/final-technical-package-build.log",
+      "bytes": 1286,
+      "sha256": "674a23633351bb91a0212df9b1d4ca5608f107544cd5d9719b677316e45ba843"
+    },
+    {
+      "path": "evidence/node18/node18-check-results.json",
+      "bytes": 881,
+      "sha256": "0819c1d495646bd9a29f24f6ed78ed1ae5b58b28e053bff3998e71cfa4effa9a"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/angular-appearance-restoration.md",
+      "bytes": 2299,
+      "sha256": "cdb141d48e6934817a1b490626ff7c9d1f2a636c15a48b831a669c5cd556c6a8"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/backend-acceptance.md",
+      "bytes": 7246,
+      "sha256": "c5be3d9feb274d4f279f006d3ec8770b6d93e24302729f79c5d182b2fa7ec2fd"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/final-manual-checklist.md",
+      "bytes": 2659,
+      "sha256": "e4be86d0ea00bef90eac4c0b64946a916b4c22525dd1a9ad7d3e97f57bca0894"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/final-technical-checks.md",
+      "bytes": 1886,
+      "sha256": "328035892ac3871f8a7690451751188f8fa2c45b80e38261f4bf580de9c4e4bb"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/m02-acceptance.md",
+      "bytes": 1463,
+      "sha256": "fca1737936450c23ec37af1d5161880877aa08fa6fbe5df74c7feeb6d6bd78f6"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/m03-acceptance.md",
+      "bytes": 1623,
+      "sha256": "ff51761a8503139529c7b08ff2022d90ffad3175a8f4dfe643facb52eaab654e"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/m04-acceptance.md",
+      "bytes": 2371,
+      "sha256": "88ecec3132a7fdd1e5955a1b4499a6a501bbb129c94a4eedc8df89996a759049"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/m05-acceptance.md",
+      "bytes": 1869,
+      "sha256": "d0518e0d3af54a07ca2f906e6990af9e9a3182efabf4d99cca2bd0347062d150"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/m11-acceptance.md",
+      "bytes": 7138,
+      "sha256": "04e202103aa84c97c298871c6149620eb90f52f6ccfe50b4fa02a2bf6761e779"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/user1-local-acceptance.md",
+      "bytes": 3655,
+      "sha256": "6ac0144ac29e69f2c226ff96a19628e36ac611a2aaec3842474cbec25a33a603"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/仓库原件/docs/user2-angular-acceptance.md",
+      "bytes": 4199,
+      "sha256": "ab6b4f6dcb57d852b274eb096368eb0b78d326e7f572faf4099929fe1b875f0d"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/先看-验收状态.md",
+      "bytes": 2438,
+      "sha256": "6d07ec43b23dd9396d1bad82ae0d003d8e8ab7087d9ab4adb8d51ed0093e9391"
+    },
+    {
+      "path": "historical-review-bundle/01-本地验收记录与测试说明/本地更新稿/user1-local-acceptance.md",
+      "bytes": 7037,
+      "sha256": "3a39bb6d81f8379933a53e9b7db4b16f08af1ad1af4c406708e4b28895c4b991"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/README.md",
+      "bytes": 3384,
+      "sha256": "b37cd1be15efe15d2966e7a1445a75b63d5b6b7e28349dc2e541ce483f09a59a"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/angular/README.md",
+      "bytes": 5366,
+      "sha256": "77f5b6d6a6845882d3928873657df5bdcfa1b72100d57cd0b19fe44db5fcb625"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/api/README.md",
+      "bytes": 1077,
+      "sha256": "265a0b78a22cb77fccc3f16b2331d4dc1aa5e3b2003b228fe22f6b4b8cf63baa"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/database/README.md",
+      "bytes": 1287,
+      "sha256": "5f8e78dadd4d94c29246c578ad3446b7e29113c8a73d02031649ba175b04dba2"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/README.md",
+      "bytes": 1684,
+      "sha256": "e98c96e9a3e0018385c6064016cd01b8ee91800807419da9b2d0d76e28799e6d"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a2-api-demo-checklist.md",
+      "bytes": 3976,
+      "sha256": "0856fb5ab7220889075f3daf1c1472bffa2d3673bbb38d5dd50fcdfa2e006c16"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a2-delivery-checklist.md",
+      "bytes": 4957,
+      "sha256": "fbe19755b461d8a53b5aeb79ef2dee191abb99a578bd270746fc0b03df78a904"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a2-final-test-checklist.md",
+      "bytes": 8350,
+      "sha256": "713fe139dfed63d81702d7657455258657a0bf36cdd1ae539fd5d9f7a2510937"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a2-local-setup.md",
+      "bytes": 3385,
+      "sha256": "d857e1366b0098372173ebdfe99d989ec35942ff4c4c5663e716d15c9db401c1"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a2-packaging-checklist.md",
+      "bytes": 2610,
+      "sha256": "ad30dc373693c9601199d9533ca96401f509d4962557d2bffb2d6f9413215fee"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a2-readme-history.md",
+      "bytes": 8704,
+      "sha256": "0f4663b361aeff0188e1fc7a2ab07f7121871f3a1f8931d5824cc6552f7761f5"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a3-collaboration.md",
+      "bytes": 3066,
+      "sha256": "b7b766d4f9bf3856a5bffbb5e7d4742fc8e387a88193743e98e98bda5710ee7b"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/a3-delivery.md",
+      "bytes": 10013,
+      "sha256": "f99b1e4dc596c8f52f5749d5d5cc242bc56d3c63cd7f5259982ed133b097a272"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/angular-cpanel-deployment.md",
+      "bytes": 8814,
+      "sha256": "2a34a17b8cc7e26899e18055aa91c97e5542fda0c9c202e00172e28d4d869440"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/angular-public-pages.md",
+      "bytes": 4577,
+      "sha256": "7bd5644f7bc02db0df896725435dce9cca07ce27aa917936258db33d759ab486"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/angular-registration.md",
+      "bytes": 3958,
+      "sha256": "f4066d239085ad8989ec78ae5be3c8dcd909cf9795c74a723467757323448a1b"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/angular-weather.md",
+      "bytes": 4084,
+      "sha256": "4ec37a7705a5317f3356593f8c1320cca0996f8f3a6646f535303929d32d92ba"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/backend-guide.md",
+      "bytes": 6066,
+      "sha256": "2af86452705cd4a330bf317451ff2e444b6b300c1dd3ea4483a0705172f7720c"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/cpanel-deployment.md",
+      "bytes": 6959,
+      "sha256": "811527825e7af8873a6438a88471fc3515d9a08ca76a93c34852f9c77203f09a"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/data-local-setup.md",
+      "bytes": 2224,
+      "sha256": "fd423647bce1b1ffa1629c96b37cf3a83a0e246fafecfb2b3ece575ca664bcc3"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/homepage-browsing.md",
+      "bytes": 2374,
+      "sha256": "726f85a1fd082f64521fa02000d730edf73726994a5dc08b770eb91d439898af"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/m12-delivery-checklist.md",
+      "bytes": 3545,
+      "sha256": "522db187d28a1f8820e9e2178dd47caceb418d293cf1532ddfb221d62e04b821"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/docs/user1-angular-handoff.md",
+      "bytes": 7340,
+      "sha256": "1f00f8a1ea12df0c9220104b3b04733449bd6cba58d53413eca18ee05c7b2ea5"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/build-angular-release.cjs",
+      "bytes": 7850,
+      "sha256": "f8cf25d7fee4609b13da91f555512443eb19581f98f43a49cde1a8e7a6b1fcb3"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/build-deployment-sql.cjs",
+      "bytes": 1049,
+      "sha256": "dc9e329b729d06ed3d83c38bc926c8464f2d19befd5da509e8c18ef94d85aa16"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/package-a2.ps1",
+      "bytes": 3660,
+      "sha256": "d02a988695062c3181306e09b4bd5324b13eb0eb5854e4711c8219c552054304"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/package-user1-local.ps1",
+      "bytes": 3235,
+      "sha256": "59e9f9ddd2e732a9eff7386afea824b1f8dca7b1020f0111d63f5f52b170be77"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/prepare-admin-test-db.cjs",
+      "bytes": 2062,
+      "sha256": "e6c667eb462161a89dfd45332edc2292318f9be958fca682eafb36a19ba2e098"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/test-angular-hosting.cjs",
+      "bytes": 3641,
+      "sha256": "14cef109f5b61e45f0af6b67b00dc30b74771bd2bff322e0aa683c6baf5477ed"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/test-angular-integration.cjs",
+      "bytes": 15002,
+      "sha256": "57ace592ecc2e46bbdd198fb6df664d08c63e3a533e47d3b15556d79a89b0778"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/test-angular-public.cjs",
+      "bytes": 17436,
+      "sha256": "519bbf875774aece94abaddc68904f025f488e40bb129f0930f37c42b9602b7a"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/test-angular-release.cjs",
+      "bytes": 12419,
+      "sha256": "7004f41723df88ccad26005cda6a733417bc35e412b900285eb0c70463d86ac7"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/test-angular-weather.cjs",
+      "bytes": 5197,
+      "sha256": "99ce01ca37d79b73be06b62de7a65683d7023b084ab147ce0ae8c5dc66946a82"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/test-joint-acceptance.cjs",
+      "bytes": 2109,
+      "sha256": "bafcfbb33174d3097dc17da2fb507d1f93f2409c7237249f124e443b7eb99ae9"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/仓库原件/scripts/zip-angular-release.ps1",
+      "bytes": 2292,
+      "sha256": "84f1fc72de4229337334a9b9b1d55ed2bc488a8867de5569a40c6427541c1ced"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/先看-交接与版本.md",
+      "bytes": 1477,
+      "sha256": "58a4f7033de48191f457dd5efd34d8c5b1c873a1cd203ff29f58216c034a6695"
+    },
+    {
+      "path": "historical-review-bundle/02-技术交接部署与打包脚本/本地更新稿/user1-angular-handoff.md",
+      "bytes": 11183,
+      "sha256": "b116bcb34a3d6e8a4589ab23b0981403f01c50ad7d3c57e29b9af1e15689179c"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/先看-证据与ZIP版本.md",
+      "bytes": 1756,
+      "sha256": "f7aaf943fd42b0d755fa777193ac7672f62a613859faa087c024d8d24451caf1"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/历史原始日志/test-angular-integration.cjs.log",
+      "bytes": 900,
+      "sha256": "2da94f3492eda8486326355abfda8cf73148d4224c20e4a086a54c660e48d19a"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/历史原始日志/test-angular-public.cjs.log",
+      "bytes": 1454,
+      "sha256": "67031cbccad05969587b60c165e57541d7133798e1095ee0d343e8823fcb5ccb"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/历史原始日志/test-joint-acceptance.cjs.log",
+      "bytes": 7521,
+      "sha256": "60eacca8ab5c00faf034b8320672bf4188ae7267b0cbd9bae69fa72c2ba5a01e"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/home-comparison.jpg",
+      "bytes": 71717,
+      "sha256": "c377ad556b2e2246b81b036dbe531dea5f402e3a1ccdaa7483434635e2d5cdf3"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/mobile-comparison.jpg",
+      "bytes": 127658,
+      "sha256": "6f975f53cba4e159a3d56bf9719063457b012bf6444d4708bd1a746d014fd35d"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/old-detail.png",
+      "bytes": 113482,
+      "sha256": "5caeeddd97369c07f0c0ab4e0c782543113b4852f63ae3b74af9d454b7173a5b"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/old-home-mobile.png",
+      "bytes": 107044,
+      "sha256": "a34b5fd54dcd7e788f73f344b5590afee12280403e03beb0f32afe2193463869"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/old-home.png",
+      "bytes": 134949,
+      "sha256": "631510d5411f3439c9c7ef44a6e3d027b90a858fd044187bbfb1a6b6757d2833"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/old-registration.png",
+      "bytes": 80039,
+      "sha256": "53f34ff1f33c1dce97504a8df3e6f3743ea1955ca634eef80138b218e8545535"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/old-search.png",
+      "bytes": 76737,
+      "sha256": "be4ad132a4859b25eda46c67941922df4b1b3977a9c05c5752d08eeee914ec2b"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/pages-review.jpg",
+      "bytes": 124764,
+      "sha256": "0d153d80b0a262513046351075bcf793e4c265ba59f11b23af0976fe100008c6"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/restored-detail.png",
+      "bytes": 132554,
+      "sha256": "d5d19eb7a5f3f209a6316779de844cc3004ba8af0685d4684d61b369cf3a0c89"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/restored-home-mobile.png",
+      "bytes": 106983,
+      "sha256": "0cea80a4594b0f6c8ed639ae3c79c8c43a67ba737a3cb50cd510fd09cc9488d0"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/restored-home.png",
+      "bytes": 134922,
+      "sha256": "d4580c7747324795cc4676e064eaa7455aaed8f7a19a19a433d77a40629551b7"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/restored-registration.png",
+      "bytes": 84703,
+      "sha256": "2ed116de0c070928c372dcfee257faa0041e57f21504b219b3d4e4d22c453866"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/旧版与还原版截图/restored-search.png",
+      "bytes": 219671,
+      "sha256": "6e5d97f21b3b6cab8a6c87bb0f1fc8a15e32a8787b182caf8a5c3af547407a3f"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/早期模块截图/m03-detail-desktop.png",
+      "bytes": 120827,
+      "sha256": "ace92566e468bbb2c8f32b9888e9ae705c11450e579a5ed96fbccec9d61b0f05"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/早期模块截图/m03-detail-mobile.png",
+      "bytes": 93541,
+      "sha256": "63c9ca638aab97e0174d10d351c89490b6043638c45537452a3dd4757d2fbb72"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/早期模块截图/m05-register-desktop.jpg",
+      "bytes": 59761,
+      "sha256": "32aa00fd7d9c42d9803c6a110f58fe283ed72217b0cddc4e982a28430d3ad683"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/早期模块截图/m05-register-mobile.jpg",
+      "bytes": 40707,
+      "sha256": "5d02b5c8dfdd840ac95081df626946a019b1c4723f8f0e90b59061cf959d0a09"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-integration-checks/public-joint-desktop.png",
+      "bytes": 127299,
+      "sha256": "dd439a04f31f2304ea1fd253a621ed4132b090670941935c6945c71db062915a"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-integration-checks/public-registration-tablet.png",
+      "bytes": 68554,
+      "sha256": "7cec8feb3c6c03b8eba1d73c521a177a7c95eab6fb0e461805711d085e4ae57e"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-integration-checks/results.json",
+      "bytes": 956,
+      "sha256": "7109a14632939f568a6d98c354374099df9c872d2d2bae06f077a47c348cdf1c"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/angular.log",
+      "bytes": 768,
+      "sha256": "991a93cf7a0981010488bb6bf921ead4a4aa75c99ee0cbd1ac19e5a0d1ad432e"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/api.log",
+      "bytes": 36,
+      "sha256": "186d07d0b6c291bd283cdf9342c3330b45703990c184b543a78b1544896b712a"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/detail-desktop.png",
+      "bytes": 136447,
+      "sha256": "9ba5b44eba96777809a90dc4224bcdcddbda5b8a92afca91fc23d5dddd4b8c5b"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/detail-mobile.png",
+      "bytes": 116283,
+      "sha256": "1976da19ddf5c1865d26e977b24a37542c7a9f43237a227fc1b8d889a1a7dbdc"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/home-desktop.png",
+      "bytes": 148567,
+      "sha256": "156783230a44cc794e9070f8c23702acece2853ffb20da331a4fcacb60bea740"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/home-mobile.png",
+      "bytes": 127382,
+      "sha256": "0486d466cdc9fc8c4a3900decf7203c802708e5f330ae0ee95d6286129121da7"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/registration-desktop.png",
+      "bytes": 92972,
+      "sha256": "65bc87f4737004f197f70a67d7c82003dc34203830439c38b1e2001242142646"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/registration-mobile.png",
+      "bytes": 61756,
+      "sha256": "c0b532857edf9a407d33956646f115931a3ff4a04ccd5377107d5dd2f9e8d402"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/results.json",
+      "bytes": 1556,
+      "sha256": "98c64ec787be681ddd58c49715bbfee281b9d424f8560dcbe797f6cc539a338a"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/search-desktop.png",
+      "bytes": 99940,
+      "sha256": "e0494fa471419423a91764f1e9eebca1600f405621af7b1d471fce63ca9af8d0"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/search-mobile.png",
+      "bytes": 154607,
+      "sha256": "565dbc1553be2748a50d37a2efdbd85f8cb79c308198a7613065f2980eb9d537"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/weather-error-mobile.png",
+      "bytes": 12556,
+      "sha256": "ea7f881d91e9ad2d80a0d88d1e9af055c7e5d9afce34a461c124c616f4eda064"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/weather-ready-desktop.png",
+      "bytes": 20703,
+      "sha256": "3b39b4f820f1cd7966a4fd0a160ba30897a876d4bdee2c404408385279cbe372"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/angular-public-checks/weather-ready-mobile.png",
+      "bytes": 19702,
+      "sha256": "dcaf04327353935c09ed75a8a4288b5ec0422bc9434aff8b60960249b9f5ede9"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/本地测试证据/hosting-check-1792078446561/results.json",
+      "bytes": 3204,
+      "sha256": "1ec0207d7452a988b885bbafa1e9c45ade50ceb6ba41199a2ba8cd5f27b30055"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/线上截图-用户提供/线上天气-用户提供.png",
+      "bytes": 233820,
+      "sha256": "940f8a7e9521c1482c44a2bc729779f4a0e994d161aa080c0b4703428a489ec1"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/线上截图-用户提供/线上首页-用户提供.png",
+      "bytes": 336194,
+      "sha256": "32cf56b0839fcb7d3738b8afa0bba46d3b71b2ee9acfb1ea21b5482ae0887848"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/cpanel-public-restored-d3f3878/manifest.json",
+      "bytes": 309,
+      "sha256": "1a72fec596dec66fc198c9eac6d0862a210818ddd90d6ce7e46c6bb7a13f5aea"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/cpanel-public-restored-d3f3878/user1-public-restored-d3f3878.zip",
+      "bytes": 118990,
+      "sha256": "16f69118d5d26269224ccb14cee8368bb32383961e5f0d155a8b0496368ea77a"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/user1-local-delivery-82e14e7-20261015-222124/A3-api-database-source.zip",
+      "bytes": 54144,
+      "sha256": "53cd69dddb6164ffd4c43898bac9c13d5bf317614342eea7be013a6b73b973a9"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/user1-local-delivery-82e14e7-20261015-222124/A3-complete-source.zip",
+      "bytes": 277496,
+      "sha256": "8954135fd039edbad80def7d39f65335dab429998527c6cbb8077ecaa6623f0e"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/user1-local-delivery-82e14e7-20261015-222124/archive-verification.json",
+      "bytes": 736,
+      "sha256": "b3ec33cea2555805875503bbe641f770f0884da5d62efb3131a53e9194a96824"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/user1-local-delivery-82e14e7-20261015-222124/manifest.json",
+      "bytes": 1445,
+      "sha256": "18f5c5a3ff61e664514345bc8202c7c3dc571df915e449dc6303c43975de3055"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/user1-local-delivery-82e14e7-20261015-222124/user1-angular-handoff.md",
+      "bytes": 7465,
+      "sha256": "b8852ce7566d3e0e45bf5f427c0fdcd462d8aeca0731bb17123f2288b21ebbba"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/user1-local-delivery-82e14e7-20261015-222124/user1-public-built.zip",
+      "bytes": 118880,
+      "sha256": "45472085aefb5a385095560f3ff8562ac9a3765ce6263af313f7fa642fb946fb"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/历史单模块包/angular-public-registration-local.json",
+      "bytes": 452,
+      "sha256": "b26e4ef7090e66887172c7ea85fbb1e4bf9e208f26cdb88d7334371d2e092959"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/历史单模块包/angular-public-registration-local.zip",
+      "bytes": 105250,
+      "sha256": "255dded1b6f424b821ba743a195c91971993d2d58978b2bfa9a4c34496b38a31"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/历史单模块包/angular-public-weather-local.json",
+      "bytes": 319,
+      "sha256": "13e4833c767546d37cdf356b023966810f4fb2341049710ae326d08733484555"
+    },
+    {
+      "path": "historical-review-bundle/03-截图日志与部署ZIP/部署与源码包/历史单模块包/angular-public-weather-local.zip",
+      "bytes": 112778,
+      "sha256": "553eaa4e4c3f6b505a7b9c0ed3b09a1a1e374119f3f6ba080a09d0fa41a4386c"
+    },
+    {
+      "path": "local-tools/create-feedback-erd.py",
+      "bytes": 4389,
+      "sha256": "e01107fc7f7209d86cbcee9ae518048c1cda8e10a4d7ac04c29a5da9de984502"
+    },
+    {
+      "path": "local-tools/package-technical-only.py",
+      "bytes": 15236,
+      "sha256": "1d4ec91f4af966af4f71fc0215ffaf39d3cd0357bf4b3a660756942353978bb1"
+    },
+    {
+      "path": "local-tools/render-feedback-erd.cjs",
+      "bytes": 964,
+      "sha256": "d50747e2b9f87e1cd2583d2b9b9b710e1bae4eba7f2b3dfe157adabb05e358a5"
+    },
+    {
+      "path": "local-tools/verify-feedback-comments.cjs",
+      "bytes": 1216,
+      "sha256": "24c743cdc5faba8c8d32a30d8e3134fe7b92bcc82b1af48b56c8053ea7b8d5ac"
+    },
+    {
+      "path": "review-documents/angular-foundation-checkout/user1-angular-handoff.md",
+      "bytes": 9856,
+      "sha256": "018b394758f14eb82039d6f598dccf4d95cd9b24746c80bf36a968d9424113d4"
+    },
+    {
+      "path": "review-documents/angular-foundation-checkout/user1-local-acceptance.md",
+      "bytes": 9720,
+      "sha256": "0901e8e1dd1f96fe6d1f6306a0fa6de9adff54e0283e90382268a9ada0fe13b5"
+    },
+    {
+      "path": "review-documents/root-checkout/a3-delivery-review.md",
+      "bytes": 12506,
+      "sha256": "3d0ff7bcb14dcec5d78682453e9b0b2bbd259da322304d7be04dbe8fecfc0e34"
+    },
+    {
+      "path": "review-documents/root-checkout/final-manual-checklist.md",
+      "bytes": 2616,
+      "sha256": "61fe6e208bd0d7ad619e1e85bed82c696400fa86d2097d0e9b001525a167e26f"
+    },
+    {
+      "path": "review-documents/root-checkout/final-technical-checks.md",
+      "bytes": 1713,
+      "sha256": "189c37ea35be5b4f8c73141ca34c80c1885fcd558c37d05051657c624fa7ec53"
+    },
+    {
+      "path": "technical-packages/00-先读我.txt",
+      "bytes": 1956,
+      "sha256": "3003a739b196ff6afbcaab9bc5ad77ba8f924c3225f0d979114a8593e5503d07"
+    },
+    {
+      "path": "technical-packages/01-代码提交包/houyan10A3-adminside.zip",
+      "bytes": 217859,
+      "sha256": "64e6d27fb16ee140d91d4e276687046e1a97b607511b5531dc0e307bba971e48"
+    },
+    {
+      "path": "technical-packages/01-代码提交包/houyan10A3-api.zip",
+      "bytes": 152148,
+      "sha256": "39be57a02a6f2293e801c4148cb2016094b326968c3eacab2c9965dfdc583549"
+    },
+    {
+      "path": "technical-packages/01-代码提交包/houyan10A3-clientside.zip",
+      "bytes": 219967,
+      "sha256": "68a5c386dd04d0266000b072a97f8456bb8325d35f8dae3ee5926f63e7a89bda"
+    },
+    {
+      "path": "technical-packages/02-cPanel备用部署包/complete-cpanel-release.zip",
+      "bytes": 271605,
+      "sha256": "126cf9a9ec03525abe2fd8f3fb9ec58e029c147b7b337e2c9d0272162f11695f"
+    },
+    {
+      "path": "technical-packages/03-技术附件/technical-attachments.zip",
+      "bytes": 2372011,
+      "sha256": "5b1ce8bdd053c5db9e92776451496368a06240b3d5f8c04a6e543b4507433c2a"
+    },
+    {
+      "path": "technical-packages/A3部署记录/01-首页活动列表.png",
+      "bytes": 257219,
+      "sha256": "e3caa546daf55cd82757d2a7572b6ef7918216557f6105156457e4969a78d70d"
+    },
+    {
+      "path": "technical-packages/A3部署记录/02-活动详情.png",
+      "bytes": 205356,
+      "sha256": "385014e6c01a3098d9f1be883e226b155b13552a08cf21c5bcfc5836f99e8a66"
+    },
+    {
+      "path": "technical-packages/A3部署记录/03-分类搜索结果.png",
+      "bytes": 187737,
+      "sha256": "01a13413e80348663f2be72894183ff3784dae2833d2962ad855f10b3cdb0aae"
+    },
+    {
+      "path": "technical-packages/A3部署记录/04-数据库连接成功.png",
+      "bytes": 20851,
+      "sha256": "4a300d4fa1fafab73d07f89c71a3ef9ebb73ad8553fcb3e419abeb7c008f88e6"
+    },
+    {
+      "path": "technical-packages/A3部署记录/部署记录.txt",
+      "bytes": 229,
+      "sha256": "f0ccaeff0a015eaf2a374e817caa7e9b5c18bf40202ce06eec934e4045dd7a0c"
+    },
+    {
+      "path": "technical-packages/SHA256SUMS.txt",
+      "bytes": 557,
+      "sha256": "6a23a960e07d047d3cf11f46afc572e8f64d022e8abb3f0693dc7339ca194abd"
+    },
+    {
+      "path": "technical-packages/manifest.json",
+      "bytes": 3189,
+      "sha256": "490378d6ac7c640098e648d2fed7983c86b0c46182fe07a4e4b6ca054736af80"
+    },
+    {
+      "path": "technical-packages/文件清单.csv",
+      "bytes": 44504,
+      "sha256": "5fa9cb62116d0749ae7cdeac6651d6858bfd8b78ec1b8c506f88378dacc94c4d"
+    }
+  ],
+  "sourceFileCount": 202,
+  "totalBytes": 12845106,
+  "archiveEntriesScanned": 451,
+  "excluded": [
+    "personal video",
+    "peer evaluation",
+    "A3-1.zip",
+    "real environment files",
+    "database backup",
+    "node_modules/cache",
+    "course handouts",
+    "personal report/submission drafts"
+  ]
+}

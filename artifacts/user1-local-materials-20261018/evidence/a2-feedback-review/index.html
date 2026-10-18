@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>A2 反馈与 A3 修正核对</title><style>body{font:17px/1.8 Arial,"Microsoft YaHei",sans-serif;max-width:1050px;margin:40px auto;padding:0 25px;color:#17201d}h1,h2{color:#0f4c5c}table{border-collapse:collapse;width:100%}th,td{border:1px solid #c7d3cc;padding:12px;text-align:left;vertical-align:top}code{background:#eef3ef;padding:2px 5px}img{width:100%}a{color:#07566a}</style>
+<h1>A2 反馈 → A3 修正核对</h1><p>2026-10-17 · 本地审阅材料。本轮未上传 GitHub / cPanel，未覆盖已完善的报告。</p>
+<table><tr><th>老师反馈</th><th>A3 核实结果与处理</th></tr>
+<tr><td>GitHub link is broken</td><td>A3 认证访问 200、匿名访问 404，仓库确为 Private。当前连接账号有 push 权限、无管理权限。按用户说明，老师要求提交后邀请；尚未知老师账号，保留私有，届时由所有者 zjsjsjjdjs 邀请并确认老师接受。A2 当时提交链接未提供，不能断言 A2 也是同一原因。</td></tr>
+<tr><td>Header、Nav、Body、Footer 拆分及复用</td><td>公众端 app.html 定义一次 header/nav/main/router-outlet/footer；后台 app.ts 同样定义一次共享框架。路由只替换主内容，各自应用的公共区域复用。页面 Body 对应 main 中的内容，不应在每个 Angular 组件中添加 body。服务端独立登录页由 page() 函数统一生成。未重做外观，新增结构说明注释。</td></tr>
+<tr><td>缺少 autodoc 风格注释</td><td>17 个核心源文件新增 JSDoc 风格职责、参数、返回值和异常说明：事务、CRUD、状态更新、登录会话、Angular 托管、HTTP 服务、天气及表单校验。自动文档工具提取 49 个文档块（含原有块）。并非宣称每个私有成员均有完整注释。</td></tr>
+<tr><td>报告缺少 ERD</td><td>按实际 a3-fresh-install.sql 生成四表 ERD，提供 PNG、SVG、Mermaid。尚未修改或核验用户最终报告，应由用户检查后插入报告。</td></tr></table>
+<h2>提交网址</h2><ul>
+<li>公众网站：<a href="https://24832591.it.scu.edu.au/">https://24832591.it.scu.edu.au/</a></li>
+<li>后台：<a href="https://24832591.it.scu.edu.au/admin/">https://24832591.it.scu.edu.au/admin/</a>（登录信息通过课程指定私密渠道提供）</li>
+<li>源码：<a href="https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents">https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents</a>（私有，按老师安排邀请）</li></ul>
+<p>这是实际运行的动态网站：浏览器运行 Angular，经 Express API 访问 MariaDB。网站用于操作演示，GitHub 用于查看源码和提交记录，两种地址应分别提供。不要交 localhost、127.0.0.1 或带 :2083/cpsess 的控制台地址作为网站地址。</p>
+<p>本次只读检查：首页 200；/api/health 200；未登录访问 /admin/ 跳转登录页。之前完整业务流程由用户逐项确认，本次没有修改线上数据。原始说明要求双方分别部署到各自 SCU cPanel，另一位同学站点应由其本人确认。</p>
+<h2>ERD 与约束</h2><img src="a3-erd.png" alt="四表实体关系图"><p><a href="a3-erd.svg">SVG 图</a> · <a href="a3-erd.mmd">Mermaid 源文件</a></p>
+<p>organisations → events、categories → events、events → registrations 均为 1 对多，每个父记录可有零个子记录。每个活动必须属于一个组织和类别，每条报名必须属于一个活动。registrations 的 (event_id,email) 联合唯一约束限制同一邮箱对同一活动仅报名一次，邮箱比较不区分大小写；ON DELETE RESTRICT 阻止删除已有报名的活动；tickets 必须大于 0。不存在单独 users 或 weather 数据表。</p>
+<h2>代码与验证证据</h2><ul><li>公众框架：angular/projects/public/src/app/app.html 与 app.ts。</li><li>后台框架：angular/projects/admin/src/app/app.ts。</li><li><a href="code-reference.html">自动代码文档</a>；安装 Angular 依赖后在仓库根目录执行 <code>node scripts/generate-code-reference.cjs</code> 可重新生成。</li><li><a href="comment-verification.json">注释验证</a>：17 个源文件的非注释 token 完全一致（统一 CRLF/LF），语法解析无错误，未改变运行逻辑。</li><li><a href="live-link-check.json">线上网址检查</a>。</li></ul>
+<h2>提交前还需确认</h2><ol><li>收到老师账号后，由仓库所有者邀请并确认接受；按老师安排保留仓库私有。</li><li><a href="https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents/pull/21">PR #21</a>：已通过 git fetch 核实合并，main 最新提交 61f293c，已包含后台外观提交 57fafcc。</li><li>把 ERD 和公众端/后台/源码网址补进最终报告；本材料不替代本人报告。</li><li>本轮新注释和图表仍在本地，审阅后决定上传；最终源码包应与最终 GitHub 版本一致，不再直接使用旧的 8d4b71c 审阅包。</li></ol>
+<p>依据：A3 原始说明第 7 页要求保护仓库不让其他学生查看，并允许邀请评分老师；第 2 页要求双方各自部署到 SCU cPanel。新增要求要求报告反映 Angular 和 AI 使用。本文件是技术核对材料，不是最终报告或最终提交。</p></html>

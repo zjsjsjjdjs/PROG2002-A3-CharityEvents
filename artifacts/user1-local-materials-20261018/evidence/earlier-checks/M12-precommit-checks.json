@@ -1,0 +1,27 @@
+{
+  "checkedLocalLinks": 71,
+  "brokenLinks": [],
+  "changedFiles": [
+    "README.md",
+    "api/README.md",
+    "clientside/README.md",
+    "database/README.md",
+    "docs/README.md",
+    "docs/a2-readme-history.md",
+    "docs/a3-collaboration.md",
+    "docs/a3-delivery.md",
+    "docs/backend-acceptance.md",
+    "docs/backend-guide.md",
+    "docs/data-local-setup.md",
+    "docs/final-manual-checklist.md",
+    "docs/final-technical-checks.md",
+    "docs/homepage-browsing.md",
+    "docs/m11-acceptance.md",
+    "docs/m12-delivery-checklist.md"
+  ],
+  "sqlReproducedWithoutGitDiff": true,
+  "portableSQL": true,
+  "applicationChanges": false,
+  "base": "f0b51ecef1a68734a3b4f60305d3cbe66365c978",
+  "tested": "26cb134637a20599a9ba5ef5866e90113672553c"
+}

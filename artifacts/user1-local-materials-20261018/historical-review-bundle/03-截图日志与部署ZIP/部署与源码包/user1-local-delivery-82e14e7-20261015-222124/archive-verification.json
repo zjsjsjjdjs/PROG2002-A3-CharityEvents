@@ -1,0 +1,25 @@
+{
+  "sourceCommit": "82e14e7bdb81e521d1865568154c0c543dd4622e",
+  "archives": [
+    {
+      "archive": "user1-public-built.zip",
+      "files": 4,
+      "sha256": "45472085AEFB5A385095560F3FF8562AC9A3765CE6263AF313F7FA642FB946FB",
+      "verified": true
+    },
+    {
+      "archive": "A3-complete-source.zip",
+      "files": 149,
+      "sha256": "8954135FD039EDBAD80DEF7D39F65335DAB429998527C6CBB8077ECAA6623F0E",
+      "verified": true
+    },
+    {
+      "archive": "A3-api-database-source.zip",
+      "files": 31,
+      "sha256": "53CD69DDDB6164FFD4C43898BAC9C13D5BF317614342EEA7BE013A6B73B973A9",
+      "verified": true
+    }
+  ],
+  "unapprovedDraftsExcluded": true,
+  "secretsAndDependenciesExcluded": true
+}

@@ -1,0 +1,16 @@
+Environment variable "PORT" detected. Using port 6494.
+> Building...
+√ Building...
+Initial chunk files | Names         |  Raw size
+main.js             | main          | 131.46 kB | 
+styles.css          | styles        |  13.64 kB | 
+
+                    | Initial total | 145.11 kB
+
+Application bundle generation complete. [2.034 seconds] - 2026-10-16T01:31:09.120Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  ➜  Local:   http://127.0.0.1:6494/
+Request for HTML file "/register.html?id=1" was received but no asset found. Asset may be missing from build.
+Request for HTML file "/register.html?id=1&id=2" was received but no asset found. Asset may be missing from build.

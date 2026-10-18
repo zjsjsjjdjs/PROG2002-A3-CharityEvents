@@ -1,0 +1,166 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>A3 code reference</title><style>body{font:16px/1.6 Arial;max-width:1000px;margin:40px auto;padding:0 24px;color:#17201d}h1,h2{color:#0f4c5c}section{border-top:1px solid #bbb;padding:18px 0}pre{white-space:pre-wrap;background:#f1f6f3;padding:18px;overflow-wrap:anywhere}small{color:#52645b}</style><h1>A3 source documentation</h1><p>Generated from 49 JSDoc blocks in JavaScript and TypeScript. This is a focused reference, not a claim that every private member is documented. Rebuild using <code>node scripts/generate-code-reference.cjs</code> after installing angular dependencies.</p><section><h2>safeReturn</h2><small>api/admin-session.js:21</small><pre>/**
+ * Restrict post-login navigation to a local admin path and exclude login/logout loops.
+ * @param {unknown} value - Untrusted returnTo query or form value.
+ * @returns {string} Sanitized admin path/query, or /admin/ as the safe default.
+ */</pre></section><section><h2>adminSessions</h2><small>api/admin-session.js:42</small><pre>/**
+ * Create in-memory admin sessions, login throttling and same-origin middleware.
+ * Sessions expire after one hour and are lost on process restart. Passwords remain server-side.
+ * @param {object} config - Validated runtime configuration from readConfig.
+ * @returns {object} Login/logout router plus protect(isApi) and sameOrigin middleware.
+ */</pre></section><section><h2>createEvent</h2><small>api/admin_db.js:9</small><pre>/**
+ * Insert only the whitelisted event fields using bound SQL parameters.
+ * @param {object} event - Event data already normalized and validated by the admin route.
+ * @returns {Promise&lt;number&gt;} Generated event identifier.
+ * @throws {Error} When database constraints or the insert fail.
+ */</pre></section><section><h2>getEvent</h2><small>api/admin_db.js:21</small><pre>/**
+ * Read an event and serialize its Brisbane-local DATETIME with an explicit +10:00 offset.
+ * @param {number} id - Validated event identifier.
+ * @returns {Promise&lt;object|null&gt;} Event record or null when absent.
+ */</pre></section><section><h2>updateEvent</h2><small>api/admin_db.js:33</small><pre>/**
+ * Replace editable event fields inside a parent-row transaction; registrations are retained.
+ * @param {number} id - Validated event identifier.
+ * @param {object} event - Complete validated event input, not a partial patch.
+ * @returns {Promise&lt;boolean&gt;} True when updated; false when the event no longer exists.
+ */</pre></section><section><h2>deleteEvent</h2><small>api/admin_db.js:52</small><pre>/**
+ * Delete only an event with no registrations, using the same parent-first lock order as registration.
+ * @param {number} id - Validated event identifier.
+ * @returns {Promise&lt;boolean&gt;} True when deleted; false when absent.
+ * @throws {Error} EVENT_HAS_REGISTRATIONS when protected, or a database failure; the transaction rolls back.
+ */</pre></section><section><h2>updateEventStatus</h2><small>api/admin_db.js:77</small><pre>/**
+ * Update status alone while preserving event details and existing registrations.
+ * @param {number} id - Validated event identifier.
+ * @param {&quot;active&quot;|&quot;suspended&quot;} status - Desired state validated by the route.
+ * @returns {Promise&lt;boolean&gt;} True when updated; false when absent.
+ */</pre></section><section><h2>checkBuild</h2><small>api/angular-server.js:14</small><pre>/**
+ * Check that a built Angular entry point exists and has the expected deployment base.
+ * @param {string} directory - Path to the browser build directory.
+ * @param {string} baseHref - Expected base URL (/ or /admin/).
+ * @returns {void}
+ * @throws {Error} When index.html is missing or its base href does not match.
+ */</pre></section><section><h2>spa</h2><small>api/angular-server.js:34</small><pre>/**
+ * Serve a browser build with SPA route fallback; missing asset/private paths return 404.
+ * @param {string} directory - Absolute build directory.
+ * @param {boolean} [privateFiles=false] - Apply no-store to all admin assets.
+ * @returns {import(&quot;express&quot;).Router} Static assets and client-side route middleware.
+ */</pre></section><section><h2>createAngularServer</h2><small>api/angular-server.js:71</small><pre>/**
+ * Assemble the same-origin public Angular app, protected admin app and existing REST API.
+ * @param {object} [options={}] - Optional config, publicDir, adminDir and API overrides for testing/hosting.
+ * @returns {import(&quot;express&quot;).Express} Express app; the caller owns listening and shutdown.
+ * @throws {Error} When either browser build is missing or has an incorrect base href.
+ */</pre></section><section><h2>readConfig</h2><small>api/config.js:22</small><pre>/**
+ * Read and validate runtime settings; production requires HTTPS and explicit admin/database settings.
+ * @param {Object&lt;string, string|undefined&gt;} [env=process.env] - Environment variable map.
+ * @returns {object} Normalized server, origin, administrator and database settings.
+ * @throws {Error} When credentials, origins or numeric ranges are inconsistent.
+ */</pre></section><section><h2>testConnection</h2><small>api/event_db.js:15</small><pre>/**
+ * Ping a pooled database connection and release it even when ping fails.
+ * @returns {Promise&lt;void&gt;} Resolves when MariaDB responds.
+ * @throws {Error} When the connection or ping fails.
+ */</pre></section><section><h2>getEventRegistrations</h2><small>api/event_db.js:30</small><pre>/**
+ * Read the public attendee list, newest registration first; email is deliberately omitted.
+ * @param {number} eventId - Validated positive event identifier.
+ * @returns {Promise&lt;Array&lt;object&gt;&gt;} Attendees with UTC ISO registration timestamps.
+ */</pre></section><section><h2>createRegistration</h2><small>api/event_db.js:54</small><pre>/**
+ * Create one registration in a transaction, locking the event before writing.
+ * The parent lock serializes registration with event suspension and deletion.
+ * @param {number} eventId - Validated positive identifier of an active event.
+ * @param {{name: string, email: string, tickets: number}} input - Validated, normalized registration data.
+ * @returns {Promise&lt;object&gt;} Persisted receipt, including its identifier and UTC timestamp.
+ * @throws {Error} EVENT_NOT_FOUND for missing/inactive events, ER_DUP_ENTRY for repeated event/email pairs, or a database error.
+ */</pre></section><section><h2>validEmail</h2><small>api/registration.js:10</small><pre>/**
+ * Validate the ASCII email format accepted by registration without testing mailbox existence.
+ * @param {string} email - Trimmed, lowercase input from the route.
+ * @returns {boolean} Whether the address satisfies length and syntax constraints.
+ */</pre></section><section><h2>App</h2><small>angular/projects/public/src/app/app.ts:6</small><pre>/**
+ * Persistent public application shell: app.html defines Header, Nav, main/router-outlet and Footer once for all public routes.
+ */</pre></section><section><h2>loadState</h2><small>angular/projects/public/src/app/event-view.ts:14</small><pre>/**
+ * Convert an HTTP stream into accessible loading, ready and error UI states.
+ * @param request - Observable request; cancelled when the consuming subscription ends.
+ * @param message - Fallback user-facing error message.
+ * @param missing - Optional replacement message for HTTP 404.
+ * @returns State stream with a 15-second request timeout and an initial loading state.
+ */</pre></section><section><h2>progressPercent</h2><small>angular/projects/public/src/app/event-view.ts:60</small><pre>/**
+ * Calculate the fundraising progress bar value.
+ * @param raised - Funds raised as a number or API decimal string.
+ * @param goal - Fundraising target as a number or API decimal string.
+ * @returns Percentage clamped to 0..100; zero for a non-positive goal.
+ */</pre></section><section><h2>eventTiming</h2><small>angular/projects/public/src/app/event-view.ts:65</small><pre>/** Match the original site&#39;s calendar-day labels in Brisbane, independent of the host timezone. */</pre></section><section><h2>nameValidator</h2><small>angular/projects/public/src/app/registration-validation.ts:3</small><pre>/** Match the existing Express registration contract; the server remains authoritative. */</pre></section><section><h2>emailValidator</h2><small>angular/projects/public/src/app/registration-validation.ts:14</small><pre>/**
+ * Check normalized email syntax against the server registration contract.
+ * @param control - Email form control; values are trimmed and lowercased for validation.
+ * @returns An email error or null. Server-side validation remains authoritative.
+ */</pre></section><section><h2>ticketsValidator</h2><small>angular/projects/public/src/app/registration-validation.ts:45</small><pre>/**
+ * Require a positive whole ticket count within the signed MySQL INT limit.
+ * @param control - Ticket-count form control.
+ * @returns A tickets error or null for integers from 1 to 2147483647.
+ */</pre></section><section><h2>RegistrationPage</h2><small>angular/projects/public/src/app/registration.ts:36</small><pre>/**
+ * Reactive registration page: validates input, prevents repeated pending submissions and keeps the receipt tied to the selected event.
+ */</pre></section><section><h2>brisbaneDay</h2><small>angular/projects/public/src/app/weather.ts:21</small><pre>/**
+ * Convert an instant into a Brisbane calendar date, independent of the browser timezone.
+ * @param date - Valid JavaScript Date to format.
+ * @returns Calendar date in YYYY-MM-DD form.
+ */</pre></section><section><h2>readForecast</h2><small>angular/projects/public/src/app/weather.ts:78</small><pre>/**
+ * Validate Open-Meteo daily arrays and extract the requested event-day forecast.
+ * @param body - Untrusted JSON response from the weather provider.
+ * @param date - Brisbane date key in YYYY-MM-DD form.
+ * @returns Ready weather or an unavailable state when the requested day is absent.
+ * @throws Error when response arrays, Celsius units or selected values are invalid.
+ */</pre></section><section><h2>load</h2><small>angular/projects/public/src/app/weather.ts:133</small><pre>/**
+   * Load weather only for valid coordinates and dates from today through the next 15 Brisbane days.
+   * @param event - Event coordinates and an ISO timestamp with an explicit timezone.
+   * @returns Lazy stream of loading/ready/unavailable/error states; timeout or network failure becomes a UI error after at most 10 seconds.
+   */</pre></section><section><h2>App</h2><small>angular/projects/admin/src/app/app.ts:7</small><pre>/**
+ * Persistent management shell: Header, Nav, main/router-outlet and Footer are reused across all Angular admin routes.
+ */</pre></section><section><h2>EventActions</h2><small>angular/projects/admin/src/app/event-actions.ts:17</small><pre>/**
+ * Reusable row actions with confirmation, in-flight locking and server-authoritative registration protection.
+ */</pre></section><section><h2>validateDraft</h2><small>angular/projects/admin/src/app/event-fields.ts:33</small><pre>/** Keep these browser checks aligned with the authoritative API admin-validation rules. */</pre></section><section><h2>EventFormPage</h2><small>angular/projects/admin/src/app/event-form.ts:27</small><pre>/**
+ * Shared create/edit page with field validation, API lookup data, preserved registration records and focus on invalid input.
+ */</pre></section><section><h2>EventListPage</h2><small>angular/projects/admin/src/app/event-list.ts:12</small><pre>/**
+ * Management event list with client-side name/location/category filtering and separate status filtering.
+ */</pre></section><section><h2>EventRegistrationsPage</h2><small>angular/projects/admin/src/app/event-registrations.ts:12</small><pre>/**
+ * Per-event registration roster with name filtering and a ticket total; cancels stale requests when the event changes.
+ */</pre></section><section><h2>FirstStatement</h2><small>angular/projects/shared/src/lib/api.ts:19</small><pre>/** Override per application when a verified deployment uses a different API prefix. */</pre></section><section><h2>health</h2><small>angular/projects/shared/src/lib/api.ts:29</small><pre>/**
+   * Read API/database health.
+   * @returns Observable health response; failures propagate to the caller.
+   */</pre></section><section><h2>categories</h2><small>angular/projects/shared/src/lib/api.ts:36</small><pre>/**
+   * Read categories used by public search.
+   * @returns Observable category list.
+   */</pre></section><section><h2>upcoming</h2><small>angular/projects/shared/src/lib/api.ts:43</small><pre>/**
+   * Read active upcoming events from the public API.
+   * @returns Observable event summaries.
+   */</pre></section><section><h2>search</h2><small>angular/projects/shared/src/lib/api.ts:51</small><pre>/**
+   * Search public events with non-empty query parameters.
+   * @param filters - Optional search criteria; blank values are omitted.
+   * @returns Observable matching event summaries.
+   */</pre></section><section><h2>detail</h2><small>angular/projects/shared/src/lib/api.ts:64</small><pre>/**
+   * Read public event details and the email-free attendee list.
+   * @param eventId - Validated positive event identifier.
+   * @returns Observable event detail; HTTP errors propagate.
+   */</pre></section><section><h2>register</h2><small>angular/projects/shared/src/lib/api.ts:73</small><pre>/**
+   * Submit a registration; the server validates input, availability and uniqueness.
+   * @param eventId - Selected event identifier.
+   * @param input - Name, email and ticket count.
+   * @returns Observable receipt; duplicate registration is reported by HTTP 409.
+   */</pre></section><section><h2>events</h2><small>angular/projects/shared/src/lib/api.ts:89</small><pre>/**
+   * Read all management events with display status and registration counts.
+   * @returns Observable summaries; authentication errors propagate.
+   */</pre></section><section><h2>organisations</h2><small>angular/projects/shared/src/lib/api.ts:96</small><pre>/**
+   * Read available event organisations.
+   * @returns Observable organisation list.
+   */</pre></section><section><h2>detail</h2><small>angular/projects/shared/src/lib/api.ts:104</small><pre>/**
+   * Read editable event fields and associated registrations.
+   * @param eventId - Validated identifier.
+   * @returns Observable management event detail.
+   */</pre></section><section><h2>create</h2><small>angular/projects/shared/src/lib/api.ts:112</small><pre>/**
+   * Create a validated event through the admin API.
+   * @param input - Complete event input.
+   * @returns Observable creation result.
+   */</pre></section><section><h2>update</h2><small>angular/projects/shared/src/lib/api.ts:121</small><pre>/**
+   * Replace editable event fields while retaining registrations.
+   * @param eventId - Target event identifier.
+   * @param input - Complete event input.
+   * @returns Observable mutation result.
+   */</pre></section><section><h2>delete</h2><small>angular/projects/shared/src/lib/api.ts:129</small><pre>/**
+   * Request deletion; existing registrations are protected by the server.
+   * @param eventId - Target event identifier.
+   * @returns Observable mutation result; HTTP 409 means deletion is blocked.
+   */</pre></section><section><h2>Decimal</h2><small>angular/projects/shared/src/lib/models.ts:2</small><pre>/** Contracts for the existing Express API. MySQL DECIMAL values are serialized as strings. */</pre></section><section><h2>Attendee</h2><small>angular/projects/shared/src/lib/models.ts:28</small><pre>/** Both public and admin attendee lists intentionally omit email. */</pre></section><section><h2>AdminEventSummary</h2><small>angular/projects/shared/src/lib/models.ts:65</small><pre>/** Admin list is a different projection from the public event summary. */</pre></section><section><h2>EventInput</h2><small>angular/projects/shared/src/lib/models.ts:77</small><pre>/** Writes use Brisbane local wall time without an offset, unlike response timestamps. */</pre></section></html>
