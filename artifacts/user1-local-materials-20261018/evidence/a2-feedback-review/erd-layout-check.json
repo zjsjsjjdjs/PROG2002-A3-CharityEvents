@@ -1,0 +1,515 @@
+[
+  {
+    "text": "A3 Charity Events — Entity Relationship Diagram",
+    "box": {
+      "x": 34,
+      "y": 19,
+      "width": 751.390625,
+      "height": 36
+    }
+  },
+  {
+    "text": "Derived from database/a3-fresh-install.sql · PK primary key · FK foreign key · UQ unique",
+    "box": {
+      "x": 35,
+      "y": 64,
+      "width": 783.640625,
+      "height": 22
+    }
+  },
+  {
+    "text": "organisations",
+    "box": {
+      "x": 51,
+      "y": 150,
+      "width": 144.25,
+      "height": 25
+    }
+  },
+  {
+    "text": "organisation_id  INT  [PK]",
+    "box": {
+      "x": 51,
+      "y": 197,
+      "width": 183.96875,
+      "height": 19
+    }
+  },
+  {
+    "text": "name  VARCHAR(120)",
+    "box": {
+      "x": 51,
+      "y": 226,
+      "width": 169.13525390625,
+      "height": 19
+    }
+  },
+  {
+    "text": "mission  VARCHAR(500)",
+    "box": {
+      "x": 51,
+      "y": 255,
+      "width": 184.234375,
+      "height": 19
+    }
+  },
+  {
+    "text": "contact_email  VARCHAR(120)",
+    "box": {
+      "x": 51,
+      "y": 284,
+      "width": 231.4990234375,
+      "height": 19
+    }
+  },
+  {
+    "text": "contact_phone  VARCHAR(30)",
+    "box": {
+      "x": 51,
+      "y": 313,
+      "width": 228.693359375,
+      "height": 19
+    }
+  },
+  {
+    "text": "website_url  VARCHAR(255)",
+    "box": {
+      "x": 50,
+      "y": 342,
+      "width": 213.59814453125,
+      "height": 19
+    }
+  },
+  {
+    "text": "categories",
+    "box": {
+      "x": 1226,
+      "y": 150,
+      "width": 110.0625,
+      "height": 25
+    }
+  },
+  {
+    "text": "category_id  INT  [PK]",
+    "box": {
+      "x": 1226,
+      "y": 197,
+      "width": 156.546875,
+      "height": 19
+    }
+  },
+  {
+    "text": "name  VARCHAR(80)  [UQ]",
+    "box": {
+      "x": 1226,
+      "y": 226,
+      "width": 199.015625,
+      "height": 19
+    }
+  },
+  {
+    "text": "description  VARCHAR(255)",
+    "box": {
+      "x": 1226,
+      "y": 255,
+      "width": 208.8212890625,
+      "height": 19
+    }
+  },
+  {
+    "text": "events",
+    "box": {
+      "x": 596,
+      "y": 250,
+      "width": 69.71875,
+      "height": 25
+    }
+  },
+  {
+    "text": "event_id  INT  [PK]",
+    "box": {
+      "x": 596,
+      "y": 297,
+      "width": 132.921875,
+      "height": 19
+    }
+  },
+  {
+    "text": "organisation_id  INT  [FK]",
+    "box": {
+      "x": 596,
+      "y": 326,
+      "width": 183,
+      "height": 19
+    }
+  },
+  {
+    "text": "category_id  INT  [FK]",
+    "box": {
+      "x": 596,
+      "y": 355,
+      "width": 155.59375,
+      "height": 19
+    }
+  },
+  {
+    "text": "name  VARCHAR(150)",
+    "box": {
+      "x": 596,
+      "y": 384,
+      "width": 169.13525390625,
+      "height": 19
+    }
+  },
+  {
+    "text": "event_datetime  DATETIME",
+    "box": {
+      "x": 596,
+      "y": 413,
+      "width": 205.65625,
+      "height": 19
+    }
+  },
+  {
+    "text": "location  VARCHAR(180)",
+    "box": {
+      "x": 596,
+      "y": 442,
+      "width": 185.20556640625,
+      "height": 19
+    }
+  },
+  {
+    "text": "purpose  VARCHAR(255)",
+    "box": {
+      "x": 596,
+      "y": 471,
+      "width": 188.04443359375,
+      "height": 19
+    }
+  },
+  {
+    "text": "short_description  VARCHAR(300)",
+    "box": {
+      "x": 596,
+      "y": 500,
+      "width": 256.0693359375,
+      "height": 19
+    }
+  },
+  {
+    "text": "full_description  TEXT",
+    "box": {
+      "x": 595,
+      "y": 529,
+      "width": 162.875,
+      "height": 19
+    }
+  },
+  {
+    "text": "ticket_price  DECIMAL(8, 2)",
+    "box": {
+      "x": 595,
+      "y": 558,
+      "width": 207.28955078125,
+      "height": 19
+    }
+  },
+  {
+    "text": "fundraising_goal  DECIMAL(10, 2)",
+    "box": {
+      "x": 595,
+      "y": 587,
+      "width": 255.525390625,
+      "height": 19
+    }
+  },
+  {
+    "text": "current_progress  DECIMAL(10, 2)",
+    "box": {
+      "x": 596,
+      "y": 616,
+      "width": 258.26904296875,
+      "height": 19
+    }
+  },
+  {
+    "text": "status  ENUM('active', 'suspended')",
+    "box": {
+      "x": 596,
+      "y": 645,
+      "width": 261.8134765625,
+      "height": 19
+    }
+  },
+  {
+    "text": "latitude  DECIMAL(9, 6)",
+    "box": {
+      "x": 596,
+      "y": 674,
+      "width": 175.12841796875,
+      "height": 19
+    }
+  },
+  {
+    "text": "longitude  DECIMAL(9, 6)",
+    "box": {
+      "x": 596,
+      "y": 703,
+      "width": 189.314453125,
+      "height": 19
+    }
+  },
+  {
+    "text": "created_at  TIMESTAMP",
+    "box": {
+      "x": 596,
+      "y": 732,
+      "width": 182.671875,
+      "height": 19
+    }
+  },
+  {
+    "text": "updated_at  TIMESTAMP",
+    "box": {
+      "x": 596,
+      "y": 761,
+      "width": 187.421875,
+      "height": 19
+    }
+  },
+  {
+    "text": "registrations",
+    "box": {
+      "x": 596,
+      "y": 880,
+      "width": 133.265625,
+      "height": 25
+    }
+  },
+  {
+    "text": "registration_id  INT  [PK]",
+    "box": {
+      "x": 596,
+      "y": 927,
+      "width": 175.4375,
+      "height": 19
+    }
+  },
+  {
+    "text": "event_id  INT  [FK]",
+    "box": {
+      "x": 596,
+      "y": 956,
+      "width": 131.96875,
+      "height": 19
+    }
+  },
+  {
+    "text": "name  VARCHAR(120)",
+    "box": {
+      "x": 596,
+      "y": 985,
+      "width": 169.13525390625,
+      "height": 19
+    }
+  },
+  {
+    "text": "email  VARCHAR(254)",
+    "box": {
+      "x": 596,
+      "y": 1014,
+      "width": 167.234375,
+      "height": 19
+    }
+  },
+  {
+    "text": "registered_at  TIMESTAMP",
+    "box": {
+      "x": 596,
+      "y": 1043,
+      "width": 201.5625,
+      "height": 19
+    }
+  },
+  {
+    "text": "tickets  INT",
+    "box": {
+      "x": 595,
+      "y": 1072,
+      "width": 81.90087890625,
+      "height": 19
+    }
+  },
+  {
+    "text": "1",
+    "box": {
+      "x": 517,
+      "y": 189,
+      "width": 11.125,
+      "height": 22
+    }
+  },
+  {
+    "text": "0..*",
+    "box": {
+      "x": 529,
+      "y": 339,
+      "width": 25.90087890625,
+      "height": 19
+    }
+  },
+  {
+    "text": "1",
+    "box": {
+      "x": 1180,
+      "y": 189,
+      "width": 11.125,
+      "height": 22
+    }
+  },
+  {
+    "text": "0..*",
+    "box": {
+      "x": 1147,
+      "y": 368,
+      "width": 25.90087890625,
+      "height": 19
+    }
+  },
+  {
+    "text": "1",
+    "box": {
+      "x": 875,
+      "y": 821,
+      "width": 9.46875,
+      "height": 19
+    }
+  },
+  {
+    "text": "0..*",
+    "box": {
+      "x": 875,
+      "y": 847,
+      "width": 25.90087890625,
+      "height": 19
+    }
+  },
+  {
+    "text": "Relationships",
+    "box": {
+      "x": 35,
+      "y": 502,
+      "width": 120.078125,
+      "height": 22
+    }
+  },
+  {
+    "text": "Each event belongs to one organisation",
+    "box": {
+      "x": 35,
+      "y": 543,
+      "width": 298.671875,
+      "height": 19
+    }
+  },
+  {
+    "text": "and one category.",
+    "box": {
+      "x": 35,
+      "y": 571,
+      "width": 134.84375,
+      "height": 19
+    }
+  },
+  {
+    "text": "An event may have zero or many registrations.",
+    "box": {
+      "x": 34,
+      "y": 611,
+      "width": 352.5,
+      "height": 19
+    }
+  },
+  {
+    "text": "Each registration refers to one event.",
+    "box": {
+      "x": 35,
+      "y": 639,
+      "width": 278.765625,
+      "height": 19
+    }
+  },
+  {
+    "text": "Registration constraints",
+    "box": {
+      "x": 1200,
+      "y": 502,
+      "width": 208.984375,
+      "height": 22
+    }
+  },
+  {
+    "text": "UNIQUE (event_id, email)",
+    "box": {
+      "x": 1200,
+      "y": 543,
+      "width": 196.84326171875,
+      "height": 19
+    }
+  },
+  {
+    "text": "Email comparison is case-insensitive.",
+    "box": {
+      "x": 1200,
+      "y": 571,
+      "width": 282.5,
+      "height": 19
+    }
+  },
+  {
+    "text": "ON DELETE RESTRICT",
+    "box": {
+      "x": 1200,
+      "y": 611,
+      "width": 186.6943359375,
+      "height": 19
+    }
+  },
+  {
+    "text": "ON UPDATE RESTRICT",
+    "box": {
+      "x": 1200,
+      "y": 639,
+      "width": 188.2548828125,
+      "height": 19
+    }
+  },
+  {
+    "text": "tickets > 0; name/email must not be blank.",
+    "box": {
+      "x": 1199,
+      "y": 679,
+      "width": 318.96875,
+      "height": 19
+    }
+  },
+  {
+    "text": "No separate users table: registrant identity is stored on each registration. The same email can register for different events.",
+    "box": {
+      "x": 35,
+      "y": 1125,
+      "width": 915.953125,
+      "height": 19
+    }
+  },
+  {
+    "text": "Admin accounts are environment/session configuration, not a database entity. Weather is retrieved externally and is not stored in these tables.",
+    "box": {
+      "x": 34,
+      "y": 1157,
+      "width": 1068.203125,
+      "height": 19
+    }
+  }
+]

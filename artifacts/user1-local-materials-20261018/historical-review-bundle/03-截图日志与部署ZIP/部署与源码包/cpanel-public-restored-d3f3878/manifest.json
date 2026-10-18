@@ -1,0 +1,7 @@
+{
+  "source_commit": "d3f3878",
+  "archive": "user1-public-restored-d3f3878.zip",
+  "sha256": "16f69118d5d26269224ccb14cee8368bb32383961e5f0d155a8b0496368ea77a",
+  "target_directory": "/home/houyan10/angular-public",
+  "scope": "Public Angular only. No database, API, credentials or admin deployment."
+}

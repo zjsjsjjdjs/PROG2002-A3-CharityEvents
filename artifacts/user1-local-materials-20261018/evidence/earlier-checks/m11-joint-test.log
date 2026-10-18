@@ -1,0 +1,98 @@
+Fresh joint acceptance database: user1_a3_test_joint_1791375259571_a124eb13
+▶ M02 registration database acceptance
+  ✔ at least ten fictional samples and same person in different events (6.6423ms)
+  ✔ case-insensitive duplicate email for one event is rejected (2.3807ms)
+  ✔ same email can register for another event and gets a server timestamp (4.302ms)
+  ✔ nonexistent event is rejected by foreign key (1.5312ms)
+  ✔ event with registrations cannot be deleted (1.4167ms)
+  ✔ zero and negative tickets are rejected by database checks (2.0886ms)
+  ✔ required fields and blank name are rejected (11.9696ms)
+  ✔ public lists are event-specific, newest first, stable for ties and omit emails (7.998ms)
+✔ M02 registration database acceptance (58.9956ms)
+▶ M03 real browser acceptance
+  ✔ shows ordered attendees and preserves event ID when Register is clicked (565.6713ms)
+  ✔ mobile detail shows only the selected event and does not overflow (171.8871ms)
+  ✔ empty and invalid event states are usable (118.9396ms)
+✔ M03 real browser acceptance (1640.0646ms)
+▶ M03 event detail API acceptance
+  ✔ retains A2 fields and returns the selected event attendees, newest first (59.052ms)
+  ✔ another event has only its own registrations (7.3198ms)
+  ✔ event with no attendees returns an empty array (4.2718ms)
+  ✔ invalid, absent and suspended events return explicit errors (12.1847ms)
+✔ M03 event detail API acceptance (103.8591ms)
+▶ M04 registration API acceptance
+  ✔ valid submission is normalized and persisted with server time (78.9953ms)
+  ✔ duplicate registration returns 409; another event accepts the same email (15.6899ms)
+  ✔ required and malformed names are rejected (19.4757ms)
+  ✔ missing, malformed and excessive emails are rejected (19.3936ms)
+  ✔ non-integer, missing, negative and overflow tickets are rejected (13.2661ms)
+  ✔ missing or suspended events cannot receive registrations (9.4675ms)
+  ✔ invalid JSON and non-object bodies return explicit client errors (4.8471ms)
+  ✔ concurrent duplicate requests create exactly one registration (11.6901ms)
+  ✔ SQL-like names are stored as text, without changing existing records (7.3648ms)
+✔ M04 registration API acceptance (203.139ms)
+▶ M05 complete registration browser acceptance
+  ✔ detail navigates to the correct event and registration form loads it (733.1349ms)
+  ✔ missing name, invalid email and illegal tickets show alert dialogs (505.4926ms)
+  ✔ successful submission confirms and returns to detail with the new record first (281.8155ms)
+  ✔ duplicate email displays API error and preserves entered data (189.2238ms)
+  ✔ mobile registration allows the same email for a different event without overflow (264.1142ms)
+  ✔ invalid, absent and suspended events leave the form disabled (189.6146ms)
+  ✔ load failure and submission network failure show actionable feedback (193.6563ms)
+  ✔ double submission is disabled and markup in a name is rendered as text (186.6654ms)
+✔ M05 complete registration browser acceptance (3441.1306ms)
+▶ M06 admin directory and public filtering
+  ✔ all events include Past and Suspended with accurate registration totals (41.744ms)
+  ✔ public search and detail continue hiding suspended events (15.9037ms)
+  ✔ browser filters, empty and failure feedback work on desktop and mobile (938.911ms)
+✔ M06 admin directory and public filtering (1210.4715ms)
+▶ M07 create and validate events
+  ✔ creates a persisted event with category and decimal prices (65.155ms)
+  ✔ rejects malformed fields and foreign keys without inserting rows (53.8751ms)
+  ✔ browser validates, creates, refreshes and keeps safe text content (1697.8591ms)
+✔ M07 create and validate events (2207.3532ms)
+▶ M08 editing and registration preservation
+  ✔ detail returns every form field and uses the shared attendee helper (7.5769ms)
+  ✔ update changes public data, preserves registrations and accepts unchanged saves (23.3468ms)
+  ✔ suspended events stay editable and keep registrations while hidden publicly (13.3832ms)
+  ✔ invalid IDs, missing events and invalid update values are rejected (18.6701ms)
+  ✔ browser prefills Brisbane time, shows attendees and saves changes (1047.4036ms)
+✔ M08 editing and registration preservation (1412.6741ms)
+▶ M09 restricted deletion and registration integration
+  ✔ unregistered event deletes and is absent from public and admin APIs (83.3967ms)
+  ✔ public registration appears in admin and forbids deletion with 409 (31.8572ms)
+  ✔ concurrent registration and deletion cannot produce an orphan or delete a successful registration (65.2163ms)
+  ✔ browser cancel keeps event, confirm deletes, registered event shows refusal (978.0171ms)
+✔ M09 restricted deletion and registration integration (1399.8514ms)
+▶ M10 deployment settings and protected administration
+  ✔ validates ports, explicit production identity and HTTPS configuration (1.4291ms)
+  ✔ protects page and API, accepts correct auth, rejects cross-site writes (65.912ms)
+  ✔ fresh cPanel SQL imports into an empty selected database with all four tables and samples (342.0758ms)
+  ✔ root-directory Passenger entry loads api/.env and serves real DB without exposing credentials (565.8606ms)
+✔ M10 deployment settings and protected administration (977.0385ms)
+▶ M11 joint admin and public registration acceptance
+  ✔ admin-created activity has identical times in every public and admin API (88.9773ms)
+  ✔ browser registers for admin-created activity and admin sees the same persisted record (1291.2907ms)
+  ✔ duplicate and invalid submissions fail without altering registration count (36.3531ms)
+  ✔ admin update and suspension preserve registrations and synchronized times (718.8256ms)
+  ✔ unregistered activity deletes and subsequent public registration returns 404 (24.1039ms)
+✔ M11 joint admin and public registration acceptance (2588.6364ms)
+▶ M11 public A2 regression and registration integration
+  ✔ health and categories remain available (42.909ms)
+  ✔ homepage contains active events from today onward in Brisbane order (28.5583ms)
+  ✔ search supports each filter, AND combinations, empty results and active past events (25.7742ms)
+  ✔ invalid filters remain 400 and SQL-like location input does not broaden results (8.1049ms)
+  ✔ homepage, search and detail preserve the same Brisbane event timestamp (10.0674ms)
+  ✔ A2 homepage cards render and link to their own detail pages (484.5719ms)
+  ✔ A2 search, combined filters, reset and no results work in the browser (254.845ms)
+  ✔ detail and registration display the stored Brisbane time, not the host timezone (145.9345ms)
+✔ M11 public A2 regression and registration integration (1745.3851ms)
+ℹ tests 76
+ℹ suites 0
+ℹ pass 76
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23184.3354
+Disposed owned joint acceptance database: user1_a3_test_joint_1791375259571_a124eb13

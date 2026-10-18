@@ -1,0 +1,172 @@
+{
+  "sourceFile": "E:\\workplace\\user1-A3\\submission\\angular-foundation-worktree\\submission\\cpanel-public-switch\\server.js",
+  "passed": 33,
+  "checks": [
+    {
+      "layout": "angular",
+      "url": "/",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/index.html",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/search?location=Brisbane",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/events/5",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/events/5/register",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/search.html?categoryId=1",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/detail.html?id=5",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/register.html?id=5",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/connection",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/main-JN7URAKK.js",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/styles-3H5CMAQN.css",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/api/not-a-route",
+      "status": 404
+    },
+    {
+      "layout": "angular",
+      "url": "/missing.js",
+      "status": 404
+    },
+    {
+      "layout": "angular",
+      "url": "/.env",
+      "status": 404
+    },
+    {
+      "layout": "angular",
+      "url": "/api/.env",
+      "status": 404
+    },
+    {
+      "layout": "angular",
+      "url": "/api/admin/events",
+      "status": 401
+    },
+    {
+      "layout": "angular",
+      "url": "/admin.html",
+      "status": 401
+    },
+    {
+      "layout": "angular",
+      "url": "/admin-event.html?id=5",
+      "status": 401
+    },
+    {
+      "layout": "angular",
+      "url": "/admin.html",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/admin-event.html?id=5",
+      "status": 200
+    },
+    {
+      "layout": "angular",
+      "url": "/assets/js/admin.js",
+      "status": 200
+    },
+    {
+      "layout": "legacy",
+      "url": "/",
+      "status": 200
+    },
+    {
+      "layout": "legacy",
+      "url": "/detail.html?id=5",
+      "status": 200
+    },
+    {
+      "layout": "legacy",
+      "url": "/api/not-a-route",
+      "status": 404
+    },
+    {
+      "layout": "legacy",
+      "url": "/missing.js",
+      "status": 404
+    },
+    {
+      "layout": "legacy",
+      "url": "/.env",
+      "status": 404
+    },
+    {
+      "layout": "legacy",
+      "url": "/api/.env",
+      "status": 404
+    },
+    {
+      "layout": "legacy",
+      "url": "/api/admin/events",
+      "status": 401
+    },
+    {
+      "layout": "legacy",
+      "url": "/admin.html",
+      "status": 401
+    },
+    {
+      "layout": "legacy",
+      "url": "/admin-event.html?id=5",
+      "status": 401
+    },
+    {
+      "layout": "legacy",
+      "url": "/admin.html",
+      "status": 200
+    },
+    {
+      "layout": "legacy",
+      "url": "/admin-event.html?id=5",
+      "status": 200
+    },
+    {
+      "layout": "legacy",
+      "url": "/assets/js/admin.js",
+      "status": 200
+    }
+  ],
+  "businessDatabaseUsed": false
+}

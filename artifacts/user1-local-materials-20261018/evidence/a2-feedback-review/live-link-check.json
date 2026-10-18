@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://24832591.it.scu.edu.au/",
+    "status": 200,
+    "final_url": "https://24832591.it.scu.edu.au/",
+    "content_type": "text/html; charset=UTF-8"
+  },
+  {
+    "url": "https://24832591.it.scu.edu.au/api/health",
+    "status": 200,
+    "final_url": "https://24832591.it.scu.edu.au/api/health",
+    "content_type": "application/json; charset=utf-8"
+  },
+  {
+    "url": "https://24832591.it.scu.edu.au/admin/",
+    "status": 200,
+    "final_url": "https://24832591.it.scu.edu.au/admin/login?returnTo=%2Fadmin%2F",
+    "content_type": "text/html; charset=utf-8"
+  }
+]

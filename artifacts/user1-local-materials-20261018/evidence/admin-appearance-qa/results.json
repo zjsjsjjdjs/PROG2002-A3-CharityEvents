@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-16T13:29:03.490Z",
+  "result": "passed",
+  "screenshots": [
+    {
+      "name": "old-list",
+      "width": 1440,
+      "url": "/legacy/admin.html"
+    },
+    {
+      "name": "restored-list",
+      "width": 1440,
+      "url": "/admin/events"
+    },
+    {
+      "name": "old-edit",
+      "width": 1440,
+      "url": "/legacy/admin-event.html?id=5"
+    },
+    {
+      "name": "restored-edit",
+      "width": 1440,
+      "url": "/admin/events/5/edit"
+    },
+    {
+      "name": "restored-create",
+      "width": 1440,
+      "url": "/admin/events/new"
+    },
+    {
+      "name": "restored-roster",
+      "width": 1440,
+      "url": "/admin/events/5/registrations"
+    },
+    {
+      "name": "old-list",
+      "width": 390,
+      "url": "/legacy/admin.html"
+    },
+    {
+      "name": "restored-list",
+      "width": 390,
+      "url": "/admin/events"
+    },
+    {
+      "name": "old-edit",
+      "width": 390,
+      "url": "/legacy/admin-event.html?id=5"
+    },
+    {
+      "name": "restored-edit",
+      "width": 390,
+      "url": "/admin/events/5/edit"
+    },
+    {
+      "name": "restored-create",
+      "width": 390,
+      "url": "/admin/events/new"
+    },
+    {
+      "name": "restored-roster",
+      "width": 390,
+      "url": "/admin/events/5/registrations"
+    }
+  ],
+  "checks": [
+    "1440/390 layout and no page overflow",
+    "320 px form without page overflow",
+    "invalid submit focuses first field",
+    "search empty state and clear filters",
+    "status filter",
+    "cancel and confirm unregistered event deletion",
+    "no unhandled browser errors"
+  ],
+  "limitations": "Local sample database only; cPanel unchanged."
+}

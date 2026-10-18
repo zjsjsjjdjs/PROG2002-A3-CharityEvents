@@ -1,0 +1,25 @@
+> Building...
+√ Building...
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-WUE7RZMO.js    | main          | 363.47 kB |                95.63 kB
+styles-F6UPIFJF.css | styles        |  11.11 kB |                 2.54 kB
+
+                    | Initial total | 374.58 kB |                98.17 kB
+
+Application bundle generation complete. [13.150 seconds] - 2026-10-17T14:54:13.347Z
+
+Output location: E:\workplace\user1-A3\submission\angular-admin-appearance-worktree\submission\angular-release-2026-10-17T14-53-41-915Z\build\public
+
+> Building...
+√ Building...
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-OK6VEMMB.js    | main          | 361.20 kB |                94.79 kB
+styles-RJBLR4YC.css | styles        |   8.81 kB |                 2.10 kB
+
+                    | Initial total | 370.01 kB |                96.89 kB
+
+Application bundle generation complete. [2.951 seconds] - 2026-10-17T14:54:17.084Z
+
+Output location: E:\workplace\user1-A3\submission\angular-admin-appearance-worktree\submission\angular-release-2026-10-17T14-53-41-915Z\build\admin
+
+RELEASE_DIRECTORY=E:\workplace\user1-A3\submission\angular-admin-appearance-worktree\submission\angular-release-2026-10-17T14-53-41-915Z

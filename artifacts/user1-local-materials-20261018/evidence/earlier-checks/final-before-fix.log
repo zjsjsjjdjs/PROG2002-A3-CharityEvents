@@ -1,0 +1,99 @@
+▶ Final regression for the three reported backend issues
+  ✖ failed refresh preserves error through filtering and loading until successful retry (5615.3247ms)
+  ✖ invalid editor IDs fail before event requests and valid and new forms load (5341.2687ms)
+  ✖ existing .env aborts setup before any connection query or configuration write (6.0619ms)
+✖ Final regression for the three reported backend issues (11364.805ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12223.0656
+
+✖ failing tests:
+
+test at test\final-regression.test.js:15:13
+✖ failed refresh preserves error through filtering and loading until successful retry (5615.3247ms)
+  Error: expect(locator).toHaveCount(expected) failed
+  
+  Locator:  locator('#admin-events tr')
+  Expected: 0
+  Received: 1
+  Timeout:  5000ms
+  
+  Call log:
+    - Expect "toHaveCount" locator('#admin-events tr') with timeout 5000ms
+    - waiting for locator('#admin-events tr')
+      14 × locator resolved to 1 element
+         - unexpected value "1"
+  
+      at captureRawStack (E:\workplace\user1-A3\api\node_modules\playwright-core\lib\coreBundle.js:8588:17)
+      at callMatcherAsStep (E:\workplace\user1-A3\api\node_modules\playwright\lib\matchers\expect.js:13310:57)
+      at Object.toHaveCount (E:\workplace\user1-A3\api\node_modules\playwright\lib\matchers\expect.js:13302:23)
+      at TestContext.<anonymous> (E:\workplace\user1-A3\api\test\final-regression.test.js:26:56)
+      at async TestContext.<anonymous> (E:\workplace\user1-A3\api\test\final-regression.test.js:15:5) {
+    matcherResult: { actual: 1, expected: 0, message: `expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('#admin-events tr')\nExpected: 0\nReceived: 1\nTimeout:  5000ms\n\nCall log:\n  - Expect "toHaveCount" locator('#admin-events tr') with timeout 5000ms\n  - waiting for locator('#admin-events tr')\n    14 × locator resolved to 1 element\n       - unexpected value "1"\n`, name: 'toHaveCount', pass: false, log: [ `  - Expect "toHaveCount" locator('#admin-events tr') with timeout 5000ms`, "  - waiting for locator('#admin-events tr')", '    14 × locator resolved to 1 element', '       - unexpected value "1"' ], timeout: 5000, ariaSnapshot: undefined }
+  }
+
+test at test\final-regression.test.js:44:13
+✖ invalid editor IDs fail before event requests and valid and new forms load (5341.2687ms)
+  Error: expect(locator).toContainText(expected) failed
+  
+  Locator: locator('#form-status')
+  Expected substring: "Invalid event ID"
+  Received string:    "All fields are required except coordinates."
+  Timeout: 5000ms
+  
+  Call log:
+    - Expect "toContainText" locator('#form-status') with timeout 5000ms
+    - waiting for locator('#form-status')
+      14 × locator resolved to <p role="status" id="form-status" aria-live="polite" data-error="false" class="form-message">All fields are required except coordinates.</p>
+         - unexpected value "All fields are required except coordinates."
+  
+      at captureRawStack (E:\workplace\user1-A3\api\node_modules\playwright-core\lib\coreBundle.js:8588:17)
+      at callMatcherAsStep (E:\workplace\user1-A3\api\node_modules\playwright\lib\matchers\expect.js:13310:57)
+      at Object.toContainText (E:\workplace\user1-A3\api\node_modules\playwright\lib\matchers\expect.js:13302:23)
+      at TestContext.<anonymous> (E:\workplace\user1-A3\api\test\final-regression.test.js:50:54)
+      at async TestContext.<anonymous> (E:\workplace\user1-A3\api\test\final-regression.test.js:44:5) {
+    matcherResult: { name: 'toContainText', expected: 'Invalid event ID', message: `expect(locator).toContainText(expected) failed\n\nLocator: locator('#form-status')\nExpected substring: "Invalid event ID"\nReceived string:    "All fields are required except coordinates."\nTimeout: 5000ms\n\nCall log:\n  - Expect "toContainText" locator('#form-status') with timeout 5000ms\n  - waiting for locator('#form-status')\n    14 × locator resolved to <p role="status" id="form-status" aria-live="polite" data-error="false" class="form-message">All fields are required except coordinates.</p>\n       - unexpected value "All fields are required except coordinates."\n`, pass: false, actual: 'All fields are required except coordinates.', log: [ `  - Expect "toContainText" locator('#form-status') with timeout 5000ms`, "  - waiting for locator('#form-status')", '    14 × locator resolved to <p role="status" id="form-status" aria-live="polite" data-error="false" class="form-message">All fields are required except coordinates.</p>', '       - unexpected value "All fields are required except coordinates."' ], timeout: 5000, ariaSnapshot: '- status: All fields are required except coordinates.' }
+  }
+
+test at test\final-regression.test.js:63:13
+✖ existing .env aborts setup before any connection query or configuration write (6.0619ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'read',
+  +   'connect',
+  +   'query',
+  +   'query',
+  +   'read',
+  +   'query',
+  +   'read',
+  +   'query',
+  +   'read',
+  +   'query'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (E:\workplace\user1-A3\api\test\final-regression.test.js:86:14)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async TestContext.<anonymous> (E:\workplace\user1-A3\api\test\final-regression.test.js:63:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [
+      'read',  'connect',
+      'query', 'query',
+      'read',  'query',
+      'read',  'query',
+      'read',  'query'
+    ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

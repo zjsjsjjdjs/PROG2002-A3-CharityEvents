@@ -1,0 +1,11 @@
+PASS: Production admin creates a persisted event with Brisbane time and coordinates
+PASS: Production public search/detail reload and event-day weather consume admin-created data
+PASS: Public registration appears in Angular admin; keyboard confirmation and Brisbane time are consistent
+PASS: Admin updates propagate to public without losing registrations
+PASS: Existing API refuses deletion of the publicly registered event
+PASS: Angular admin suspension blocks an already-open public form and retains existing attendees
+PASS: Built SPA supports legacy bookmarks, direct routes, unknown-page recovery and keyboard skip link
+PASS: Local deployment model keeps API errors and missing assets outside SPA fallback
+PASS: Public built pages fit 320 px, 390 px and tablet widths
+PASS: No unhandled browser errors or unintended extra registration
+Disposed this run's isolated database and servers.

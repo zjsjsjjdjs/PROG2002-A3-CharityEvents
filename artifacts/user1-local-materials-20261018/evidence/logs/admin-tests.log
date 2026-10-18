@@ -1,0 +1,13 @@
+> Building...
+√ Building...
+Application bundle generation complete. [2.810 seconds] - 2026-10-16T13:27:14.430Z
+
+
+ RUN  v5.0.4 E:/workplace/user1-A3/submission/angular-admin-appearance-worktree/angular
+
+
+ Test Files  2 passed (2)
+      Tests  28 passed (28)
+   Start at  21:27:17
+   Duration  20.89s (environment 94%, setup 2%, tests 2%, import 1%, transform 1%)
+

@@ -1,0 +1,21 @@
+PASS: Home loads upcoming events from real Express and database
+PASS: Combined date/location/category filters survive direct reload
+PASS: Detail shows Brisbane wall time on a UTC+8 browser and restores search
+PASS: Empty results and clear filters recover correctly
+PASS: Failed search hides stale results and retry recovers
+PASS: Suspended and invalid events cannot expose a registration action
+PASS: Angular form prevents invalid submissions before database writes
+PASS: Angular registration confirms and refreshes real attendee data, retaining search filters
+PASS: Duplicate email with changed case/spacing is rejected without losing input
+PASS: The same email can register for a different event
+PASS: Network failure keeps input and a deliberate retry can succeed
+PASS: Suspension between loading and submit blocks registration safely
+PASS: Legacy registration bookmarks open Angular; duplicate IDs are rejected
+PASS: All four public pages fit a 390 px viewport
+PASS: Weather loading is independent; event-day forecast, Celsius and attribution render
+PASS: Failed weather does not block registration; deliberate retry recovers
+PASS: Malformed and missing-day provider data never show fabricated temperatures
+PASS: Missing coordinates, distant and past dates avoid unnecessary provider requests
+PASS: Weather success and retry states fit mobile screens
+PASS: No unhandled browser page errors
+Disposed this run's isolated database.

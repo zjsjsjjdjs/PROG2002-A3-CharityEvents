@@ -1,0 +1,25 @@
+﻿A3 技术交付包（与个人资料分开）
+
+1. 01-代码提交包：houyan10A3-clientside.zip、houyan10A3-adminside.zip、houyan10A3-api.zip。
+   这三份对应课程列出的代码包名称，包含可编辑源码和对应运行文件。
+2. 02-cPanel备用部署包：complete-cpanel-release.zip，完整运行目录的备份/重新安装包。
+   你当前网站已部署正常，本次不需要再次部署，也不要把示例 SQL 导入现有数据库。
+3. 03-技术附件：technical-attachments.zip，ERD、源码文档、历史测试截图/日志及本次构建检查。
+
+两份你修改的本地审查文档、正式报告、视频、互评表均未加入这些压缩包，原文件未改动。
+请将这些个人资料按你自己的安排另行打包。本目录不是包含所有材料的一键提交总包。
+代码包中的 docs/ 审查材料被有意分开；代码、SQL、测试、构建脚本完整保留。
+
+源码提交：df0d5e6f21f7c171a2681fe86d182240ae4cfcfb
+来源分支：codex/user1-a2-feedback-fixes
+PR： https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents/pull/22
+打包时 PR #22 尚未合并，main 为 61f293c。本包包含 PR #22 的技术改进；本次没有执行合并或上传。
+公众端： https://24832591.it.scu.edu.au/
+后台： https://24832591.it.scu.edu.au/admin/
+GitHub： https://github.com/zjsjsjjdjs/PROG2002-A3-CharityEvents
+
+验证：公众端和后台重新生产构建通过；两端静态产物与原验收版本逐字节一致；
+三包合并包含所有已跟踪 Angular/API/旧版客户端/数据库/脚本源码；ZIP CRC 与逐文件 SHA256 通过。
+没有声称本次重跑了全部应用测试，也没有自动提交 Moodle。
+manifest.json 记录版本/检查，文件清单.csv 记录压缩包内全部文件，SHA256SUMS.txt 用于核对完整性。
+包内 README.txt/INSTALL.txt 有重建和新环境安装说明，实际密码须私下配置。

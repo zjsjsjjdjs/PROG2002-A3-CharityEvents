@@ -1,0 +1,18 @@
+{
+  "passed": 10,
+  "checks": [
+    "Production admin creates a persisted event with Brisbane time and coordinates",
+    "Production public search/detail reload and event-day weather consume admin-created data",
+    "Public registration appears in Angular admin; keyboard confirmation and Brisbane time are consistent",
+    "Admin updates propagate to public without losing registrations",
+    "Existing API refuses deletion of the publicly registered event",
+    "Angular admin suspension blocks an already-open public form and retains existing attendees",
+    "Built SPA supports legacy bookmarks, direct routes, unknown-page recovery and keyboard skip link",
+    "Local deployment model keeps API errors and missing assets outside SPA fallback",
+    "Public built pages fit 320 px, 390 px and tablet widths",
+    "No unhandled browser errors or unintended extra registration"
+  ],
+  "pageErrors": [],
+  "builtOutput": true,
+  "deployedToCpanel": false
+}

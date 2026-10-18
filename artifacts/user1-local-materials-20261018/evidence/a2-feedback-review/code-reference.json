@@ -1,0 +1,296 @@
+[
+  {
+    "file": "api/admin-session.js",
+    "line": 21,
+    "symbol": "safeReturn",
+    "documentation": "/**\r\n * Restrict post-login navigation to a local admin path and exclude login/logout loops.\r\n * @param {unknown} value - Untrusted returnTo query or form value.\r\n * @returns {string} Sanitized admin path/query, or /admin/ as the safe default.\r\n */"
+  },
+  {
+    "file": "api/admin-session.js",
+    "line": 42,
+    "symbol": "adminSessions",
+    "documentation": "/**\r\n * Create in-memory admin sessions, login throttling and same-origin middleware.\r\n * Sessions expire after one hour and are lost on process restart. Passwords remain server-side.\r\n * @param {object} config - Validated runtime configuration from readConfig.\r\n * @returns {object} Login/logout router plus protect(isApi) and sameOrigin middleware.\r\n */"
+  },
+  {
+    "file": "api/admin_db.js",
+    "line": 9,
+    "symbol": "createEvent",
+    "documentation": "/**\r\n * Insert only the whitelisted event fields using bound SQL parameters.\r\n * @param {object} event - Event data already normalized and validated by the admin route.\r\n * @returns {Promise<number>} Generated event identifier.\r\n * @throws {Error} When database constraints or the insert fail.\r\n */"
+  },
+  {
+    "file": "api/admin_db.js",
+    "line": 21,
+    "symbol": "getEvent",
+    "documentation": "/**\r\n * Read an event and serialize its Brisbane-local DATETIME with an explicit +10:00 offset.\r\n * @param {number} id - Validated event identifier.\r\n * @returns {Promise<object|null>} Event record or null when absent.\r\n */"
+  },
+  {
+    "file": "api/admin_db.js",
+    "line": 33,
+    "symbol": "updateEvent",
+    "documentation": "/**\r\n * Replace editable event fields inside a parent-row transaction; registrations are retained.\r\n * @param {number} id - Validated event identifier.\r\n * @param {object} event - Complete validated event input, not a partial patch.\r\n * @returns {Promise<boolean>} True when updated; false when the event no longer exists.\r\n */"
+  },
+  {
+    "file": "api/admin_db.js",
+    "line": 52,
+    "symbol": "deleteEvent",
+    "documentation": "/**\r\n * Delete only an event with no registrations, using the same parent-first lock order as registration.\r\n * @param {number} id - Validated event identifier.\r\n * @returns {Promise<boolean>} True when deleted; false when absent.\r\n * @throws {Error} EVENT_HAS_REGISTRATIONS when protected, or a database failure; the transaction rolls back.\r\n */"
+  },
+  {
+    "file": "api/admin_db.js",
+    "line": 77,
+    "symbol": "updateEventStatus",
+    "documentation": "/**\r\n * Update status alone while preserving event details and existing registrations.\r\n * @param {number} id - Validated event identifier.\r\n * @param {\"active\"|\"suspended\"} status - Desired state validated by the route.\r\n * @returns {Promise<boolean>} True when updated; false when absent.\r\n */"
+  },
+  {
+    "file": "api/angular-server.js",
+    "line": 14,
+    "symbol": "checkBuild",
+    "documentation": "/**\r\n * Check that a built Angular entry point exists and has the expected deployment base.\r\n * @param {string} directory - Path to the browser build directory.\r\n * @param {string} baseHref - Expected base URL (/ or /admin/).\r\n * @returns {void}\r\n * @throws {Error} When index.html is missing or its base href does not match.\r\n */"
+  },
+  {
+    "file": "api/angular-server.js",
+    "line": 34,
+    "symbol": "spa",
+    "documentation": "/**\r\n * Serve a browser build with SPA route fallback; missing asset/private paths return 404.\r\n * @param {string} directory - Absolute build directory.\r\n * @param {boolean} [privateFiles=false] - Apply no-store to all admin assets.\r\n * @returns {import(\"express\").Router} Static assets and client-side route middleware.\r\n */"
+  },
+  {
+    "file": "api/angular-server.js",
+    "line": 71,
+    "symbol": "createAngularServer",
+    "documentation": "/**\r\n * Assemble the same-origin public Angular app, protected admin app and existing REST API.\r\n * @param {object} [options={}] - Optional config, publicDir, adminDir and API overrides for testing/hosting.\r\n * @returns {import(\"express\").Express} Express app; the caller owns listening and shutdown.\r\n * @throws {Error} When either browser build is missing or has an incorrect base href.\r\n */"
+  },
+  {
+    "file": "api/config.js",
+    "line": 22,
+    "symbol": "readConfig",
+    "documentation": "/**\r\n * Read and validate runtime settings; production requires HTTPS and explicit admin/database settings.\r\n * @param {Object<string, string|undefined>} [env=process.env] - Environment variable map.\r\n * @returns {object} Normalized server, origin, administrator and database settings.\r\n * @throws {Error} When credentials, origins or numeric ranges are inconsistent.\r\n */"
+  },
+  {
+    "file": "api/event_db.js",
+    "line": 15,
+    "symbol": "testConnection",
+    "documentation": "/**\r\n * Ping a pooled database connection and release it even when ping fails.\r\n * @returns {Promise<void>} Resolves when MariaDB responds.\r\n * @throws {Error} When the connection or ping fails.\r\n */"
+  },
+  {
+    "file": "api/event_db.js",
+    "line": 30,
+    "symbol": "getEventRegistrations",
+    "documentation": "/**\r\n * Read the public attendee list, newest registration first; email is deliberately omitted.\r\n * @param {number} eventId - Validated positive event identifier.\r\n * @returns {Promise<Array<object>>} Attendees with UTC ISO registration timestamps.\r\n */"
+  },
+  {
+    "file": "api/event_db.js",
+    "line": 54,
+    "symbol": "createRegistration",
+    "documentation": "/**\r\n * Create one registration in a transaction, locking the event before writing.\r\n * The parent lock serializes registration with event suspension and deletion.\r\n * @param {number} eventId - Validated positive identifier of an active event.\r\n * @param {{name: string, email: string, tickets: number}} input - Validated, normalized registration data.\r\n * @returns {Promise<object>} Persisted receipt, including its identifier and UTC timestamp.\r\n * @throws {Error} EVENT_NOT_FOUND for missing/inactive events, ER_DUP_ENTRY for repeated event/email pairs, or a database error.\r\n */"
+  },
+  {
+    "file": "api/registration.js",
+    "line": 10,
+    "symbol": "validEmail",
+    "documentation": "/**\r\n * Validate the ASCII email format accepted by registration without testing mailbox existence.\r\n * @param {string} email - Trimmed, lowercase input from the route.\r\n * @returns {boolean} Whether the address satisfies length and syntax constraints.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/app.ts",
+    "line": 6,
+    "symbol": "App",
+    "documentation": "/**\r\n * Persistent public application shell: app.html defines Header, Nav, main/router-outlet and Footer once for all public routes.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/event-view.ts",
+    "line": 14,
+    "symbol": "loadState",
+    "documentation": "/**\r\n * Convert an HTTP stream into accessible loading, ready and error UI states.\r\n * @param request - Observable request; cancelled when the consuming subscription ends.\r\n * @param message - Fallback user-facing error message.\r\n * @param missing - Optional replacement message for HTTP 404.\r\n * @returns State stream with a 15-second request timeout and an initial loading state.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/event-view.ts",
+    "line": 60,
+    "symbol": "progressPercent",
+    "documentation": "/**\r\n * Calculate the fundraising progress bar value.\r\n * @param raised - Funds raised as a number or API decimal string.\r\n * @param goal - Fundraising target as a number or API decimal string.\r\n * @returns Percentage clamped to 0..100; zero for a non-positive goal.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/event-view.ts",
+    "line": 65,
+    "symbol": "eventTiming",
+    "documentation": "/** Match the original site's calendar-day labels in Brisbane, independent of the host timezone. */"
+  },
+  {
+    "file": "angular/projects/public/src/app/registration-validation.ts",
+    "line": 3,
+    "symbol": "nameValidator",
+    "documentation": "/** Match the existing Express registration contract; the server remains authoritative. */"
+  },
+  {
+    "file": "angular/projects/public/src/app/registration-validation.ts",
+    "line": 14,
+    "symbol": "emailValidator",
+    "documentation": "/**\r\n * Check normalized email syntax against the server registration contract.\r\n * @param control - Email form control; values are trimmed and lowercased for validation.\r\n * @returns An email error or null. Server-side validation remains authoritative.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/registration-validation.ts",
+    "line": 45,
+    "symbol": "ticketsValidator",
+    "documentation": "/**\r\n * Require a positive whole ticket count within the signed MySQL INT limit.\r\n * @param control - Ticket-count form control.\r\n * @returns A tickets error or null for integers from 1 to 2147483647.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/registration.ts",
+    "line": 36,
+    "symbol": "RegistrationPage",
+    "documentation": "/**\r\n * Reactive registration page: validates input, prevents repeated pending submissions and keeps the receipt tied to the selected event.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/weather.ts",
+    "line": 21,
+    "symbol": "brisbaneDay",
+    "documentation": "/**\r\n * Convert an instant into a Brisbane calendar date, independent of the browser timezone.\r\n * @param date - Valid JavaScript Date to format.\r\n * @returns Calendar date in YYYY-MM-DD form.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/weather.ts",
+    "line": 78,
+    "symbol": "readForecast",
+    "documentation": "/**\r\n * Validate Open-Meteo daily arrays and extract the requested event-day forecast.\r\n * @param body - Untrusted JSON response from the weather provider.\r\n * @param date - Brisbane date key in YYYY-MM-DD form.\r\n * @returns Ready weather or an unavailable state when the requested day is absent.\r\n * @throws Error when response arrays, Celsius units or selected values are invalid.\r\n */"
+  },
+  {
+    "file": "angular/projects/public/src/app/weather.ts",
+    "line": 133,
+    "symbol": "load",
+    "documentation": "/**\r\n   * Load weather only for valid coordinates and dates from today through the next 15 Brisbane days.\r\n   * @param event - Event coordinates and an ISO timestamp with an explicit timezone.\r\n   * @returns Lazy stream of loading/ready/unavailable/error states; timeout or network failure becomes a UI error after at most 10 seconds.\r\n   */"
+  },
+  {
+    "file": "angular/projects/admin/src/app/app.ts",
+    "line": 7,
+    "symbol": "App",
+    "documentation": "/**\r\n * Persistent management shell: Header, Nav, main/router-outlet and Footer are reused across all Angular admin routes.\r\n */"
+  },
+  {
+    "file": "angular/projects/admin/src/app/event-actions.ts",
+    "line": 17,
+    "symbol": "EventActions",
+    "documentation": "/**\r\n * Reusable row actions with confirmation, in-flight locking and server-authoritative registration protection.\r\n */"
+  },
+  {
+    "file": "angular/projects/admin/src/app/event-fields.ts",
+    "line": 33,
+    "symbol": "validateDraft",
+    "documentation": "/** Keep these browser checks aligned with the authoritative API admin-validation rules. */"
+  },
+  {
+    "file": "angular/projects/admin/src/app/event-form.ts",
+    "line": 27,
+    "symbol": "EventFormPage",
+    "documentation": "/**\r\n * Shared create/edit page with field validation, API lookup data, preserved registration records and focus on invalid input.\r\n */"
+  },
+  {
+    "file": "angular/projects/admin/src/app/event-list.ts",
+    "line": 12,
+    "symbol": "EventListPage",
+    "documentation": "/**\r\n * Management event list with client-side name/location/category filtering and separate status filtering.\r\n */"
+  },
+  {
+    "file": "angular/projects/admin/src/app/event-registrations.ts",
+    "line": 12,
+    "symbol": "EventRegistrationsPage",
+    "documentation": "/**\r\n * Per-event registration roster with name filtering and a ticket total; cancels stale requests when the event changes.\r\n */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 19,
+    "symbol": "FirstStatement",
+    "documentation": "/** Override per application when a verified deployment uses a different API prefix. */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 29,
+    "symbol": "health",
+    "documentation": "/**\r\n   * Read API/database health.\r\n   * @returns Observable health response; failures propagate to the caller.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 36,
+    "symbol": "categories",
+    "documentation": "/**\r\n   * Read categories used by public search.\r\n   * @returns Observable category list.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 43,
+    "symbol": "upcoming",
+    "documentation": "/**\r\n   * Read active upcoming events from the public API.\r\n   * @returns Observable event summaries.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 51,
+    "symbol": "search",
+    "documentation": "/**\r\n   * Search public events with non-empty query parameters.\r\n   * @param filters - Optional search criteria; blank values are omitted.\r\n   * @returns Observable matching event summaries.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 64,
+    "symbol": "detail",
+    "documentation": "/**\r\n   * Read public event details and the email-free attendee list.\r\n   * @param eventId - Validated positive event identifier.\r\n   * @returns Observable event detail; HTTP errors propagate.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 73,
+    "symbol": "register",
+    "documentation": "/**\r\n   * Submit a registration; the server validates input, availability and uniqueness.\r\n   * @param eventId - Selected event identifier.\r\n   * @param input - Name, email and ticket count.\r\n   * @returns Observable receipt; duplicate registration is reported by HTTP 409.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 89,
+    "symbol": "events",
+    "documentation": "/**\r\n   * Read all management events with display status and registration counts.\r\n   * @returns Observable summaries; authentication errors propagate.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 96,
+    "symbol": "organisations",
+    "documentation": "/**\r\n   * Read available event organisations.\r\n   * @returns Observable organisation list.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 104,
+    "symbol": "detail",
+    "documentation": "/**\r\n   * Read editable event fields and associated registrations.\r\n   * @param eventId - Validated identifier.\r\n   * @returns Observable management event detail.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 112,
+    "symbol": "create",
+    "documentation": "/**\r\n   * Create a validated event through the admin API.\r\n   * @param input - Complete event input.\r\n   * @returns Observable creation result.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 121,
+    "symbol": "update",
+    "documentation": "/**\r\n   * Replace editable event fields while retaining registrations.\r\n   * @param eventId - Target event identifier.\r\n   * @param input - Complete event input.\r\n   * @returns Observable mutation result.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/api.ts",
+    "line": 129,
+    "symbol": "delete",
+    "documentation": "/**\r\n   * Request deletion; existing registrations are protected by the server.\r\n   * @param eventId - Target event identifier.\r\n   * @returns Observable mutation result; HTTP 409 means deletion is blocked.\r\n   */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/models.ts",
+    "line": 2,
+    "symbol": "Decimal",
+    "documentation": "/** Contracts for the existing Express API. MySQL DECIMAL values are serialized as strings. */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/models.ts",
+    "line": 28,
+    "symbol": "Attendee",
+    "documentation": "/** Both public and admin attendee lists intentionally omit email. */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/models.ts",
+    "line": 65,
+    "symbol": "AdminEventSummary",
+    "documentation": "/** Admin list is a different projection from the public event summary. */"
+  },
+  {
+    "file": "angular/projects/shared/src/lib/models.ts",
+    "line": 77,
+    "symbol": "EventInput",
+    "documentation": "/** Writes use Brisbane local wall time without an offset, unlike response timestamps. */"
+  }
+]

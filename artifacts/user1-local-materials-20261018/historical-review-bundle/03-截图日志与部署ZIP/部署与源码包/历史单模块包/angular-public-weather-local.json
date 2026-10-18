@@ -1,0 +1,10 @@
+{
+  "commit": "be6c9e866f666e918dbae0261d626aa6e547485a",
+  "branch": "user1-angular-weather",
+  "archive": "angular-public-weather-local.zip",
+  "sha256": "553EAA4E4C3F6B505A7B9C0ED3B09A1A1E374119F3F6BA080A09D0FA41A4386C",
+  "unitTests": 66,
+  "browserChecks": 20,
+  "uploaded": false,
+  "deployed": false
+}
